@@ -1,0 +1,19 @@
+{
+  "case_count": 200,
+  "step_count": 460,
+  "unique_reference_queries": 150,
+  "kind_counts": {
+    "single": 150,
+    "multi_turn": 30,
+    "interaction": 20
+  },
+  "split_counts": {
+    "development": 120,
+    "acceptance": 80
+  },
+  "cross_split_reference_overlap": 0,
+  "reference_dialect": "sqlite",
+  "review_policy": "always",
+  "human_review": "pending; reference SQL constructed and execution verified, not externally human labelled",
+  "independence_note": "Multi-turn and interaction cases reuse some single-query references; 200 scenarios are not 200 independent SQL tasks."
+}

@@ -1,0 +1,7 @@
+{
+  "metrics": {
+    "pass_rate": {"min": 0.8},
+    "routing_accuracy": {"min": 0.8},
+    "result_accuracy": {"min": 0.8}
+  }
+}

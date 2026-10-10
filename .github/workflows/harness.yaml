@@ -1,0 +1,35 @@
+name: Offline Harness Regression
+
+on:
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  harness:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v3
+      - run: uv python install 3.12
+      - run: uv sync --all-extras --python 3.12
+      - name: Offline execution and safety tests
+        run: uv run python -m pytest tests/test_benchmark200.py tests/test_accounts.py tests/test_deepseek.py tests/test_harness.py tests/test_harness_system.py tests/test_human_review.py tests/test_evaluation.py tests/test_collaboration.py tests/test_context.py tests/test_history.py tests/test_sample_data.py -o addopts='' -p no:cacheprovider -q
+      - name: Validate replay grading with deliberately failing examples
+        shell: bash
+        run: |
+          if uv run data-agent eval run evals/sample/suite.json --observations evals/sample/demo_observations.json --output outputs/harness-ci; then
+            echo "Expected deliberate replay failures"
+            exit 1
+          else
+            status=$?
+            if [ "$status" -ne 1 ]; then
+              exit "$status"
+            fi
+          fi
+      - name: Gate synthetic replay behavior (not model accuracy)
+        run: uv run data-agent eval gate outputs/harness-ci/report.json evals/harness/replay_gate.json
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: harness-replay-report
+          path: outputs/harness-ci

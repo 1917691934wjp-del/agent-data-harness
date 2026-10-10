@@ -9,6 +9,7 @@ from langchain_core.language_models import BaseChatModel
 from langchain_core.messages import AIMessage, HumanMessage, SystemMessage
 
 from data_agent.executors import CodeExecutor, ExecutionStatus
+from data_agent.harness.budget import current_budget, invoke_model
 from data_agent.prompts import VISUALIZATION_SYSTEM_PROMPT
 
 if TYPE_CHECKING:
@@ -72,7 +73,7 @@ Generate Python code to create an appropriate visualization for this data and qu
         ]
 
         try:
-            response = await self._llm.ainvoke(messages)
+            response = await invoke_model(self._llm, messages)
 
             content = response.content
             if isinstance(content, list):
@@ -88,6 +89,15 @@ Generate Python code to create an appropriate visualization for this data and qu
             logger.debug("Generated visualization code:\n%s", code[:500])
 
             # Execute code in sandbox
+            budget = current_budget.get()
+            if budget:
+                budget.check()
+                if (
+                    type(self._executor).__name__ == "LocalExecutor"
+                    and not budget.policy.allow_local_code
+                ):
+                    budget.fail("Local code execution disabled by harness policy")
+                budget.consume("tool_calls")
             exec_result = await self._executor.execute(code)
 
             if exec_result.status == ExecutionStatus.SUCCESS:

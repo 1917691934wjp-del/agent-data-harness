@@ -5,6 +5,7 @@ with automatic intent detection to route queries to the appropriate data agent.
 """
 
 import contextlib
+import json
 import logging
 from pathlib import Path
 from typing import TYPE_CHECKING, Any, Union
@@ -18,6 +19,7 @@ from langgraph.graph.state import CompiledStateGraph
 from langgraph.types import Command, interrupt
 
 from data_agent.adapters import CosmosAdapter, create_sql_database
+from data_agent.collaboration import AgentCoordinator
 from data_agent.config import (
     AgentConfig,
     AzureSQLDatasource,
@@ -26,17 +28,23 @@ from data_agent.config import (
     DataAgentConfig,
     DatabricksDatasource,
     PostgresDatasource,
+    SampleDatasource,
     SynapseDatasource,
 )
-from data_agent.config_loader import ConfigLoader
+from data_agent.config_loader import ConfigLoader, SchemaFormatter
+from data_agent.context import build_schema_snapshot, business_metrics, metric_catalog
 from data_agent.graph import create_data_agent
+from data_agent.harness.budget import invoke_model
 from data_agent.llm import get_llm
+from data_agent.models.collaboration import CollaborationSettings
 from data_agent.models.state import AgentState, InputState, OutputState
 from data_agent.utils.callbacks import AgentCallback
 from data_agent.utils.message_utils import get_recent_history
 
 if TYPE_CHECKING:
+    from langchain_core.callbacks import BaseCallbackHandler
     from langchain_core.runnables import RunnableConfig
+    from langgraph.checkpoint.base import BaseCheckpointSaver
 
 logger = logging.getLogger(__name__)
 
@@ -56,6 +64,11 @@ class DataAgentFlow:
         deployment_name: str | None = None,
         api_version: str = "2024-08-01-preview",
         shared_db: SQLDatabase | None = None,
+        *,
+        enable_collaboration: bool = True,
+        collaboration_settings: CollaborationSettings | None = None,
+        checkpointer: "BaseCheckpointSaver | None" = None,
+        callbacks: "list[BaseCallbackHandler] | None" = None,
     ) -> None:
         """Initialize the Data Agent Flow.
 
@@ -67,6 +80,11 @@ class DataAgentFlow:
             deployment_name: Name of the deployed model.
             api_version: Azure OpenAI API version.
             shared_db: Optional shared SQLDatabase instance for agents.
+            enable_collaboration: Plan parallel and dependent tasks automatically.
+                Set False to use the original single-agent routing workflow.
+            collaboration_settings: Concurrency, timeout and evidence limits.
+            checkpointer: Optional persistent saver. Defaults to process-local memory.
+            callbacks: Additional observers, such as evaluation usage collectors.
 
         Raises:
             ValueError: If neither config_path nor config is provided.
@@ -81,17 +99,29 @@ class DataAgentFlow:
         self.datasources: dict[str, Datasource] = {}
         self.data_agents: dict[str, CompiledStateGraph] = {}
         self._agent_descriptions: dict[str, str] = {}
+        self._schema_snapshots = {}
         self._shared_db = shared_db
+        self._enable_collaboration = enable_collaboration
+        self._collaboration_settings = collaboration_settings or CollaborationSettings()
+        self._checkpointer = checkpointer
+        self._extra_callbacks = list(callbacks or [])
 
         self._intent_llm = get_llm(
             provider=self.config.intent_detection.llm_config.provider,
             azure_endpoint=azure_endpoint,
-            api_key=api_key,
+            api_key=api_key
+            if self.config.intent_detection.llm_config.provider == "azure_openai"
+            else None,
             deployment_name=self.config.intent_detection.llm_config.model
-            or deployment_name,
+            or (
+                deployment_name
+                if self.config.intent_detection.llm_config.provider == "azure_openai"
+                else None
+            ),
             api_version=self.config.intent_detection.llm_config.api_version
             or api_version,
             temperature=self.config.intent_detection.llm_config.temperature,
+            max_tokens=self.config.intent_detection.llm_config.max_tokens,
         )
 
         self._default_llm_settings = {
@@ -116,6 +146,9 @@ class DataAgentFlow:
             datasource = self._create_datasource(name, ds)
             if datasource:
                 self.datasources[name] = datasource
+                self._schema_snapshots[name] = build_schema_snapshot(
+                    agent_config, datasource
+                )
                 self._create_agent_graph(name, agent_config)
 
             self._agent_descriptions[name] = self._build_agent_description(agent_config)
@@ -130,6 +163,10 @@ class DataAgentFlow:
             return None
 
         match ds:
+            case SampleDatasource():
+                from data_agent.adapters.sample import create_sample_database
+
+                return create_sample_database(ds.source)
             case DatabricksDatasource():
                 return create_sql_database(
                     "databricks",
@@ -213,20 +250,29 @@ class DataAgentFlow:
         """Create the LangGraph agent for a data agent."""
         llm_cfg = agent_config.llm_config
         agent_llm = get_llm(
-            provider=llm_cfg.provider or "azure_openai",
+            provider=llm_cfg.provider or "deepseek",
             azure_endpoint=self._default_llm_settings["azure_endpoint"],
-            api_key=self._default_llm_settings["api_key"],
+            api_key=self._default_llm_settings["api_key"]
+            if llm_cfg.provider == "azure_openai"
+            else None,
             deployment_name=llm_cfg.model
-            or self._default_llm_settings["deployment_name"],
+            or (
+                self._default_llm_settings["deployment_name"]
+                if llm_cfg.provider == "azure_openai"
+                else None
+            ),
             api_version=llm_cfg.api_version
             or self._default_llm_settings["api_version"],
             temperature=llm_cfg.temperature,
+            max_tokens=llm_cfg.max_tokens,
         )
         self.data_agents[name] = create_data_agent(
             llm=agent_llm,
             datasource=self.datasources[name],
             config=agent_config,
             max_retries=self.config.max_retries,
+            checkpointer=False if self._enable_collaboration else None,
+            schema_snapshot=self._schema_snapshots[name],
         )
 
     def _build_agent_description(self, agent_config: DataAgentConfig) -> str:
@@ -255,6 +301,76 @@ class DataAgentFlow:
         return "".join(parts)
 
     def _build_workflow(self) -> CompiledStateGraph:
+        """Build automatic collaboration, retaining the legacy opt-out path."""
+        if not self._enable_collaboration:
+            return self._build_single_agent_workflow()
+        catalog = dict(self._agent_descriptions)
+        snapshots = getattr(self, "_schema_snapshots", {})
+        for agent_config in self.config.data_agents:
+            snapshot = snapshots.get(agent_config.name)
+            catalog[agent_config.name] += "\n" + (
+                snapshot.text
+                if snapshot
+                else SchemaFormatter.format_schema_context(agent_config)
+            )
+            if snapshot:
+                catalog[agent_config.name] += "\nBusiness metric availability:\n" + json.dumps(
+                    metric_catalog(snapshot), ensure_ascii=False
+                )
+        coordinator = AgentCoordinator(
+            self._intent_llm,
+            self.data_agents,
+            catalog,
+            self._collaboration_settings,
+            metrics={
+                name: business_metrics(snapshot)
+                for name, snapshot in snapshots.items()
+            },
+            schema_versions={
+                name: snapshot.version for name, snapshot in snapshots.items()
+            },
+        )
+        workflow = StateGraph(
+            AgentState, input_schema=InputState, output_schema=OutputState
+        )
+        workflow.add_node("plan_tasks", coordinator.plan_tasks)
+        workflow.add_node("clarify_tasks", coordinator.clarify_tasks)
+        workflow.add_node("review_plan", coordinator.review_plan)
+        workflow.add_node("execute_tasks", coordinator.execute_tasks)
+        workflow.add_node("summarize_results", coordinator.summarize_results)
+        workflow.add_edge(START, "plan_tasks")
+
+        def route_plan(state: AgentState) -> str:
+            plan = state.get("collaboration_plan")
+            if plan is None:
+                return END
+            return "review_plan" if plan.tasks else "clarify_tasks"
+
+        workflow.add_conditional_edges(
+            "plan_tasks",
+            route_plan,
+            {
+                "review_plan": "review_plan",
+                "clarify_tasks": "clarify_tasks",
+                END: END,
+            },
+        )
+        workflow.add_conditional_edges(
+            "clarify_tasks", route_plan, {"review_plan": "review_plan", END: END}
+        )
+        workflow.add_conditional_edges(
+            "review_plan",
+            lambda state: state["review_action"],
+            {"approve": "execute_tasks", "revise": "plan_tasks", "cancel": END},
+        )
+        workflow.add_edge("execute_tasks", "summarize_results")
+        workflow.add_edge("summarize_results", END)
+        return workflow.compile(
+            checkpointer=getattr(self, "_checkpointer", None) or InMemorySaver(),
+            name="data_agent_flow",
+        )
+
+    def _build_single_agent_workflow(self) -> CompiledStateGraph:
         """Build the intent detection and routing workflow.
 
         Returns:
@@ -265,13 +381,13 @@ class DataAgentFlow:
         intent_llm = self._intent_llm
         intent_system_prompt = self.config.intent_detection.system_prompt
 
-        def intent_detection_node(state: AgentState) -> dict[str, Any]:
+        async def intent_detection_node(state: AgentState) -> dict[str, Any]:
             """Detect user intent and select the appropriate data agent."""
             question = state["question"]
 
-            agent_list = "\n".join(
-                [f"- {name}: {desc}" for name, desc in agent_descriptions.items()]
-            )
+            agent_list = "\n".join([
+                f"- {name}: {desc}" for name, desc in agent_descriptions.items()
+            ])
 
             system_content = intent_system_prompt.format(agent_descriptions=agent_list)
 
@@ -283,39 +399,43 @@ class DataAgentFlow:
                 HumanMessage(content=question),
             ]
 
-            response = intent_llm.invoke(messages)
+            response = await invoke_model(intent_llm, messages)
             content = response.content
             selected_agent = (
                 content.strip()
                 if isinstance(content, str)
-                else str(content[0]).strip() if content else ""
+                else str(content[0]).strip()
+                if content
+                else ""
             )
 
             if selected_agent not in agent_names:
-                clarification = interrupt(
-                    {
-                        "type": "clarification_needed",
-                        "message": "I couldn't understand your question. Could you please provide more details or rephrase it?",
-                        "original_question": question,
-                        "hint": "Try being more specific about what data you're looking for.",
-                    }
-                )
+                clarification = interrupt({
+                    "type": "clarification_needed",
+                    "message": "暂时无法理解你的问题，请补充细节或换一种方式描述。",
+                    "original_question": question,
+                    "hint": "请具体说明想查询的数据和时间范围。",
+                })
                 clarified_question = (
                     clarification.get("question")
                     if isinstance(clarification, dict)
-                    else str(clarification) if clarification else None
+                    else str(clarification)
+                    if clarification
+                    else None
                 )
                 if clarified_question:
                     messages = [
                         SystemMessage(content=system_content),
                         HumanMessage(content=clarified_question),
                     ]
-                    response = intent_llm.invoke(messages)
+                    response = await invoke_model(intent_llm, messages)
                     content = response.content
                     selected_agent = (
                         content.strip()
                         if isinstance(content, str)
-                        else str(content[0]).strip() if content else ""
+                        else str(content[0]).strip()
+                        if content
+                        else ""
                     )
                     if selected_agent in agent_names:
                         return {
@@ -345,7 +465,7 @@ class DataAgentFlow:
                 ],
             }
 
-        def query_rewrite_node(state: AgentState) -> dict[str, Any]:
+        async def query_rewrite_node(state: AgentState) -> dict[str, Any]:
             """Rewrite the user's question for the selected agent's context."""
             question = state["question"]
             datasource = state.get("datasource_name", "")
@@ -388,12 +508,14 @@ class DataAgentFlow:
 Respond with ONLY the rewritten question, nothing else."""
 
             messages = [HumanMessage(content=rewrite_prompt)]
-            response = intent_llm.invoke(messages)
+            response = await invoke_model(intent_llm, messages)
             content = response.content
             rewritten = (
                 content.strip()
                 if isinstance(content, str)
-                else str(content[0]).strip() if content else question
+                else str(content[0]).strip()
+                if content
+                else question
             )
 
             return {
@@ -416,13 +538,13 @@ Respond with ONLY the rewritten question, nothing else."""
 
         def out_of_scope_node(state: AgentState) -> dict[str, Any]:
             """Handle out-of-scope requests."""
-            agent_list = "\n".join(
-                [f"- {desc}" for desc in agent_descriptions.values()]
-            )
+            agent_list = "\n".join([
+                f"- {desc}" for desc in agent_descriptions.values()
+            ])
             response = (
                 "I'm sorry, but I cannot help with that request. "
-                "Your question is outside the scope of available data.\n\n"
-                f"I can help you with queries related to:\n{agent_list}"
+                "你的问题超出了当前数据的范围。\n\n"
+                f"可以查询以下业务数据：\n{agent_list}"
             )
             return {
                 "final_response": response,
@@ -472,7 +594,7 @@ Respond with ONLY the rewritten question, nothing else."""
         for name in agent_names:
             workflow.add_edge(name, END)
 
-        checkpointer = InMemorySaver()
+        checkpointer = getattr(self, "_checkpointer", None) or InMemorySaver()
 
         return workflow.compile(
             checkpointer=checkpointer,
@@ -507,6 +629,59 @@ Respond with ONLY the rewritten question, nothing else."""
         question: str | None = None,
         thread_id: str | None = None,
         resume_value: dict[str, Any] | None = None,
+        *,
+        callbacks: "list[BaseCallbackHandler] | None" = None,
+    ) -> OutputState | dict[str, Any]:
+        """Run or resume one turn; do not overwrite pending human input."""
+        if question is not None and resume_value is not None:
+            raise ValueError("Provide a question or a resume decision, not both")
+        if resume_value is not None and thread_id is None:
+            raise ValueError(
+                "thread_id is required when resuming an interrupted execution"
+            )
+        thread_id = thread_id or uuid4().hex
+        if not hasattr(self, "_running_threads"):
+            self._running_threads: set[str] = set()
+        if thread_id in self._running_threads:
+            raise RuntimeError("This conversation is already processing a request")
+        self._running_threads.add(thread_id)
+        try:
+            pending = await self.get_pending_input(thread_id)
+            if pending and resume_value is None:
+                raise ValueError(
+                    "Human input is pending; resume or cancel before starting a new question"
+                )
+            if not pending and resume_value is not None:
+                raise ValueError("No pending human input for this conversation")
+            if callbacks is None:
+                result = await self._run_turn(question, thread_id, resume_value)
+            else:
+                result = await self._run_turn(
+                    question, thread_id, resume_value, callbacks=callbacks
+                )
+            if "__interrupt__" in result:
+                result["thread_id"] = thread_id
+            return result
+        finally:
+            self._running_threads.discard(thread_id)
+
+    async def get_pending_input(self, thread_id: str) -> dict[str, Any] | None:
+        """Read pending input from the checkpoint, without rerunning any nodes."""
+        snapshot = await self._graph.aget_state({
+            "configurable": {"thread_id": thread_id}
+        })
+        for task in snapshot.tasks:
+            for pending in task.interrupts:
+                return dict(pending.value)
+        return None
+
+    async def _run_turn(
+        self,
+        question: str | None = None,
+        thread_id: str | None = None,
+        resume_value: dict[str, Any] | None = None,
+        *,
+        callbacks: "list[BaseCallbackHandler] | None" = None,
     ) -> OutputState | dict[str, Any]:
         """Execute a natural language query with automatic routing.
 
@@ -528,7 +703,7 @@ Respond with ONLY the rewritten question, nothing else."""
             ValueError: If neither question nor resume_value is provided,
                 or if resume_value is provided without thread_id.
         """
-        if resume_value:
+        if resume_value is not None:
             if thread_id is None:
                 raise ValueError(
                     "thread_id is required when resuming an interrupted execution"
@@ -544,7 +719,11 @@ Respond with ONLY the rewritten question, nothing else."""
 
         config: RunnableConfig = {
             "configurable": {"thread_id": thread_id},
-            "callbacks": [self._callback],
+            "callbacks": [
+                self._callback,
+                *getattr(self, "_extra_callbacks", []),
+                *(callbacks or []),
+            ],
             "recursion_limit": 50,
         }
 
@@ -564,6 +743,11 @@ Respond with ONLY the rewritten question, nothing else."""
             visualization_image=result.get("visualization_image"),
             visualization_code=result.get("visualization_code"),
             visualization_error=result.get("visualization_error"),
+            collaboration_plan=result.get("collaboration_plan"),
+            agent_results=result.get("agent_results", []),
+            collaboration_warnings=result.get("collaboration_warnings", []),
+            query_context=result.get("query_context", {}),
+            confirmed_context=result.get("confirmed_context", {}),
         )
 
     def get_agent_names(self) -> list[str]:

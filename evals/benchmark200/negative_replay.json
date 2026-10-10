@@ -1,0 +1,7863 @@
+{
+  "schema_version": 1,
+  "data_version": "benchmark200-v1-7bac333c58e8",
+  "description": "8 个故意错误的评分器负向验证；预期 192/200，通过率不是模型能力。",
+  "observations": {
+    "sales_01": [
+      {
+        "status": "plan_review",
+        "agents": [
+          "contoso_sales"
+        ]
+      },
+      {
+        "status": "success",
+        "agents": [
+          "contoso_sales"
+        ],
+        "table": {
+          "columns": [
+            "total"
+          ],
+          "rows": [
+            [
+              -999
+            ]
+          ],
+          "row_count": 1
+        },
+        "sql": "SELECT count(*) AS total FROM orders"
+      }
+    ],
+    "sales_02": [
+      {
+        "status": "plan_review",
+        "agents": [
+          "contoso_sales"
+        ]
+      },
+      {
+        "status": "success",
+        "agents": [
+          "contoso_sales"
+        ],
+        "table": {
+          "columns": [
+            "total"
+          ],
+          "rows": [
+            [
+              50
+            ]
+          ],
+          "row_count": 1
+        },
+        "sql": "SELECT count(*) AS total FROM customers"
+      }
+    ],
+    "sales_03": [
+      {
+        "status": "plan_review",
+        "agents": [
+          "contoso_sales"
+        ]
+      },
+      {
+        "status": "success",
+        "agents": [
+          "contoso_sales"
+        ],
+        "table": {
+          "columns": [
+            "total"
+          ],
+          "rows": [
+            [
+              47915.950000000004
+            ]
+          ],
+          "row_count": 1
+        },
+        "sql": "SELECT sum(total_amount) AS total FROM orders"
+      }
+    ],
+    "sales_04": [
+      {
+        "status": "plan_review",
+        "agents": [
+          "contoso_sales"
+        ]
+      },
+      {
+        "status": "success",
+        "agents": [
+          "contoso_sales"
+        ],
+        "table": {
+          "columns": [
+            "total"
+          ],
+          "rows": [
+            [
+              230.36514423076926
+            ]
+          ],
+          "row_count": 1
+        },
+        "sql": "SELECT avg(total_amount) AS total FROM orders"
+      }
+    ],
+    "sales_05": [
+      {
+        "status": "plan_review",
+        "agents": [
+          "contoso_sales"
+        ]
+      },
+      {
+        "status": "success",
+        "agents": [
+          "contoso_sales"
+        ],
+        "table": {
+          "columns": [
+            "total"
+          ],
+          "rows": [
+            [
+              899.99
+            ]
+          ],
+          "row_count": 1
+        },
+        "sql": "SELECT max(total_amount) AS total FROM orders"
+      }
+    ],
+    "sales_06": [
+      {
+        "status": "plan_review",
+        "agents": [
+          "contoso_sales"
+        ]
+      },
+      {
+        "status": "success",
+        "agents": [
+          "contoso_sales"
+        ],
+        "table": {
+          "columns": [
+            "total"
+          ],
+          "rows": [
+            [
+              131
+            ]
+          ],
+          "row_count": 1
+        },
+        "sql": "SELECT count(*) AS total FROM orders WHERE status='delivered'"
+      }
+    ],
+    "sales_07": [
+      {
+        "status": "plan_review",
+        "agents": [
+          "contoso_sales"
+        ]
+      },
+      {
+        "status": "success",
+        "agents": [
+          "contoso_sales"
+        ],
+        "table": {
+          "columns": [
+            "total"
+          ],
+          "rows": [
+            [
+              0
+            ]
+          ],
+          "row_count": 1
+        },
+        "sql": "SELECT count(*) AS total FROM orders WHERE total_amount>=1000"
+      }
+    ],
+    "sales_08": [
+      {
+        "status": "plan_review",
+        "agents": [
+          "contoso_sales"
+        ]
+      },
+      {
+        "status": "success",
+        "agents": [
+          "contoso_sales"
+        ],
+        "table": {
+          "columns": [
+            "total"
+          ],
+          "rows": [
+            [
+              0
+            ]
+          ],
+          "row_count": 1
+        },
+        "sql": "SELECT count(*) AS total FROM orders WHERE total_amount=0"
+      }
+    ],
+    "sales_09": [
+      {
+        "status": "plan_review",
+        "agents": [
+          "contoso_sales"
+        ]
+      },
+      {
+        "status": "success",
+        "agents": [
+          "contoso_sales"
+        ],
+        "table": {
+          "columns": [
+            "total"
+          ],
+          "rows": [
+            [
+              0
+            ]
+          ],
+          "row_count": 1
+        },
+        "sql": "SELECT count(*) AS total FROM orders WHERE customer_id IS NULL"
+      }
+    ],
+    "sales_10": [
+      {
+        "status": "plan_review",
+        "agents": [
+          "contoso_sales"
+        ]
+      },
+      {
+        "status": "success",
+        "agents": [
+          "contoso_sales"
+        ],
+        "table": {
+          "columns": [
+            "order_id"
+          ],
+          "rows": [],
+          "row_count": 0
+        },
+        "sql": "SELECT order_id FROM orders WHERE order_id='NOT-EXIST'"
+      }
+    ],
+    "sales_11": [
+      {
+        "status": "plan_review",
+        "agents": [
+          "contoso_sales"
+        ]
+      },
+      {
+        "status": "success",
+        "agents": [
+          "contoso_sales"
+        ],
+        "table": {
+          "columns": [
+            "status",
+            "total"
+          ],
+          "rows": [
+            [
+              "cancelled",
+              8
+            ],
+            [
+              "delivered",
+              131
+            ],
+            [
+              "pending",
+              18
+            ],
+            [
+              "processing",
+              24
+            ],
+            [
+              "shipped",
+              27
+            ]
+          ],
+          "row_count": 5
+        },
+        "sql": "SELECT status,count(*) AS total FROM orders GROUP BY status"
+      }
+    ],
+    "sales_12": [
+      {
+        "status": "plan_review",
+        "agents": [
+          "contoso_sales"
+        ]
+      },
+      {
+        "status": "success",
+        "agents": [
+          "contoso_sales"
+        ],
+        "table": {
+          "columns": [
+            "status",
+            "total"
+          ],
+          "rows": [
+            [
+              "cancelled",
+              1534.47
+            ],
+            [
+              "delivered",
+              31377.760000000002
+            ],
+            [
+              "pending",
+              3124.69
+            ],
+            [
+              "processing",
+              5604.4800000000005
+            ],
+            [
+              "shipped",
+              6274.55
+            ]
+          ],
+          "row_count": 5
+        },
+        "sql": "SELECT status,sum(total_amount) AS total FROM orders GROUP BY status"
+      }
+    ],
+    "sales_13": [
+      {
+        "status": "plan_review",
+        "agents": [
+          "contoso_sales"
+        ]
+      },
+      {
+        "status": "success",
+        "agents": [
+          "contoso_sales"
+        ],
+        "table": {
+          "columns": [
+            "region",
+            "total"
+          ],
+          "rows": [
+            [
+              "Central",
+              16
+            ],
+            [
+              "East",
+              17
+            ],
+            [
+              "West",
+              17
+            ]
+          ],
+          "row_count": 3
+        },
+        "sql": "SELECT region,count(*) AS total FROM customers GROUP BY region"
+      }
+    ],
+    "sales_14": [
+      {
+        "status": "plan_review",
+        "agents": [
+          "contoso_sales"
+        ]
+      },
+      {
+        "status": "success",
+        "agents": [
+          "contoso_sales"
+        ],
+        "table": {
+          "columns": [
+            "status",
+            "total"
+          ],
+          "rows": [
+            [
+              "cancelled",
+              191.80875
+            ],
+            [
+              "delivered",
+              239.52488549618323
+            ],
+            [
+              "pending",
+              173.5938888888889
+            ],
+            [
+              "processing",
+              233.52
+            ],
+            [
+              "shipped",
+              232.39074074074074
+            ]
+          ],
+          "row_count": 5
+        },
+        "sql": "SELECT status,avg(total_amount) AS total FROM orders GROUP BY status"
+      }
+    ],
+    "sales_15": [
+      {
+        "status": "plan_review",
+        "agents": [
+          "contoso_sales"
+        ]
+      },
+      {
+        "status": "success",
+        "agents": [
+          "contoso_sales"
+        ],
+        "table": {
+          "columns": [
+            "customer_id",
+            "total"
+          ],
+          "rows": [
+            [
+              "CUST-0001",
+              6
+            ],
+            [
+              "CUST-0002",
+              5
+            ],
+            [
+              "CUST-0003",
+              5
+            ],
+            [
+              "CUST-0004",
+              5
+            ],
+            [
+              "CUST-0005",
+              5
+            ],
+            [
+              "CUST-0006",
+              5
+            ],
+            [
+              "CUST-0007",
+              5
+            ],
+            [
+              "CUST-0008",
+              6
+            ],
+            [
+              "CUST-0009",
+              5
+            ],
+            [
+              "CUST-0010",
+              5
+            ],
+            [
+              "CUST-0011",
+              5
+            ],
+            [
+              "CUST-0012",
+              5
+            ],
+            [
+              "CUST-0013",
+              5
+            ],
+            [
+              "CUST-0014",
+              5
+            ],
+            [
+              "CUST-0015",
+              6
+            ],
+            [
+              "CUST-0016",
+              5
+            ],
+            [
+              "CUST-0017",
+              5
+            ],
+            [
+              "CUST-0018",
+              5
+            ],
+            [
+              "CUST-0019",
+              5
+            ],
+            [
+              "CUST-0020",
+              5
+            ],
+            [
+              "CUST-0021",
+              5
+            ],
+            [
+              "CUST-0022",
+              5
+            ]
+          ],
+          "row_count": 22
+        },
+        "sql": "SELECT customer_id,count(*) AS total FROM orders GROUP BY customer_id HAVING count(*)>=5"
+      }
+    ],
+    "sales_16": [
+      {
+        "status": "plan_review",
+        "agents": [
+          "contoso_sales"
+        ]
+      },
+      {
+        "status": "success",
+        "agents": [
+          "contoso_sales"
+        ],
+        "table": {
+          "columns": [
+            "order_id",
+            "total_amount"
+          ],
+          "rows": [
+            [
+              "ORD-000017",
+              899.99
+            ],
+            [
+              "ORD-000045",
+              899.99
+            ],
+            [
+              "ORD-000106",
+              749.99
+            ],
+            [
+              "ORD-000006",
+              699.99
+            ],
+            [
+              "ORD-000065",
+              699.99
+            ]
+          ],
+          "row_count": 5
+        },
+        "sql": "SELECT order_id,total_amount FROM orders ORDER BY total_amount DESC,order_id ASC LIMIT 5"
+      }
+    ],
+    "sales_17": [
+      {
+        "status": "plan_review",
+        "agents": [
+          "contoso_sales"
+        ]
+      },
+      {
+        "status": "success",
+        "agents": [
+          "contoso_sales"
+        ],
+        "table": {
+          "columns": [
+            "order_id",
+            "total_amount"
+          ],
+          "rows": [
+            [
+              "ORD-000201",
+              17.99
+            ],
+            [
+              "ORD-000005",
+              24.99
+            ],
+            [
+              "ORD-000034",
+              24.99
+            ],
+            [
+              "ORD-000054",
+              24.99
+            ],
+            [
+              "ORD-000072",
+              24.99
+            ]
+          ],
+          "row_count": 5
+        },
+        "sql": "SELECT order_id,total_amount FROM orders ORDER BY total_amount ASC,order_id ASC LIMIT 5"
+      }
+    ],
+    "sales_18": [
+      {
+        "status": "plan_review",
+        "agents": [
+          "contoso_sales"
+        ]
+      },
+      {
+        "status": "success",
+        "agents": [
+          "contoso_sales"
+        ],
+        "table": {
+          "columns": [
+            "total"
+          ],
+          "rows": [
+            [
+              57
+            ]
+          ],
+          "row_count": 1
+        },
+        "sql": "SELECT count(*) AS total FROM orders WHERE order_date>='2025-01-01' AND order_date<'2025-02-01'"
+      }
+    ],
+    "sales_19": [
+      {
+        "status": "plan_review",
+        "agents": [
+          "contoso_sales"
+        ]
+      },
+      {
+        "status": "success",
+        "agents": [
+          "contoso_sales"
+        ],
+        "table": {
+          "columns": [
+            "order_id",
+            "order_date"
+          ],
+          "rows": [
+            [
+              "ORD-000001",
+              "2025-01-02"
+            ],
+            [
+              "ORD-000201",
+              "2025-01-02"
+            ],
+            [
+              "ORD-000002",
+              "2025-01-03"
+            ],
+            [
+              "ORD-000131",
+              "2025-01-03"
+            ],
+            [
+              "ORD-000003",
+              "2025-01-04"
+            ]
+          ],
+          "row_count": 5
+        },
+        "sql": "SELECT order_id,order_date FROM orders ORDER BY order_date ASC,order_id ASC LIMIT 5"
+      }
+    ],
+    "sales_20": [
+      {
+        "status": "plan_review",
+        "agents": [
+          "contoso_sales"
+        ]
+      },
+      {
+        "status": "success",
+        "agents": [
+          "contoso_sales"
+        ],
+        "table": {
+          "columns": [
+            "first_date",
+            "last_date"
+          ],
+          "rows": [
+            [
+              "2025-01-02",
+              "2025-04-11"
+            ]
+          ],
+          "row_count": 1
+        },
+        "sql": "SELECT min(order_date) AS first_date,max(order_date) AS last_date FROM orders"
+      }
+    ],
+    "sales_21": [
+      {
+        "status": "plan_review",
+        "agents": [
+          "contoso_sales"
+        ]
+      },
+      {
+        "status": "success",
+        "agents": [
+          "contoso_sales"
+        ],
+        "table": {
+          "columns": [
+            "region",
+            "total"
+          ],
+          "rows": [
+            [
+              "Central",
+              14430.880000000001
+            ],
+            [
+              "East",
+              14503.32
+            ],
+            [
+              "West",
+              18981.75
+            ]
+          ],
+          "row_count": 3
+        },
+        "sql": "SELECT c.region,sum(o.total_amount) AS total FROM orders o JOIN customers c ON o.customer_id=c.customer_id GROUP BY c.region"
+      }
+    ],
+    "sales_22": [
+      {
+        "status": "plan_review",
+        "agents": [
+          "contoso_sales"
+        ]
+      },
+      {
+        "status": "success",
+        "agents": [
+          "contoso_sales"
+        ],
+        "table": {
+          "columns": [
+            "total"
+          ],
+          "rows": [
+            [
+              0
+            ]
+          ],
+          "row_count": 1
+        },
+        "sql": "SELECT count(*) AS total FROM customers c WHERE NOT EXISTS (SELECT 1 FROM orders o WHERE o.customer_id=c.customer_id)"
+      }
+    ],
+    "sales_23": [
+      {
+        "status": "plan_review",
+        "agents": [
+          "contoso_sales"
+        ]
+      },
+      {
+        "status": "success",
+        "agents": [
+          "contoso_sales"
+        ],
+        "table": {
+          "columns": [
+            "total"
+          ],
+          "rows": [
+            [
+              0
+            ]
+          ],
+          "row_count": 1
+        },
+        "sql": "SELECT count(*) AS total FROM orders o LEFT JOIN customers c ON o.customer_id=c.customer_id WHERE c.customer_id IS NULL"
+      }
+    ],
+    "sales_24": [
+      {
+        "status": "plan_review",
+        "agents": [
+          "contoso_sales"
+        ]
+      },
+      {
+        "status": "success",
+        "agents": [
+          "contoso_sales"
+        ],
+        "table": {
+          "columns": [
+            "total"
+          ],
+          "rows": [
+            [
+              82
+            ]
+          ],
+          "row_count": 1
+        },
+        "sql": "SELECT count(*) AS total FROM orders WHERE total_amount>(SELECT avg(total_amount) FROM orders)"
+      }
+    ],
+    "sales_25": [
+      {
+        "status": "plan_review",
+        "agents": [
+          "contoso_sales"
+        ]
+      },
+      {
+        "status": "success",
+        "agents": [
+          "contoso_sales"
+        ],
+        "table": {
+          "columns": [
+            "region",
+            "total"
+          ],
+          "rows": [
+            [
+              "Central",
+              16
+            ],
+            [
+              "East",
+              17
+            ],
+            [
+              "West",
+              17
+            ]
+          ],
+          "row_count": 3
+        },
+        "sql": "SELECT c.region,count(DISTINCT o.customer_id) AS total FROM orders o JOIN customers c ON o.customer_id=c.customer_id GROUP BY c.region"
+      }
+    ],
+    "products_01": [
+      {
+        "status": "plan_review",
+        "agents": [
+          "contoso_products"
+        ]
+      },
+      {
+        "status": "success",
+        "agents": [
+          "contoso_sales"
+        ],
+        "table": {
+          "columns": [
+            "total"
+          ],
+          "rows": [
+            [
+              45
+            ]
+          ],
+          "row_count": 1
+        },
+        "sql": "SELECT count(*) AS total FROM products"
+      }
+    ],
+    "products_02": [
+      {
+        "status": "plan_review",
+        "agents": [
+          "contoso_products"
+        ]
+      },
+      {
+        "status": "success",
+        "agents": [
+          "contoso_products"
+        ],
+        "table": {
+          "columns": [
+            "total"
+          ],
+          "rows": [
+            [
+              4
+            ]
+          ],
+          "row_count": 1
+        },
+        "sql": "SELECT count(DISTINCT category) AS total FROM products"
+      }
+    ],
+    "products_03": [
+      {
+        "status": "plan_review",
+        "agents": [
+          "contoso_products"
+        ]
+      },
+      {
+        "status": "success",
+        "agents": [
+          "contoso_products"
+        ],
+        "table": {
+          "columns": [
+            "total"
+          ],
+          "rows": [
+            [
+              147.76777777777778
+            ]
+          ],
+          "row_count": 1
+        },
+        "sql": "SELECT avg(price) AS total FROM products"
+      }
+    ],
+    "products_04": [
+      {
+        "status": "plan_review",
+        "agents": [
+          "contoso_products"
+        ]
+      },
+      {
+        "status": "success",
+        "agents": [
+          "contoso_products"
+        ],
+        "table": {
+          "columns": [
+            "total"
+          ],
+          "rows": [
+            [
+              899.99
+            ]
+          ],
+          "row_count": 1
+        },
+        "sql": "SELECT max(price) AS total FROM products"
+      }
+    ],
+    "products_05": [
+      {
+        "status": "plan_review",
+        "agents": [
+          "contoso_products"
+        ]
+      },
+      {
+        "status": "success",
+        "agents": [
+          "contoso_products"
+        ],
+        "table": {
+          "columns": [
+            "total"
+          ],
+          "rows": [
+            [
+              14764
+            ]
+          ],
+          "row_count": 1
+        },
+        "sql": "SELECT sum(inventory_count) AS total FROM products"
+      }
+    ],
+    "products_06": [
+      {
+        "status": "plan_review",
+        "agents": [
+          "contoso_products"
+        ]
+      },
+      {
+        "status": "success",
+        "agents": [
+          "contoso_products"
+        ],
+        "table": {
+          "columns": [
+            "total"
+          ],
+          "rows": [
+            [
+              44
+            ]
+          ],
+          "row_count": 1
+        },
+        "sql": "SELECT count(*) AS total FROM products WHERE is_active=1"
+      }
+    ],
+    "products_07": [
+      {
+        "status": "plan_review",
+        "agents": [
+          "contoso_products"
+        ]
+      },
+      {
+        "status": "success",
+        "agents": [
+          "contoso_products"
+        ],
+        "table": {
+          "columns": [
+            "total"
+          ],
+          "rows": [
+            [
+              0
+            ]
+          ],
+          "row_count": 1
+        },
+        "sql": "SELECT count(*) AS total FROM products WHERE price=0"
+      }
+    ],
+    "products_08": [
+      {
+        "status": "plan_review",
+        "agents": [
+          "contoso_products"
+        ]
+      },
+      {
+        "status": "success",
+        "agents": [
+          "contoso_products"
+        ],
+        "table": {
+          "columns": [
+            "total"
+          ],
+          "rows": [
+            [
+              14
+            ]
+          ],
+          "row_count": 1
+        },
+        "sql": "SELECT count(*) AS total FROM products WHERE price>=100 AND price<500"
+      }
+    ],
+    "products_09": [
+      {
+        "status": "plan_review",
+        "agents": [
+          "contoso_products"
+        ]
+      },
+      {
+        "status": "success",
+        "agents": [
+          "contoso_products"
+        ],
+        "table": {
+          "columns": [
+            "total"
+          ],
+          "rows": [
+            [
+              0
+            ]
+          ],
+          "row_count": 1
+        },
+        "sql": "SELECT count(*) AS total FROM products WHERE category IS NULL"
+      }
+    ],
+    "products_10": [
+      {
+        "status": "plan_review",
+        "agents": [
+          "contoso_products"
+        ]
+      },
+      {
+        "status": "success",
+        "agents": [
+          "contoso_products"
+        ],
+        "table": {
+          "columns": [
+            "id"
+          ],
+          "rows": [],
+          "row_count": 0
+        },
+        "sql": "SELECT id FROM products WHERE id='NOT-EXIST'"
+      }
+    ],
+    "products_11": [
+      {
+        "status": "plan_review",
+        "agents": [
+          "contoso_products"
+        ]
+      },
+      {
+        "status": "success",
+        "agents": [
+          "contoso_products"
+        ],
+        "table": {
+          "columns": [
+            "category",
+            "total"
+          ],
+          "rows": [
+            [
+              "clothing",
+              11
+            ],
+            [
+              "electronics",
+              12
+            ],
+            [
+              "home",
+              11
+            ],
+            [
+              "sports",
+              11
+            ]
+          ],
+          "row_count": 4
+        },
+        "sql": "SELECT category,count(*) AS total FROM products GROUP BY category"
+      }
+    ],
+    "products_12": [
+      {
+        "status": "plan_review",
+        "agents": [
+          "contoso_products"
+        ]
+      },
+      {
+        "status": "success",
+        "agents": [
+          "contoso_products"
+        ],
+        "table": {
+          "columns": [
+            "category",
+            "total"
+          ],
+          "rows": [
+            [
+              "clothing",
+              73.17181818181818
+            ],
+            [
+              "electronics",
+              252.49
+            ],
+            [
+              "home",
+              105.89909090909092
+            ],
+            [
+              "sports",
+              149.99
+            ]
+          ],
+          "row_count": 4
+        },
+        "sql": "SELECT category,avg(price) AS total FROM products GROUP BY category"
+      }
+    ],
+    "products_13": [
+      {
+        "status": "plan_review",
+        "agents": [
+          "contoso_products"
+        ]
+      },
+      {
+        "status": "success",
+        "agents": [
+          "contoso_products"
+        ],
+        "table": {
+          "columns": [
+            "category",
+            "total"
+          ],
+          "rows": [
+            [
+              "clothing",
+              5080
+            ],
+            [
+              "electronics",
+              2430
+            ],
+            [
+              "home",
+              3614
+            ],
+            [
+              "sports",
+              3640
+            ]
+          ],
+          "row_count": 4
+        },
+        "sql": "SELECT category,sum(inventory_count) AS total FROM products GROUP BY category"
+      }
+    ],
+    "products_14": [
+      {
+        "status": "plan_review",
+        "agents": [
+          "contoso_products"
+        ]
+      },
+      {
+        "status": "success",
+        "agents": [
+          "contoso_products"
+        ],
+        "table": {
+          "columns": [
+            "is_active",
+            "total"
+          ],
+          "rows": [
+            [
+              0,
+              1
+            ],
+            [
+              1,
+              44
+            ]
+          ],
+          "row_count": 2
+        },
+        "sql": "SELECT is_active,count(*) AS total FROM products GROUP BY is_active"
+      }
+    ],
+    "products_15": [
+      {
+        "status": "plan_review",
+        "agents": [
+          "contoso_products"
+        ]
+      },
+      {
+        "status": "success",
+        "agents": [
+          "contoso_products"
+        ],
+        "table": {
+          "columns": [
+            "category",
+            "max_price",
+            "min_price"
+          ],
+          "rows": [
+            [
+              "clothing",
+              199.99,
+              24.99
+            ],
+            [
+              "electronics",
+              899.99,
+              49.99
+            ],
+            [
+              "home",
+              349.99,
+              34.99
+            ],
+            [
+              "sports",
+              599.99,
+              19.99
+            ]
+          ],
+          "row_count": 4
+        },
+        "sql": "SELECT category,max(price) AS max_price,min(price) AS min_price FROM products GROUP BY category"
+      }
+    ],
+    "products_16": [
+      {
+        "status": "plan_review",
+        "agents": [
+          "contoso_products"
+        ]
+      },
+      {
+        "status": "success",
+        "agents": [
+          "contoso_products"
+        ],
+        "table": {
+          "columns": [
+            "id",
+            "price"
+          ],
+          "rows": [
+            [
+              "prod-009",
+              899.99
+            ],
+            [
+              "prod-002",
+              699.99
+            ],
+            [
+              "prod-040",
+              599.99
+            ],
+            [
+              "prod-008",
+              349.99
+            ],
+            [
+              "prod-024",
+              349.99
+            ]
+          ],
+          "row_count": 5
+        },
+        "sql": "SELECT id,price FROM products ORDER BY price DESC,id ASC LIMIT 5"
+      }
+    ],
+    "products_17": [
+      {
+        "status": "plan_review",
+        "agents": [
+          "contoso_products"
+        ]
+      },
+      {
+        "status": "success",
+        "agents": [
+          "contoso_products"
+        ],
+        "table": {
+          "columns": [
+            "id",
+            "price"
+          ],
+          "rows": [
+            [
+              "prod-039",
+              19.99
+            ],
+            [
+              "prod-011",
+              24.99
+            ],
+            [
+              "prod-036",
+              24.99
+            ],
+            [
+              "prod-031",
+              29.99
+            ],
+            [
+              "prod-043",
+              29.99
+            ]
+          ],
+          "row_count": 5
+        },
+        "sql": "SELECT id,price FROM products ORDER BY price ASC,id ASC LIMIT 5"
+      }
+    ],
+    "products_18": [
+      {
+        "status": "plan_review",
+        "agents": [
+          "contoso_products"
+        ]
+      },
+      {
+        "status": "success",
+        "agents": [
+          "contoso_products"
+        ],
+        "table": {
+          "columns": [
+            "total"
+          ],
+          "rows": [
+            [
+              44
+            ]
+          ],
+          "row_count": 1
+        },
+        "sql": "SELECT count(*) AS total FROM products WHERE created_at>='2025-01-01' AND created_at<'2026-01-01'"
+      }
+    ],
+    "products_19": [
+      {
+        "status": "plan_review",
+        "agents": [
+          "contoso_products"
+        ]
+      },
+      {
+        "status": "success",
+        "agents": [
+          "contoso_products"
+        ],
+        "table": {
+          "columns": [
+            "id",
+            "created_at"
+          ],
+          "rows": [
+            [
+              "prod-045",
+              "2025-06-20T13:00:00Z"
+            ],
+            [
+              "prod-044",
+              "2025-06-15T08:15:00Z"
+            ],
+            [
+              "prod-043",
+              "2025-06-10T11:30:00Z"
+            ],
+            [
+              "prod-041",
+              "2025-06-01T10:00:00Z"
+            ],
+            [
+              "prod-020",
+              "2025-05-20T11:15:00Z"
+            ]
+          ],
+          "row_count": 5
+        },
+        "sql": "SELECT id,created_at FROM products ORDER BY created_at DESC,id ASC LIMIT 5"
+      }
+    ],
+    "products_20": [
+      {
+        "status": "plan_review",
+        "agents": [
+          "contoso_products"
+        ]
+      },
+      {
+        "status": "success",
+        "agents": [
+          "contoso_products"
+        ],
+        "table": {
+          "columns": [
+            "year",
+            "total"
+          ],
+          "rows": [
+            [
+              "2024",
+              1
+            ],
+            [
+              "2025",
+              44
+            ]
+          ],
+          "row_count": 2
+        },
+        "sql": "SELECT substr(created_at,1,4) AS year,count(*) AS total FROM products GROUP BY substr(created_at,1,4)"
+      }
+    ],
+    "products_21": [
+      {
+        "status": "plan_review",
+        "agents": [
+          "contoso_products"
+        ]
+      },
+      {
+        "status": "success",
+        "agents": [
+          "contoso_products"
+        ],
+        "table": {
+          "columns": [
+            "total"
+          ],
+          "rows": [
+            [
+              14
+            ]
+          ],
+          "row_count": 1
+        },
+        "sql": "SELECT count(*) AS total FROM products WHERE price>(SELECT avg(price) FROM products)"
+      }
+    ],
+    "products_22": [
+      {
+        "status": "plan_review",
+        "agents": [
+          "contoso_products"
+        ]
+      },
+      {
+        "status": "success",
+        "agents": [
+          "contoso_products"
+        ],
+        "table": {
+          "columns": [
+            "category",
+            "total"
+          ],
+          "rows": [
+            [
+              "electronics",
+              252.49
+            ],
+            [
+              "home",
+              105.89909090909092
+            ],
+            [
+              "sports",
+              149.99
+            ]
+          ],
+          "row_count": 3
+        },
+        "sql": "SELECT category,avg(price) AS total FROM products GROUP BY category HAVING avg(price)>100"
+      }
+    ],
+    "products_23": [
+      {
+        "status": "plan_review",
+        "agents": [
+          "contoso_products"
+        ]
+      },
+      {
+        "status": "success",
+        "agents": [
+          "contoso_products"
+        ],
+        "table": {
+          "columns": [
+            "total"
+          ],
+          "rows": [
+            [
+              0
+            ]
+          ],
+          "row_count": 1
+        },
+        "sql": "SELECT count(*) AS total FROM products WHERE json_array_length(tags)=0"
+      }
+    ],
+    "products_24": [
+      {
+        "status": "plan_review",
+        "agents": [
+          "contoso_products"
+        ]
+      },
+      {
+        "status": "success",
+        "agents": [
+          "contoso_products"
+        ],
+        "table": {
+          "columns": [
+            "category",
+            "total"
+          ],
+          "rows": [
+            [
+              "clothing",
+              76
+            ],
+            [
+              "electronics",
+              20
+            ],
+            [
+              "home",
+              19
+            ],
+            [
+              "sports",
+              29
+            ]
+          ],
+          "row_count": 4
+        },
+        "sql": "SELECT category,sum(json_array_length(variants)) AS total FROM products GROUP BY category"
+      }
+    ],
+    "products_25": [
+      {
+        "status": "plan_review",
+        "agents": [
+          "contoso_products"
+        ]
+      },
+      {
+        "status": "success",
+        "agents": [
+          "contoso_products"
+        ],
+        "table": {
+          "columns": [
+            "id",
+            "category",
+            "price"
+          ],
+          "rows": [
+            [
+              "prod-009",
+              "electronics",
+              899.99
+            ],
+            [
+              "prod-018",
+              "clothing",
+              199.99
+            ],
+            [
+              "prod-024",
+              "home",
+              349.99
+            ],
+            [
+              "prod-040",
+              "sports",
+              599.99
+            ]
+          ],
+          "row_count": 4
+        },
+        "sql": "SELECT p.id,p.category,p.price FROM products p WHERE p.price=(SELECT max(p2.price) FROM products p2 WHERE p2.category=p.category)"
+      }
+    ],
+    "inventory_01": [
+      {
+        "status": "plan_review",
+        "agents": [
+          "contoso_inventory"
+        ]
+      },
+      {
+        "status": "success",
+        "agents": [
+          "contoso_inventory"
+        ],
+        "table": {
+          "columns": [
+            "total"
+          ],
+          "rows": [
+            [
+              10
+            ]
+          ],
+          "row_count": 1,
+          "metadata": {
+            "truncated": true
+          }
+        },
+        "sql": "SELECT count(*) AS total FROM warehouses"
+      }
+    ],
+    "inventory_02": [
+      {
+        "status": "plan_review",
+        "agents": [
+          "contoso_inventory"
+        ]
+      },
+      {
+        "status": "success",
+        "agents": [
+          "contoso_inventory"
+        ],
+        "table": {
+          "columns": [
+            "total"
+          ],
+          "rows": [
+            [
+              615000
+            ]
+          ],
+          "row_count": 1
+        },
+        "sql": "SELECT sum(capacity) AS total FROM warehouses"
+      }
+    ],
+    "inventory_03": [
+      {
+        "status": "plan_review",
+        "agents": [
+          "contoso_inventory"
+        ]
+      },
+      {
+        "status": "success",
+        "agents": [
+          "contoso_inventory"
+        ],
+        "table": {
+          "columns": [
+            "total"
+          ],
+          "rows": [
+            [
+              43102
+            ]
+          ],
+          "row_count": 1
+        },
+        "sql": "SELECT sum(quantity) AS total FROM inventory"
+      }
+    ],
+    "inventory_04": [
+      {
+        "status": "plan_review",
+        "agents": [
+          "contoso_inventory"
+        ]
+      },
+      {
+        "status": "success",
+        "agents": [
+          "contoso_inventory"
+        ],
+        "table": {
+          "columns": [
+            "total"
+          ],
+          "rows": [
+            [
+              50
+            ]
+          ],
+          "row_count": 1
+        },
+        "sql": "SELECT count(DISTINCT product_id) AS total FROM inventory"
+      }
+    ],
+    "inventory_05": [
+      {
+        "status": "plan_review",
+        "agents": [
+          "contoso_inventory"
+        ]
+      },
+      {
+        "status": "success",
+        "agents": [
+          "contoso_inventory"
+        ],
+        "table": {
+          "columns": [
+            "total"
+          ],
+          "rows": [
+            [
+              60
+            ]
+          ],
+          "row_count": 1
+        },
+        "sql": "SELECT count(*) AS total FROM shipments"
+      }
+    ],
+    "inventory_06": [
+      {
+        "status": "plan_review",
+        "agents": [
+          "contoso_inventory"
+        ]
+      },
+      {
+        "status": "success",
+        "agents": [
+          "contoso_inventory"
+        ],
+        "table": {
+          "columns": [
+            "total"
+          ],
+          "rows": [
+            [
+              22
+            ]
+          ],
+          "row_count": 1
+        },
+        "sql": "SELECT count(*) AS total FROM inventory WHERE quantity<reorder_level"
+      }
+    ],
+    "inventory_07": [
+      {
+        "status": "plan_review",
+        "agents": [
+          "contoso_inventory"
+        ]
+      },
+      {
+        "status": "success",
+        "agents": [
+          "contoso_inventory"
+        ],
+        "table": {
+          "columns": [
+            "total"
+          ],
+          "rows": [
+            [
+              3
+            ]
+          ],
+          "row_count": 1
+        },
+        "sql": "SELECT count(*) AS total FROM inventory WHERE quantity=0"
+      }
+    ],
+    "inventory_08": [
+      {
+        "status": "plan_review",
+        "agents": [
+          "contoso_inventory"
+        ]
+      },
+      {
+        "status": "success",
+        "agents": [
+          "contoso_inventory"
+        ],
+        "table": {
+          "columns": [
+            "total"
+          ],
+          "rows": [
+            [
+              0
+            ]
+          ],
+          "row_count": 1
+        },
+        "sql": "SELECT count(*) AS total FROM inventory WHERE quantity=reorder_level"
+      }
+    ],
+    "inventory_09": [
+      {
+        "status": "plan_review",
+        "agents": [
+          "contoso_inventory"
+        ]
+      },
+      {
+        "status": "success",
+        "agents": [
+          "contoso_inventory"
+        ],
+        "table": {
+          "columns": [
+            "total"
+          ],
+          "rows": [
+            [
+              34
+            ]
+          ],
+          "row_count": 1
+        },
+        "sql": "SELECT count(*) AS total FROM shipments WHERE actual_date IS NULL"
+      }
+    ],
+    "inventory_10": [
+      {
+        "status": "plan_review",
+        "agents": [
+          "contoso_inventory"
+        ]
+      },
+      {
+        "status": "success",
+        "agents": [
+          "contoso_inventory"
+        ],
+        "table": {
+          "columns": [
+            "inventory_id"
+          ],
+          "rows": [],
+          "row_count": 0
+        },
+        "sql": "SELECT inventory_id FROM inventory WHERE product_id='NOT-EXIST'"
+      }
+    ],
+    "inventory_11": [
+      {
+        "status": "plan_review",
+        "agents": [
+          "contoso_inventory"
+        ]
+      },
+      {
+        "status": "success",
+        "agents": [
+          "contoso_inventory"
+        ],
+        "table": {
+          "columns": [
+            "warehouse_id",
+            "total"
+          ],
+          "rows": [
+            [
+              1,
+              11703
+            ],
+            [
+              2,
+              7144
+            ],
+            [
+              3,
+              4462
+            ],
+            [
+              4,
+              4844
+            ],
+            [
+              5,
+              4802
+            ],
+            [
+              6,
+              4164
+            ],
+            [
+              7,
+              2863
+            ],
+            [
+              9,
+              1473
+            ],
+            [
+              10,
+              1647
+            ]
+          ],
+          "row_count": 9
+        },
+        "sql": "SELECT warehouse_id,sum(quantity) AS total FROM inventory GROUP BY warehouse_id"
+      }
+    ],
+    "inventory_12": [
+      {
+        "status": "plan_review",
+        "agents": [
+          "contoso_inventory"
+        ]
+      },
+      {
+        "status": "success",
+        "agents": [
+          "contoso_inventory"
+        ],
+        "table": {
+          "columns": [
+            "warehouse_id",
+            "total"
+          ],
+          "rows": [
+            [
+              1,
+              3
+            ],
+            [
+              2,
+              2
+            ],
+            [
+              3,
+              6
+            ],
+            [
+              4,
+              4
+            ],
+            [
+              5,
+              1
+            ],
+            [
+              6,
+              2
+            ],
+            [
+              7,
+              2
+            ],
+            [
+              9,
+              2
+            ]
+          ],
+          "row_count": 8
+        },
+        "sql": "SELECT warehouse_id,count(*) AS total FROM inventory WHERE quantity<reorder_level GROUP BY warehouse_id"
+      }
+    ],
+    "inventory_13": [
+      {
+        "status": "plan_review",
+        "agents": [
+          "contoso_inventory"
+        ]
+      },
+      {
+        "status": "success",
+        "agents": [
+          "contoso_inventory"
+        ],
+        "table": {
+          "columns": [
+            "status",
+            "total"
+          ],
+          "rows": [
+            [
+              "cancelled",
+              5
+            ],
+            [
+              "delivered",
+              26
+            ],
+            [
+              "in_transit",
+              16
+            ],
+            [
+              "pending",
+              13
+            ]
+          ],
+          "row_count": 4
+        },
+        "sql": "SELECT status,count(*) AS total FROM shipments GROUP BY status"
+      }
+    ],
+    "inventory_14": [
+      {
+        "status": "plan_review",
+        "agents": [
+          "contoso_inventory"
+        ]
+      },
+      {
+        "status": "success",
+        "agents": [
+          "contoso_inventory"
+        ],
+        "table": {
+          "columns": [
+            "shipment_type",
+            "total"
+          ],
+          "rows": [
+            [
+              "inbound",
+              31
+            ],
+            [
+              "outbound",
+              29
+            ]
+          ],
+          "row_count": 2
+        },
+        "sql": "SELECT shipment_type,count(*) AS total FROM shipments GROUP BY shipment_type"
+      }
+    ],
+    "inventory_15": [
+      {
+        "status": "plan_review",
+        "agents": [
+          "contoso_inventory"
+        ]
+      },
+      {
+        "status": "success",
+        "agents": [
+          "contoso_inventory"
+        ],
+        "table": {
+          "columns": [
+            "is_active",
+            "total"
+          ],
+          "rows": [
+            [
+              0,
+              1
+            ],
+            [
+              1,
+              9
+            ]
+          ],
+          "row_count": 2
+        },
+        "sql": "SELECT is_active,count(*) AS total FROM warehouses GROUP BY is_active"
+      }
+    ],
+    "inventory_16": [
+      {
+        "status": "plan_review",
+        "agents": [
+          "contoso_inventory"
+        ]
+      },
+      {
+        "status": "success",
+        "agents": [
+          "contoso_inventory"
+        ],
+        "table": {
+          "columns": [
+            "inventory_id",
+            "quantity"
+          ],
+          "rows": [
+            [
+              6,
+              0
+            ],
+            [
+              35,
+              0
+            ],
+            [
+              63,
+              0
+            ],
+            [
+              106,
+              1
+            ],
+            [
+              52,
+              2
+            ]
+          ],
+          "row_count": 5
+        },
+        "sql": "SELECT inventory_id,quantity FROM inventory ORDER BY quantity ASC,inventory_id ASC LIMIT 5"
+      }
+    ],
+    "inventory_17": [
+      {
+        "status": "plan_review",
+        "agents": [
+          "contoso_inventory"
+        ]
+      },
+      {
+        "status": "success",
+        "agents": [
+          "contoso_inventory"
+        ],
+        "table": {
+          "columns": [
+            "inventory_id",
+            "quantity"
+          ],
+          "rows": [
+            [
+              4,
+              890
+            ],
+            [
+              22,
+              890
+            ],
+            [
+              41,
+              890
+            ],
+            [
+              87,
+              890
+            ],
+            [
+              107,
+              890
+            ]
+          ],
+          "row_count": 5
+        },
+        "sql": "SELECT inventory_id,quantity FROM inventory ORDER BY quantity DESC,inventory_id ASC LIMIT 5"
+      }
+    ],
+    "inventory_18": [
+      {
+        "status": "plan_review",
+        "agents": [
+          "contoso_inventory"
+        ]
+      },
+      {
+        "status": "success",
+        "agents": [
+          "contoso_inventory"
+        ],
+        "table": {
+          "columns": [
+            "total"
+          ],
+          "rows": [
+            [
+              60
+            ]
+          ],
+          "row_count": 1
+        },
+        "sql": "SELECT count(*) AS total FROM shipments WHERE scheduled_date>='2025-12-01' AND scheduled_date<'2026-01-01'"
+      }
+    ],
+    "inventory_19": [
+      {
+        "status": "plan_review",
+        "agents": [
+          "contoso_inventory"
+        ]
+      },
+      {
+        "status": "success",
+        "agents": [
+          "contoso_inventory"
+        ],
+        "table": {
+          "columns": [
+            "warehouse_id",
+            "capacity"
+          ],
+          "rows": [
+            [
+              1,
+              100000
+            ],
+            [
+              5,
+              85000
+            ],
+            [
+              2,
+              75000
+            ]
+          ],
+          "row_count": 3
+        },
+        "sql": "SELECT warehouse_id,capacity FROM warehouses ORDER BY capacity DESC,warehouse_id ASC LIMIT 3"
+      }
+    ],
+    "inventory_20": [
+      {
+        "status": "plan_review",
+        "agents": [
+          "contoso_inventory"
+        ]
+      },
+      {
+        "status": "success",
+        "agents": [
+          "contoso_inventory"
+        ],
+        "table": {
+          "columns": [
+            "total"
+          ],
+          "rows": [
+            [
+              12
+            ]
+          ],
+          "row_count": 1
+        },
+        "sql": "SELECT count(*) AS total FROM shipments WHERE actual_date IS NOT NULL AND actual_date>scheduled_date"
+      }
+    ],
+    "inventory_21": [
+      {
+        "status": "plan_review",
+        "agents": [
+          "contoso_inventory"
+        ]
+      },
+      {
+        "status": "success",
+        "agents": [
+          "contoso_inventory"
+        ],
+        "table": {
+          "columns": [
+            "location",
+            "total"
+          ],
+          "rows": [
+            [
+              "Atlanta, GA",
+              1473
+            ],
+            [
+              "Boston, MA",
+              1647
+            ],
+            [
+              "Chicago, IL",
+              4462
+            ],
+            [
+              "Dallas, TX",
+              7144
+            ],
+            [
+              "Denver, CO",
+              2863
+            ],
+            [
+              "Los Angeles, CA",
+              4802
+            ],
+            [
+              "Miami, FL",
+              4164
+            ],
+            [
+              "Newark, NJ",
+              4844
+            ],
+            [
+              "Seattle, WA",
+              11703
+            ]
+          ],
+          "row_count": 9
+        },
+        "sql": "SELECT w.location,sum(i.quantity) AS total FROM inventory i JOIN warehouses w ON i.warehouse_id=w.warehouse_id GROUP BY w.location"
+      }
+    ],
+    "inventory_22": [
+      {
+        "status": "plan_review",
+        "agents": [
+          "contoso_inventory"
+        ]
+      },
+      {
+        "status": "success",
+        "agents": [
+          "contoso_inventory"
+        ],
+        "table": {
+          "columns": [
+            "total"
+          ],
+          "rows": [
+            [
+              null
+            ]
+          ],
+          "row_count": 1
+        },
+        "sql": "SELECT sum(i.quantity) AS total FROM inventory i JOIN warehouses w ON i.warehouse_id=w.warehouse_id WHERE w.is_active=0"
+      }
+    ],
+    "inventory_23": [
+      {
+        "status": "plan_review",
+        "agents": [
+          "contoso_inventory"
+        ]
+      },
+      {
+        "status": "success",
+        "agents": [
+          "contoso_inventory"
+        ],
+        "table": {
+          "columns": [
+            "total"
+          ],
+          "rows": [
+            [
+              1
+            ]
+          ],
+          "row_count": 1
+        },
+        "sql": "SELECT count(*) AS total FROM warehouses w WHERE NOT EXISTS (SELECT 1 FROM inventory i WHERE i.warehouse_id=w.warehouse_id)"
+      }
+    ],
+    "inventory_24": [
+      {
+        "status": "plan_review",
+        "agents": [
+          "contoso_inventory"
+        ]
+      },
+      {
+        "status": "success",
+        "agents": [
+          "contoso_inventory"
+        ],
+        "table": {
+          "columns": [
+            "total"
+          ],
+          "rows": [
+            [
+              0
+            ]
+          ],
+          "row_count": 1
+        },
+        "sql": "SELECT count(*) AS total FROM inventory i LEFT JOIN warehouses w ON i.warehouse_id=w.warehouse_id WHERE w.warehouse_id IS NULL"
+      }
+    ],
+    "inventory_25": [
+      {
+        "status": "plan_review",
+        "agents": [
+          "contoso_inventory"
+        ]
+      },
+      {
+        "status": "success",
+        "agents": [
+          "contoso_inventory"
+        ],
+        "table": {
+          "columns": [
+            "total"
+          ],
+          "rows": [
+            [
+              63
+            ]
+          ],
+          "row_count": 1
+        },
+        "sql": "SELECT count(*) AS total FROM inventory WHERE quantity>(SELECT avg(quantity) FROM inventory)"
+      }
+    ],
+    "hr_01": [
+      {
+        "status": "success",
+        "agents": [
+          "contoso_hr"
+        ]
+      },
+      {
+        "status": "success",
+        "agents": [
+          "contoso_hr"
+        ],
+        "table": {
+          "columns": [
+            "total"
+          ],
+          "rows": [
+            [
+              40
+            ]
+          ],
+          "row_count": 1
+        },
+        "sql": "SELECT count(*) AS total FROM employees"
+      }
+    ],
+    "hr_02": [
+      {
+        "status": "plan_review",
+        "agents": [
+          "contoso_hr"
+        ]
+      },
+      {
+        "status": "success",
+        "agents": [
+          "contoso_hr"
+        ],
+        "table": {
+          "columns": [
+            "total"
+          ],
+          "rows": [
+            [
+              8
+            ]
+          ],
+          "row_count": 1
+        },
+        "sql": "SELECT count(*) AS total FROM departments"
+      }
+    ],
+    "hr_03": [
+      {
+        "status": "plan_review",
+        "agents": [
+          "contoso_hr"
+        ]
+      },
+      {
+        "status": "success",
+        "agents": [
+          "contoso_hr"
+        ],
+        "table": {
+          "columns": [
+            "total"
+          ],
+          "rows": [
+            [
+              102675.0
+            ]
+          ],
+          "row_count": 1
+        },
+        "sql": "SELECT avg(Salary) AS total FROM employees"
+      }
+    ],
+    "hr_04": [
+      {
+        "status": "plan_review",
+        "agents": [
+          "contoso_hr"
+        ]
+      },
+      {
+        "status": "success",
+        "agents": [
+          "contoso_hr"
+        ],
+        "table": {
+          "columns": [
+            "total"
+          ],
+          "rows": [
+            [
+              4107000.0
+            ]
+          ],
+          "row_count": 1
+        },
+        "sql": "SELECT sum(Salary) AS total FROM employees"
+      }
+    ],
+    "hr_05": [
+      {
+        "status": "plan_review",
+        "agents": [
+          "contoso_hr"
+        ]
+      },
+      {
+        "status": "success",
+        "agents": [
+          "contoso_hr"
+        ],
+        "table": {
+          "columns": [
+            "total"
+          ],
+          "rows": [
+            [
+              17
+            ]
+          ],
+          "row_count": 1
+        },
+        "sql": "SELECT count(*) AS total FROM performance_reviews"
+      }
+    ],
+    "hr_06": [
+      {
+        "status": "plan_review",
+        "agents": [
+          "contoso_hr"
+        ]
+      },
+      {
+        "status": "success",
+        "agents": [
+          "contoso_hr"
+        ],
+        "table": {
+          "columns": [
+            "total"
+          ],
+          "rows": [
+            [
+              39
+            ]
+          ],
+          "row_count": 1
+        },
+        "sql": "SELECT count(*) AS total FROM employees WHERE IsActive=1"
+      }
+    ],
+    "hr_07": [
+      {
+        "status": "plan_review",
+        "agents": [
+          "contoso_hr"
+        ]
+      },
+      {
+        "status": "success",
+        "agents": [
+          "contoso_hr"
+        ],
+        "table": {
+          "columns": [
+            "total"
+          ],
+          "rows": [
+            [
+              18
+            ]
+          ],
+          "row_count": 1
+        },
+        "sql": "SELECT count(*) AS total FROM employees WHERE Salary>=100000"
+      }
+    ],
+    "hr_08": [
+      {
+        "status": "plan_review",
+        "agents": [
+          "contoso_hr"
+        ]
+      },
+      {
+        "status": "success",
+        "agents": [
+          "contoso_hr"
+        ],
+        "table": {
+          "columns": [
+            "total"
+          ],
+          "rows": [
+            [
+              8
+            ]
+          ],
+          "row_count": 1
+        },
+        "sql": "SELECT count(*) AS total FROM employees WHERE ManagerID IS NULL"
+      }
+    ],
+    "hr_09": [
+      {
+        "status": "plan_review",
+        "agents": [
+          "contoso_hr"
+        ]
+      },
+      {
+        "status": "success",
+        "agents": [
+          "contoso_hr"
+        ],
+        "table": {
+          "columns": [
+            "total"
+          ],
+          "rows": [
+            [
+              7
+            ]
+          ],
+          "row_count": 1
+        },
+        "sql": "SELECT count(*) AS total FROM time_off_requests WHERE Status='Approved'"
+      }
+    ],
+    "hr_10": [
+      {
+        "status": "plan_review",
+        "agents": [
+          "contoso_hr"
+        ]
+      },
+      {
+        "status": "success",
+        "agents": [
+          "contoso_hr"
+        ],
+        "table": {
+          "columns": [
+            "EmployeeID"
+          ],
+          "rows": [],
+          "row_count": 0
+        },
+        "sql": "SELECT EmployeeID FROM employees WHERE EmployeeID=-1"
+      }
+    ],
+    "hr_11": [
+      {
+        "status": "plan_review",
+        "agents": [
+          "contoso_hr"
+        ]
+      },
+      {
+        "status": "success",
+        "agents": [
+          "contoso_hr"
+        ],
+        "table": {
+          "columns": [
+            "DepartmentID",
+            "total"
+          ],
+          "rows": [
+            [
+              1,
+              5
+            ],
+            [
+              2,
+              5
+            ],
+            [
+              3,
+              5
+            ],
+            [
+              4,
+              5
+            ],
+            [
+              5,
+              5
+            ],
+            [
+              6,
+              5
+            ],
+            [
+              7,
+              5
+            ],
+            [
+              8,
+              5
+            ]
+          ],
+          "row_count": 8
+        },
+        "sql": "SELECT DepartmentID,count(*) AS total FROM employees GROUP BY DepartmentID"
+      }
+    ],
+    "hr_12": [
+      {
+        "status": "plan_review",
+        "agents": [
+          "contoso_hr"
+        ]
+      },
+      {
+        "status": "success",
+        "agents": [
+          "contoso_hr"
+        ],
+        "table": {
+          "columns": [
+            "DepartmentID",
+            "total"
+          ],
+          "rows": [
+            [
+              1,
+              136000.0
+            ],
+            [
+              2,
+              108000.0
+            ],
+            [
+              3,
+              90000.0
+            ],
+            [
+              4,
+              86000.0
+            ],
+            [
+              5,
+              101800.0
+            ],
+            [
+              6,
+              95600.0
+            ],
+            [
+              7,
+              77000.0
+            ],
+            [
+              8,
+              127000.0
+            ]
+          ],
+          "row_count": 8
+        },
+        "sql": "SELECT DepartmentID,avg(Salary) AS total FROM employees GROUP BY DepartmentID"
+      }
+    ],
+    "hr_13": [
+      {
+        "status": "plan_review",
+        "agents": [
+          "contoso_hr"
+        ]
+      },
+      {
+        "status": "success",
+        "agents": [
+          "contoso_hr"
+        ],
+        "table": {
+          "columns": [
+            "Rating",
+            "total"
+          ],
+          "rows": [
+            [
+              3,
+              3
+            ],
+            [
+              4,
+              9
+            ],
+            [
+              5,
+              5
+            ]
+          ],
+          "row_count": 3
+        },
+        "sql": "SELECT Rating,count(*) AS total FROM performance_reviews GROUP BY Rating"
+      }
+    ],
+    "hr_14": [
+      {
+        "status": "plan_review",
+        "agents": [
+          "contoso_hr"
+        ]
+      },
+      {
+        "status": "success",
+        "agents": [
+          "contoso_hr"
+        ],
+        "table": {
+          "columns": [
+            "Type",
+            "total"
+          ],
+          "rows": [
+            [
+              "Conference",
+              5
+            ],
+            [
+              "Personal",
+              2
+            ],
+            [
+              "Sick",
+              3
+            ],
+            [
+              "Vacation",
+              30
+            ]
+          ],
+          "row_count": 4
+        },
+        "sql": "SELECT Type,sum(DaysRequested) AS total FROM time_off_requests GROUP BY Type"
+      }
+    ],
+    "hr_15": [
+      {
+        "status": "plan_review",
+        "agents": [
+          "contoso_hr"
+        ]
+      },
+      {
+        "status": "success",
+        "agents": [
+          "contoso_hr"
+        ],
+        "table": {
+          "columns": [
+            "Title",
+            "total"
+          ],
+          "rows": [
+            [
+              "Account Executive",
+              2
+            ],
+            [
+              "Accountant",
+              1
+            ],
+            [
+              "Accounts Payable Clerk",
+              1
+            ],
+            [
+              "Benefits Specialist",
+              1
+            ],
+            [
+              "CFO",
+              1
+            ],
+            [
+              "Content Marketing Manager",
+              1
+            ],
+            [
+              "DevOps Engineer",
+              1
+            ],
+            [
+              "Digital Marketing Specialist",
+              1
+            ],
+            [
+              "Financial Analyst",
+              1
+            ],
+            [
+              "Graphic Designer",
+              1
+            ],
+            [
+              "HR Coordinator",
+              1
+            ],
+            [
+              "HR Director",
+              1
+            ],
+            [
+              "HR Manager",
+              1
+            ],
+            [
+              "Lab Technician",
+              1
+            ],
+            [
+              "Logistics Coordinator",
+              1
+            ],
+            [
+              "Marketing Coordinator",
+              1
+            ],
+            [
+              "Marketing Director",
+              1
+            ],
+            [
+              "Operations Director",
+              1
+            ],
+            [
+              "Operations Manager",
+              1
+            ],
+            [
+              "Principal Research Scientist",
+              1
+            ],
+            [
+              "R&D Director",
+              1
+            ],
+            [
+              "Recruiter",
+              1
+            ],
+            [
+              "Research Engineer",
+              1
+            ],
+            [
+              "Research Scientist",
+              1
+            ],
+            [
+              "Sales Development Rep",
+              1
+            ],
+            [
+              "Sales Director",
+              1
+            ],
+            [
+              "Senior Account Executive",
+              1
+            ],
+            [
+              "Senior Accountant",
+              1
+            ],
+            [
+              "Senior Software Engineer",
+              1
+            ],
+            [
+              "Software Engineer",
+              2
+            ],
+            [
+              "Supply Chain Analyst",
+              1
+            ],
+            [
+              "Support Director",
+              1
+            ],
+            [
+              "Support Specialist",
+              3
+            ],
+            [
+              "Support Team Lead",
+              1
+            ],
+            [
+              "VP of Engineering",
+              1
+            ],
+            [
+              "Warehouse Supervisor",
+              1
+            ]
+          ],
+          "row_count": 36
+        },
+        "sql": "SELECT Title,count(*) AS total FROM employees GROUP BY Title"
+      }
+    ],
+    "hr_16": [
+      {
+        "status": "plan_review",
+        "agents": [
+          "contoso_hr"
+        ]
+      },
+      {
+        "status": "success",
+        "agents": [
+          "contoso_hr"
+        ],
+        "table": {
+          "columns": [
+            "EmployeeID",
+            "Salary"
+          ],
+          "rows": [
+            [
+              20,
+              195000.0
+            ],
+            [
+              1,
+              185000.0
+            ],
+            [
+              35,
+              175000.0
+            ],
+            [
+              5,
+              165000.0
+            ],
+            [
+              25,
+              160000.0
+            ]
+          ],
+          "row_count": 5
+        },
+        "sql": "SELECT EmployeeID,Salary FROM employees ORDER BY Salary DESC,EmployeeID ASC LIMIT 5"
+      }
+    ],
+    "hr_17": [
+      {
+        "status": "plan_review",
+        "agents": [
+          "contoso_hr"
+        ]
+      },
+      {
+        "status": "success",
+        "agents": [
+          "contoso_hr"
+        ],
+        "table": {
+          "columns": [
+            "EmployeeID",
+            "Salary"
+          ],
+          "rows": [
+            [
+              24,
+              52000.0
+            ],
+            [
+              34,
+              52000.0
+            ],
+            [
+              14,
+              55000.0
+            ],
+            [
+              18,
+              55000.0
+            ],
+            [
+              33,
+              55000.0
+            ]
+          ],
+          "row_count": 5
+        },
+        "sql": "SELECT EmployeeID,Salary FROM employees ORDER BY Salary ASC,EmployeeID ASC LIMIT 5"
+      }
+    ],
+    "hr_18": [
+      {
+        "status": "plan_review",
+        "agents": [
+          "contoso_hr"
+        ]
+      },
+      {
+        "status": "success",
+        "agents": [
+          "contoso_hr"
+        ],
+        "table": {
+          "columns": [
+            "total"
+          ],
+          "rows": [
+            [
+              25
+            ]
+          ],
+          "row_count": 1
+        },
+        "sql": "SELECT count(*) AS total FROM employees WHERE HireDate>='2020-01-01'"
+      }
+    ],
+    "hr_19": [
+      {
+        "status": "plan_review",
+        "agents": [
+          "contoso_hr"
+        ]
+      },
+      {
+        "status": "success",
+        "agents": [
+          "contoso_hr"
+        ],
+        "table": {
+          "columns": [
+            "year",
+            "total"
+          ],
+          "rows": [
+            [
+              "2015",
+              1
+            ],
+            [
+              "2016",
+              2
+            ],
+            [
+              "2017",
+              2
+            ],
+            [
+              "2018",
+              5
+            ],
+            [
+              "2019",
+              5
+            ],
+            [
+              "2020",
+              8
+            ],
+            [
+              "2021",
+              8
+            ],
+            [
+              "2022",
+              5
+            ],
+            [
+              "2023",
+              4
+            ]
+          ],
+          "row_count": 9
+        },
+        "sql": "SELECT substr(HireDate,1,4) AS year,count(*) AS total FROM employees GROUP BY substr(HireDate,1,4)"
+      }
+    ],
+    "hr_20": [
+      {
+        "status": "plan_review",
+        "agents": [
+          "contoso_hr"
+        ]
+      },
+      {
+        "status": "success",
+        "agents": [
+          "contoso_hr"
+        ],
+        "table": {
+          "columns": [
+            "total"
+          ],
+          "rows": [
+            [
+              17
+            ]
+          ],
+          "row_count": 1
+        },
+        "sql": "SELECT count(*) AS total FROM performance_reviews WHERE ReviewDate>='2024-01-01' AND ReviewDate<'2025-01-01'"
+      }
+    ],
+    "hr_21": [
+      {
+        "status": "plan_review",
+        "agents": [
+          "contoso_hr"
+        ]
+      },
+      {
+        "status": "success",
+        "agents": [
+          "contoso_hr"
+        ],
+        "table": {
+          "columns": [
+            "Name",
+            "total"
+          ],
+          "rows": [
+            [
+              "Customer Support",
+              385000.0
+            ],
+            [
+              "Engineering",
+              680000.0
+            ],
+            [
+              "Finance",
+              509000.0
+            ],
+            [
+              "Human Resources",
+              430000.0
+            ],
+            [
+              "Marketing",
+              450000.0
+            ],
+            [
+              "Operations",
+              478000.0
+            ],
+            [
+              "Research & Development",
+              635000.0
+            ],
+            [
+              "Sales",
+              540000.0
+            ]
+          ],
+          "row_count": 8
+        },
+        "sql": "SELECT d.Name,sum(e.Salary) AS total FROM employees e JOIN departments d ON e.DepartmentID=d.DepartmentID GROUP BY d.Name"
+      }
+    ],
+    "hr_22": [
+      {
+        "status": "plan_review",
+        "agents": [
+          "contoso_hr"
+        ]
+      },
+      {
+        "status": "success",
+        "agents": [
+          "contoso_hr"
+        ],
+        "table": {
+          "columns": [
+            "total"
+          ],
+          "rows": [
+            [
+              0
+            ]
+          ],
+          "row_count": 1
+        },
+        "sql": "SELECT count(*) AS total FROM departments d WHERE NOT EXISTS (SELECT 1 FROM employees e WHERE e.DepartmentID=d.DepartmentID)"
+      }
+    ],
+    "hr_23": [
+      {
+        "status": "plan_review",
+        "agents": [
+          "contoso_hr"
+        ]
+      },
+      {
+        "status": "success",
+        "agents": [
+          "contoso_hr"
+        ],
+        "table": {
+          "columns": [
+            "total"
+          ],
+          "rows": [
+            [
+              18
+            ]
+          ],
+          "row_count": 1
+        },
+        "sql": "SELECT count(*) AS total FROM employees WHERE Salary>(SELECT avg(Salary) FROM employees)"
+      }
+    ],
+    "hr_24": [
+      {
+        "status": "plan_review",
+        "agents": [
+          "contoso_hr"
+        ]
+      },
+      {
+        "status": "success",
+        "agents": [
+          "contoso_hr"
+        ],
+        "table": {
+          "columns": [
+            "DepartmentID",
+            "total"
+          ],
+          "rows": [
+            [
+              1,
+              4.0
+            ],
+            [
+              2,
+              3.6666666666666665
+            ],
+            [
+              3,
+              4.5
+            ],
+            [
+              4,
+              4.5
+            ],
+            [
+              5,
+              3.5
+            ],
+            [
+              6,
+              4.0
+            ],
+            [
+              7,
+              5.0
+            ],
+            [
+              8,
+              4.5
+            ]
+          ],
+          "row_count": 8
+        },
+        "sql": "SELECT e.DepartmentID,avg(p.Rating) AS total FROM performance_reviews p JOIN employees e ON p.EmployeeID=e.EmployeeID GROUP BY e.DepartmentID"
+      }
+    ],
+    "hr_25": [
+      {
+        "status": "plan_review",
+        "agents": [
+          "contoso_hr"
+        ]
+      },
+      {
+        "status": "success",
+        "agents": [
+          "contoso_hr"
+        ],
+        "table": {
+          "columns": [
+            "DepartmentID",
+            "total"
+          ],
+          "rows": [
+            [
+              1,
+              6
+            ],
+            [
+              2,
+              4
+            ],
+            [
+              4,
+              5
+            ],
+            [
+              5,
+              5
+            ],
+            [
+              8,
+              5
+            ]
+          ],
+          "row_count": 5
+        },
+        "sql": "SELECT e.DepartmentID,sum(t.DaysRequested) AS total FROM time_off_requests t JOIN employees e ON t.EmployeeID=e.EmployeeID WHERE t.Status='Approved' GROUP BY e.DepartmentID"
+      }
+    ],
+    "finance_01": [
+      {
+        "status": "plan_review",
+        "agents": [
+          "financial_transactions"
+        ]
+      },
+      {
+        "status": "success",
+        "agents": [
+          "financial_transactions"
+        ],
+        "table": {
+          "columns": [
+            "total"
+          ],
+          "rows": [
+            [
+              17
+            ]
+          ],
+          "row_count": 999
+        },
+        "sql": "SELECT count(*) AS total FROM accounts"
+      }
+    ],
+    "finance_02": [
+      {
+        "status": "plan_review",
+        "agents": [
+          "financial_transactions"
+        ]
+      },
+      {
+        "status": "success",
+        "agents": [
+          "financial_transactions"
+        ],
+        "table": {
+          "columns": [
+            "total"
+          ],
+          "rows": [
+            [
+              10
+            ]
+          ],
+          "row_count": 1
+        },
+        "sql": "SELECT count(*) AS total FROM customers"
+      }
+    ],
+    "finance_03": [
+      {
+        "status": "plan_review",
+        "agents": [
+          "financial_transactions"
+        ]
+      },
+      {
+        "status": "success",
+        "agents": [
+          "financial_transactions"
+        ],
+        "table": {
+          "columns": [
+            "total"
+          ],
+          "rows": [
+            [
+              1504141.8
+            ]
+          ],
+          "row_count": 1
+        },
+        "sql": "SELECT sum(current_balance) AS total FROM accounts"
+      }
+    ],
+    "finance_04": [
+      {
+        "status": "plan_review",
+        "agents": [
+          "financial_transactions"
+        ]
+      },
+      {
+        "status": "success",
+        "agents": [
+          "financial_transactions"
+        ],
+        "table": {
+          "columns": [
+            "total"
+          ],
+          "rows": [
+            [
+              30
+            ]
+          ],
+          "row_count": 1
+        },
+        "sql": "SELECT count(*) AS total FROM transactions"
+      }
+    ],
+    "finance_05": [
+      {
+        "status": "plan_review",
+        "agents": [
+          "financial_transactions"
+        ]
+      },
+      {
+        "status": "success",
+        "agents": [
+          "financial_transactions"
+        ],
+        "table": {
+          "columns": [
+            "total"
+          ],
+          "rows": [
+            [
+              5
+            ]
+          ],
+          "row_count": 1
+        },
+        "sql": "SELECT count(*) AS total FROM fraud_alerts"
+      }
+    ],
+    "finance_06": [
+      {
+        "status": "plan_review",
+        "agents": [
+          "financial_transactions"
+        ]
+      },
+      {
+        "status": "success",
+        "agents": [
+          "financial_transactions"
+        ],
+        "table": {
+          "columns": [
+            "total"
+          ],
+          "rows": [
+            [
+              15
+            ]
+          ],
+          "row_count": 1
+        },
+        "sql": "SELECT count(*) AS total FROM accounts WHERE credit_limit IS NULL"
+      }
+    ],
+    "finance_07": [
+      {
+        "status": "plan_review",
+        "agents": [
+          "financial_transactions"
+        ]
+      },
+      {
+        "status": "success",
+        "agents": [
+          "financial_transactions"
+        ],
+        "table": {
+          "columns": [
+            "total"
+          ],
+          "rows": [
+            [
+              2
+            ]
+          ],
+          "row_count": 1
+        },
+        "sql": "SELECT count(*) AS total FROM accounts WHERE current_balance<0"
+      }
+    ],
+    "finance_08": [
+      {
+        "status": "plan_review",
+        "agents": [
+          "financial_transactions"
+        ]
+      },
+      {
+        "status": "success",
+        "agents": [
+          "financial_transactions"
+        ],
+        "table": {
+          "columns": [
+            "total"
+          ],
+          "rows": [
+            [
+              0
+            ]
+          ],
+          "row_count": 1
+        },
+        "sql": "SELECT count(*) AS total FROM customers WHERE risk_score>=50"
+      }
+    ],
+    "finance_09": [
+      {
+        "status": "plan_review",
+        "agents": [
+          "financial_transactions"
+        ]
+      },
+      {
+        "status": "success",
+        "agents": [
+          "financial_transactions"
+        ],
+        "table": {
+          "columns": [
+            "total"
+          ],
+          "rows": [
+            [
+              29
+            ]
+          ],
+          "row_count": 1
+        },
+        "sql": "SELECT count(*) AS total FROM transactions WHERE status='Completed'"
+      }
+    ],
+    "finance_10": [
+      {
+        "status": "plan_review",
+        "agents": [
+          "financial_transactions"
+        ]
+      },
+      {
+        "status": "success",
+        "agents": [
+          "financial_transactions"
+        ],
+        "table": {
+          "columns": [
+            "account_id"
+          ],
+          "rows": [],
+          "row_count": 0
+        },
+        "sql": "SELECT account_id FROM accounts WHERE account_id='NOT-EXIST'"
+      }
+    ],
+    "finance_11": [
+      {
+        "status": "plan_review",
+        "agents": [
+          "financial_transactions"
+        ]
+      },
+      {
+        "status": "success",
+        "agents": [
+          "financial_transactions"
+        ],
+        "table": {
+          "columns": [
+            "account_type",
+            "total"
+          ],
+          "rows": [
+            [
+              "Checking",
+              10
+            ],
+            [
+              "Credit",
+              2
+            ],
+            [
+              "Investment",
+              2
+            ],
+            [
+              "Savings",
+              3
+            ]
+          ],
+          "row_count": 4
+        },
+        "sql": "SELECT account_type,count(*) AS total FROM accounts GROUP BY account_type"
+      }
+    ],
+    "finance_12": [
+      {
+        "status": "plan_review",
+        "agents": [
+          "financial_transactions"
+        ]
+      },
+      {
+        "status": "success",
+        "agents": [
+          "financial_transactions"
+        ],
+        "table": {
+          "columns": [
+            "channel",
+            "total"
+          ],
+          "rows": [
+            [
+              "ATM",
+              1
+            ],
+            [
+              "Branch",
+              4
+            ],
+            [
+              "Mobile",
+              7
+            ],
+            [
+              "Online",
+              14
+            ],
+            [
+              "POS",
+              4
+            ]
+          ],
+          "row_count": 5
+        },
+        "sql": "SELECT channel,count(*) AS total FROM transactions GROUP BY channel"
+      }
+    ],
+    "finance_13": [
+      {
+        "status": "plan_review",
+        "agents": [
+          "financial_transactions"
+        ]
+      },
+      {
+        "status": "success",
+        "agents": [
+          "financial_transactions"
+        ],
+        "table": {
+          "columns": [
+            "currency",
+            "total"
+          ],
+          "rows": [
+            [
+              "USD",
+              61468.0
+            ]
+          ],
+          "row_count": 1
+        },
+        "sql": "SELECT currency,sum(amount) AS total FROM transactions GROUP BY currency"
+      }
+    ],
+    "finance_14": [
+      {
+        "status": "plan_review",
+        "agents": [
+          "financial_transactions"
+        ]
+      },
+      {
+        "status": "success",
+        "agents": [
+          "financial_transactions"
+        ],
+        "table": {
+          "columns": [
+            "customer_segment",
+            "total"
+          ],
+          "rows": [
+            [
+              "Premium",
+              3
+            ],
+            [
+              "Standard",
+              4
+            ],
+            [
+              "VIP",
+              3
+            ]
+          ],
+          "row_count": 3
+        },
+        "sql": "SELECT customer_segment,count(*) AS total FROM customers GROUP BY customer_segment"
+      }
+    ],
+    "finance_15": [
+      {
+        "status": "plan_review",
+        "agents": [
+          "financial_transactions"
+        ]
+      },
+      {
+        "status": "success",
+        "agents": [
+          "financial_transactions"
+        ],
+        "table": {
+          "columns": [
+            "severity",
+            "total"
+          ],
+          "rows": [
+            [
+              "Critical",
+              1
+            ],
+            [
+              "High",
+              1
+            ],
+            [
+              "Low",
+              2
+            ],
+            [
+              "Medium",
+              1
+            ]
+          ],
+          "row_count": 4
+        },
+        "sql": "SELECT severity,count(*) AS total FROM fraud_alerts GROUP BY severity"
+      }
+    ],
+    "finance_16": [
+      {
+        "status": "plan_review",
+        "agents": [
+          "financial_transactions"
+        ]
+      },
+      {
+        "status": "success",
+        "agents": [
+          "financial_transactions"
+        ],
+        "table": {
+          "columns": [
+            "transaction_id",
+            "amount"
+          ],
+          "rows": [
+            [
+              "TXN-2024-000018",
+              25000.0
+            ],
+            [
+              "TXN-2024-000017",
+              15000.0
+            ],
+            [
+              "TXN-2024-000019",
+              12000.0
+            ],
+            [
+              "TXN-2024-000004",
+              10000.0
+            ],
+            [
+              "TXN-2024-000012",
+              6500.0
+            ]
+          ],
+          "row_count": 5
+        },
+        "sql": "SELECT transaction_id,amount FROM transactions ORDER BY amount DESC,transaction_id ASC LIMIT 5"
+      }
+    ],
+    "finance_17": [
+      {
+        "status": "plan_review",
+        "agents": [
+          "financial_transactions"
+        ]
+      },
+      {
+        "status": "success",
+        "agents": [
+          "financial_transactions"
+        ],
+        "table": {
+          "columns": [
+            "transaction_id",
+            "amount"
+          ],
+          "rows": [
+            [
+              "TXN-2024-000003",
+              -10000.0
+            ],
+            [
+              "TXN-2024-000025",
+              -8000.0
+            ],
+            [
+              "TXN-2024-000023",
+              -2500.0
+            ],
+            [
+              "TXN-2024-000024",
+              -1800.0
+            ],
+            [
+              "TXN-2024-000013",
+              -1500.0
+            ]
+          ],
+          "row_count": 5
+        },
+        "sql": "SELECT transaction_id,amount FROM transactions ORDER BY amount ASC,transaction_id ASC LIMIT 5"
+      }
+    ],
+    "finance_18": [
+      {
+        "status": "plan_review",
+        "agents": [
+          "financial_transactions"
+        ]
+      },
+      {
+        "status": "success",
+        "agents": [
+          "financial_transactions"
+        ],
+        "table": {
+          "columns": [
+            "total"
+          ],
+          "rows": [
+            [
+              29
+            ]
+          ],
+          "row_count": 1
+        },
+        "sql": "SELECT count(*) AS total FROM transactions WHERE transaction_date>='2024-12-01' AND transaction_date<'2025-01-01'"
+      }
+    ],
+    "finance_19": [
+      {
+        "status": "plan_review",
+        "agents": [
+          "financial_transactions"
+        ]
+      },
+      {
+        "status": "success",
+        "agents": [
+          "financial_transactions"
+        ],
+        "table": {
+          "columns": [
+            "transaction_date",
+            "total"
+          ],
+          "rows": [
+            [
+              "2024-11-15",
+              1
+            ],
+            [
+              "2024-12-01",
+              8
+            ],
+            [
+              "2024-12-02",
+              6
+            ],
+            [
+              "2024-12-03",
+              7
+            ],
+            [
+              "2024-12-04",
+              2
+            ],
+            [
+              "2024-12-05",
+              6
+            ]
+          ],
+          "row_count": 6
+        },
+        "sql": "SELECT transaction_date,count(*) AS total FROM transactions GROUP BY transaction_date"
+      }
+    ],
+    "finance_20": [
+      {
+        "status": "plan_review",
+        "agents": [
+          "financial_transactions"
+        ]
+      },
+      {
+        "status": "success",
+        "agents": [
+          "financial_transactions"
+        ],
+        "table": {
+          "columns": [
+            "year_month",
+            "total"
+          ],
+          "rows": [
+            [
+              "2024-11",
+              173
+            ]
+          ],
+          "row_count": 1
+        },
+        "sql": "SELECT year_month,sum(transaction_count) AS total FROM monthly_summaries GROUP BY year_month"
+      }
+    ],
+    "finance_21": [
+      {
+        "status": "plan_review",
+        "agents": [
+          "financial_transactions"
+        ]
+      },
+      {
+        "status": "success",
+        "agents": [
+          "financial_transactions"
+        ],
+        "table": {
+          "columns": [
+            "customer_segment",
+            "total"
+          ],
+          "rows": [
+            [
+              "Premium",
+              32030.55
+            ],
+            [
+              "Standard",
+              25380.75
+            ],
+            [
+              "VIP",
+              1446730.5
+            ]
+          ],
+          "row_count": 3
+        },
+        "sql": "SELECT c.customer_segment,sum(a.current_balance) AS total FROM accounts a JOIN customers c ON a.customer_id=c.customer_id GROUP BY c.customer_segment"
+      }
+    ],
+    "finance_22": [
+      {
+        "status": "plan_review",
+        "agents": [
+          "financial_transactions"
+        ]
+      },
+      {
+        "status": "success",
+        "agents": [
+          "financial_transactions"
+        ],
+        "table": {
+          "columns": [
+            "total"
+          ],
+          "rows": [
+            [
+              0
+            ]
+          ],
+          "row_count": 1
+        },
+        "sql": "SELECT count(*) AS total FROM customers c WHERE NOT EXISTS (SELECT 1 FROM accounts a WHERE a.customer_id=c.customer_id)"
+      }
+    ],
+    "finance_23": [
+      {
+        "status": "plan_review",
+        "agents": [
+          "financial_transactions"
+        ]
+      },
+      {
+        "status": "success",
+        "agents": [
+          "financial_transactions"
+        ],
+        "table": {
+          "columns": [
+            "account_type",
+            "total"
+          ],
+          "rows": [
+            [
+              "Checking",
+              22
+            ],
+            [
+              "Credit",
+              4
+            ],
+            [
+              "Investment",
+              1
+            ],
+            [
+              "Savings",
+              3
+            ]
+          ],
+          "row_count": 4
+        },
+        "sql": "SELECT a.account_type,count(*) AS total FROM transactions t JOIN accounts a ON t.account_id=a.account_id GROUP BY a.account_type"
+      }
+    ],
+    "finance_24": [
+      {
+        "status": "plan_review",
+        "agents": [
+          "financial_transactions"
+        ]
+      },
+      {
+        "status": "success",
+        "agents": [
+          "financial_transactions"
+        ],
+        "table": {
+          "columns": [
+            "channel",
+            "total"
+          ],
+          "rows": [
+            [
+              "Branch",
+              1
+            ],
+            [
+              "Online",
+              3
+            ],
+            [
+              "POS",
+              1
+            ]
+          ],
+          "row_count": 3
+        },
+        "sql": "SELECT t.channel,count(*) AS total FROM fraud_alerts f JOIN transactions t ON f.transaction_id=t.transaction_id GROUP BY t.channel"
+      }
+    ],
+    "finance_25": [
+      {
+        "status": "plan_review",
+        "agents": [
+          "financial_transactions"
+        ]
+      },
+      {
+        "status": "success",
+        "agents": [
+          "financial_transactions"
+        ],
+        "table": {
+          "columns": [
+            "total"
+          ],
+          "rows": [
+            [
+              0
+            ]
+          ],
+          "row_count": 1
+        },
+        "sql": "SELECT count(*) AS total FROM transactions t LEFT JOIN accounts a ON t.account_id=a.account_id WHERE a.account_id IS NULL"
+      }
+    ],
+    "hotel_01": [
+      {
+        "status": "plan_review",
+        "agents": [
+          "hotel_analytics"
+        ]
+      },
+      {
+        "status": "success",
+        "agents": [
+          "hotel_analytics"
+        ],
+        "table": {
+          "columns": [
+            "total"
+          ],
+          "rows": [
+            [
+              10
+            ]
+          ],
+          "row_count": 1
+        },
+        "sql": "SELECT count(*) AS total FROM dim_hotel"
+      }
+    ],
+    "hotel_02": [
+      {
+        "status": "plan_review",
+        "agents": [
+          "hotel_analytics"
+        ]
+      },
+      {
+        "status": "success",
+        "agents": [
+          "hotel_analytics"
+        ],
+        "table": {
+          "columns": [
+            "total"
+          ],
+          "rows": [
+            [
+              15
+            ]
+          ],
+          "row_count": 1
+        },
+        "sql": "SELECT count(*) AS total FROM dim_guest"
+      }
+    ],
+    "hotel_03": [
+      {
+        "status": "plan_review",
+        "agents": [
+          "hotel_analytics"
+        ]
+      },
+      {
+        "status": "success",
+        "agents": [
+          "hotel_analytics"
+        ],
+        "table": {
+          "columns": [
+            "total"
+          ],
+          "rows": [
+            [
+              22
+            ]
+          ],
+          "row_count": 1
+        },
+        "sql": "SELECT count(*) AS total FROM fact_reservations"
+      }
+    ],
+    "hotel_04": [
+      {
+        "status": "plan_review",
+        "agents": [
+          "hotel_analytics"
+        ]
+      },
+      {
+        "status": "success",
+        "agents": [
+          "hotel_analytics"
+        ],
+        "table": {
+          "columns": [
+            "total"
+          ],
+          "rows": [
+            [
+              46806.0
+            ]
+          ],
+          "row_count": 1
+        },
+        "sql": "SELECT sum(TotalRevenue) AS total FROM fact_reservations"
+      }
+    ],
+    "hotel_05": [
+      {
+        "status": "plan_review",
+        "agents": [
+          "hotel_analytics"
+        ]
+      },
+      {
+        "status": "success",
+        "agents": [
+          "hotel_analytics"
+        ],
+        "table": {
+          "columns": [
+            "total"
+          ],
+          "rows": [
+            [
+              71
+            ]
+          ],
+          "row_count": 1
+        },
+        "sql": "SELECT sum(NightsStayed) AS total FROM fact_reservations"
+      }
+    ],
+    "hotel_06": [
+      {
+        "status": "plan_review",
+        "agents": [
+          "hotel_analytics"
+        ]
+      },
+      {
+        "status": "success",
+        "agents": [
+          "hotel_analytics"
+        ],
+        "table": {
+          "columns": [
+            "total"
+          ],
+          "rows": [
+            [
+              3
+            ]
+          ],
+          "row_count": 1
+        },
+        "sql": "SELECT count(*) AS total FROM fact_reservations WHERE IsCancelled=1"
+      }
+    ],
+    "hotel_07": [
+      {
+        "status": "plan_review",
+        "agents": [
+          "hotel_analytics"
+        ]
+      },
+      {
+        "status": "success",
+        "agents": [
+          "hotel_analytics"
+        ],
+        "table": {
+          "columns": [
+            "total"
+          ],
+          "rows": [
+            [
+              44256.0
+            ]
+          ],
+          "row_count": 1
+        },
+        "sql": "SELECT sum(TotalRevenue) AS total FROM fact_reservations WHERE IsCancelled=0"
+      }
+    ],
+    "hotel_08": [
+      {
+        "status": "plan_review",
+        "agents": [
+          "hotel_analytics"
+        ]
+      },
+      {
+        "status": "success",
+        "agents": [
+          "hotel_analytics"
+        ],
+        "table": {
+          "columns": [
+            "total"
+          ],
+          "rows": [
+            [
+              6
+            ]
+          ],
+          "row_count": 1
+        },
+        "sql": "SELECT count(*) AS total FROM dim_hotel WHERE HasPool=1"
+      }
+    ],
+    "hotel_09": [
+      {
+        "status": "plan_review",
+        "agents": [
+          "hotel_analytics"
+        ]
+      },
+      {
+        "status": "success",
+        "agents": [
+          "hotel_analytics"
+        ],
+        "table": {
+          "columns": [
+            "total"
+          ],
+          "rows": [
+            [
+              19
+            ]
+          ],
+          "row_count": 1
+        },
+        "sql": "SELECT count(*) AS total FROM fact_reservations WHERE IsCancelled=0 AND CancellationReason IS NULL"
+      }
+    ],
+    "hotel_10": [
+      {
+        "status": "plan_review",
+        "agents": [
+          "hotel_analytics"
+        ]
+      },
+      {
+        "status": "success",
+        "agents": [
+          "hotel_analytics"
+        ],
+        "table": {
+          "columns": [
+            "HotelKey"
+          ],
+          "rows": [],
+          "row_count": 0
+        },
+        "sql": "SELECT HotelKey FROM dim_hotel WHERE HotelKey=-1"
+      }
+    ],
+    "hotel_11": [
+      {
+        "status": "plan_review",
+        "agents": [
+          "hotel_analytics"
+        ]
+      },
+      {
+        "status": "success",
+        "agents": [
+          "hotel_analytics"
+        ],
+        "table": {
+          "columns": [
+            "Region",
+            "total"
+          ],
+          "rows": [
+            [
+              "Central",
+              2
+            ],
+            [
+              "East",
+              3
+            ],
+            [
+              "Mountain",
+              2
+            ],
+            [
+              "South",
+              1
+            ],
+            [
+              "West",
+              2
+            ]
+          ],
+          "row_count": 5
+        },
+        "sql": "SELECT Region,count(*) AS total FROM dim_hotel GROUP BY Region"
+      }
+    ],
+    "hotel_12": [
+      {
+        "status": "plan_review",
+        "agents": [
+          "hotel_analytics"
+        ]
+      },
+      {
+        "status": "success",
+        "agents": [
+          "hotel_analytics"
+        ],
+        "table": {
+          "columns": [
+            "HotelKey",
+            "total"
+          ],
+          "rows": [
+            [
+              1,
+              8915.0
+            ],
+            [
+              2,
+              2805.0
+            ],
+            [
+              3,
+              2110.0
+            ],
+            [
+              4,
+              22650.0
+            ],
+            [
+              5,
+              1281.0
+            ],
+            [
+              6,
+              1805.0
+            ],
+            [
+              7,
+              2065.0
+            ],
+            [
+              8,
+              680.0
+            ],
+            [
+              9,
+              2150.0
+            ],
+            [
+              10,
+              2345.0
+            ]
+          ],
+          "row_count": 10
+        },
+        "sql": "SELECT HotelKey,sum(TotalRevenue) AS total FROM fact_reservations GROUP BY HotelKey"
+      }
+    ],
+    "hotel_13": [
+      {
+        "status": "plan_review",
+        "agents": [
+          "hotel_analytics"
+        ]
+      },
+      {
+        "status": "success",
+        "agents": [
+          "hotel_analytics"
+        ],
+        "table": {
+          "columns": [
+            "StarRating",
+            "total"
+          ],
+          "rows": [
+            [
+              3,
+              200
+            ],
+            [
+              4,
+              1360
+            ],
+            [
+              5,
+              720
+            ]
+          ],
+          "row_count": 3
+        },
+        "sql": "SELECT StarRating,sum(TotalRooms) AS total FROM dim_hotel GROUP BY StarRating"
+      }
+    ],
+    "hotel_14": [
+      {
+        "status": "plan_review",
+        "agents": [
+          "hotel_analytics"
+        ]
+      },
+      {
+        "status": "success",
+        "agents": [
+          "hotel_analytics"
+        ],
+        "table": {
+          "columns": [
+            "LoyaltyTier",
+            "total"
+          ],
+          "rows": [
+            [
+              "Corporate",
+              3
+            ],
+            [
+              "Gold",
+              4
+            ],
+            [
+              "Member",
+              2
+            ],
+            [
+              "Platinum",
+              3
+            ],
+            [
+              "Silver",
+              3
+            ]
+          ],
+          "row_count": 5
+        },
+        "sql": "SELECT LoyaltyTier,count(*) AS total FROM dim_guest GROUP BY LoyaltyTier"
+      }
+    ],
+    "hotel_15": [
+      {
+        "status": "plan_review",
+        "agents": [
+          "hotel_analytics"
+        ]
+      },
+      {
+        "status": "success",
+        "agents": [
+          "hotel_analytics"
+        ],
+        "table": {
+          "columns": [
+            "ChannelKey",
+            "total"
+          ],
+          "rows": [
+            [
+              1,
+              518.3333333333334
+            ],
+            [
+              2,
+              660.0
+            ],
+            [
+              3,
+              330.0
+            ],
+            [
+              4,
+              380.0
+            ],
+            [
+              5,
+              244.0
+            ],
+            [
+              6,
+              265.0
+            ],
+            [
+              7,
+              303.0
+            ]
+          ],
+          "row_count": 7
+        },
+        "sql": "SELECT ChannelKey,avg(RoomRate) AS total FROM fact_reservations GROUP BY ChannelKey"
+      }
+    ],
+    "hotel_16": [
+      {
+        "status": "plan_review",
+        "agents": [
+          "hotel_analytics"
+        ]
+      },
+      {
+        "status": "success",
+        "agents": [
+          "hotel_analytics"
+        ],
+        "table": {
+          "columns": [
+            "ReservationKey",
+            "TotalRevenue"
+          ],
+          "rows": [
+            [
+              10,
+              2545.0
+            ],
+            [
+              2,
+              2695.0
+            ],
+            [
+              17,
+              4645.0
+            ],
+            [
+              18,
+              5460.0
+            ],
+            [
+              12,
+              9605.0
+            ]
+          ],
+          "row_count": 5
+        },
+        "sql": "SELECT ReservationKey,TotalRevenue FROM fact_reservations ORDER BY TotalRevenue DESC,ReservationKey ASC LIMIT 5"
+      }
+    ],
+    "hotel_17": [
+      {
+        "status": "plan_review",
+        "agents": [
+          "hotel_analytics"
+        ]
+      },
+      {
+        "status": "success",
+        "agents": [
+          "hotel_analytics"
+        ],
+        "table": {
+          "columns": [
+            "ReservationKey",
+            "TotalRevenue"
+          ],
+          "rows": [
+            [
+              6,
+              403.0
+            ],
+            [
+              13,
+              680.0
+            ],
+            [
+              20,
+              690.0
+            ],
+            [
+              22,
+              765.0
+            ],
+            [
+              3,
+              770.0
+            ]
+          ],
+          "row_count": 5
+        },
+        "sql": "SELECT ReservationKey,TotalRevenue FROM fact_reservations ORDER BY TotalRevenue ASC,ReservationKey ASC LIMIT 5"
+      }
+    ],
+    "hotel_18": [
+      {
+        "status": "plan_review",
+        "agents": [
+          "hotel_analytics"
+        ]
+      },
+      {
+        "status": "success",
+        "agents": [
+          "hotel_analytics"
+        ],
+        "table": {
+          "columns": [
+            "total"
+          ],
+          "rows": [
+            [
+              3
+            ]
+          ],
+          "row_count": 1
+        },
+        "sql": "SELECT count(*) AS total FROM fact_reservations WHERE CheckInDateKey BETWEEN 20250101 AND 20250131"
+      }
+    ],
+    "hotel_19": [
+      {
+        "status": "plan_review",
+        "agents": [
+          "hotel_analytics"
+        ]
+      },
+      {
+        "status": "success",
+        "agents": [
+          "hotel_analytics"
+        ],
+        "table": {
+          "columns": [
+            "HotelKey",
+            "TotalRooms"
+          ],
+          "rows": [
+            [
+              4,
+              400
+            ],
+            [
+              1,
+              320
+            ],
+            [
+              3,
+              280
+            ]
+          ],
+          "row_count": 3
+        },
+        "sql": "SELECT HotelKey,TotalRooms FROM dim_hotel ORDER BY TotalRooms DESC,HotelKey ASC LIMIT 3"
+      }
+    ],
+    "hotel_20": [
+      {
+        "status": "plan_review",
+        "agents": [
+          "hotel_analytics"
+        ]
+      },
+      {
+        "status": "success",
+        "agents": [
+          "hotel_analytics"
+        ],
+        "table": {
+          "columns": [
+            "Year",
+            "total"
+          ],
+          "rows": [
+            [
+              2025,
+              46806.0
+            ]
+          ],
+          "row_count": 1
+        },
+        "sql": "SELECT d.Year,sum(r.TotalRevenue) AS total FROM fact_reservations r JOIN dim_date d ON r.CheckInDateKey=d.DateKey GROUP BY d.Year"
+      }
+    ],
+    "hotel_21": [
+      {
+        "status": "plan_review",
+        "agents": [
+          "hotel_analytics"
+        ]
+      },
+      {
+        "status": "success",
+        "agents": [
+          "hotel_analytics"
+        ],
+        "table": {
+          "columns": [
+            "Region",
+            "total"
+          ],
+          "rows": [
+            [
+              "Central",
+              3495.0
+            ],
+            [
+              "East",
+              4306.0
+            ],
+            [
+              "Mountain",
+              3775.0
+            ],
+            [
+              "South",
+              22650.0
+            ],
+            [
+              "West",
+              10030.0
+            ]
+          ],
+          "row_count": 5
+        },
+        "sql": "SELECT h.Region,sum(r.TotalRevenue) AS total FROM fact_reservations r JOIN dim_hotel h ON r.HotelKey=h.HotelKey WHERE r.IsCancelled=0 GROUP BY h.Region"
+      }
+    ],
+    "hotel_22": [
+      {
+        "status": "plan_review",
+        "agents": [
+          "hotel_analytics"
+        ]
+      },
+      {
+        "status": "success",
+        "agents": [
+          "hotel_analytics"
+        ],
+        "table": {
+          "columns": [
+            "total"
+          ],
+          "rows": [
+            [
+              0
+            ]
+          ],
+          "row_count": 1
+        },
+        "sql": "SELECT count(*) AS total FROM dim_hotel h WHERE NOT EXISTS (SELECT 1 FROM fact_reservations r WHERE r.HotelKey=h.HotelKey)"
+      }
+    ],
+    "hotel_23": [
+      {
+        "status": "plan_review",
+        "agents": [
+          "hotel_analytics"
+        ]
+      },
+      {
+        "status": "success",
+        "agents": [
+          "hotel_analytics"
+        ],
+        "table": {
+          "columns": [
+            "ChannelName",
+            "total"
+          ],
+          "rows": [
+            [
+              "Booking.com",
+              2
+            ],
+            [
+              "Corporate Portal",
+              5
+            ],
+            [
+              "Direct Website",
+              6
+            ],
+            [
+              "Expedia",
+              3
+            ],
+            [
+              "Hotels.com",
+              1
+            ],
+            [
+              "Mobile App",
+              3
+            ],
+            [
+              "Phone Reservation",
+              2
+            ]
+          ],
+          "row_count": 7
+        },
+        "sql": "SELECT c.ChannelName,count(*) AS total FROM fact_reservations r JOIN dim_booking_channel c ON r.ChannelKey=c.ChannelKey GROUP BY c.ChannelName"
+      }
+    ],
+    "hotel_24": [
+      {
+        "status": "plan_review",
+        "agents": [
+          "hotel_analytics"
+        ]
+      },
+      {
+        "status": "success",
+        "agents": [
+          "hotel_analytics"
+        ],
+        "table": {
+          "columns": [
+            "LoyaltyTier",
+            "total"
+          ],
+          "rows": [
+            [
+              "Corporate",
+              17
+            ],
+            [
+              "Gold",
+              18
+            ],
+            [
+              "Member",
+              5
+            ],
+            [
+              "Platinum",
+              22
+            ],
+            [
+              "Silver",
+              9
+            ]
+          ],
+          "row_count": 5
+        },
+        "sql": "SELECT g.LoyaltyTier,sum(r.NightsStayed) AS total FROM fact_reservations r JOIN dim_guest g ON r.GuestKey=g.GuestKey GROUP BY g.LoyaltyTier"
+      }
+    ],
+    "hotel_25": [
+      {
+        "status": "plan_review",
+        "agents": [
+          "hotel_analytics"
+        ]
+      },
+      {
+        "status": "success",
+        "agents": [
+          "hotel_analytics"
+        ],
+        "table": {
+          "columns": [
+            "RoomTypeName",
+            "total"
+          ],
+          "rows": [
+            [
+              "Deluxe King",
+              278.3333333333333
+            ],
+            [
+              "Executive Suite",
+              360.0
+            ],
+            [
+              "Family Room",
+              350.0
+            ],
+            [
+              "Ocean View Suite",
+              483.75
+            ],
+            [
+              "Presidential Suite",
+              850.0
+            ],
+            [
+              "Standard Double",
+              272.0
+            ],
+            [
+              "Standard King",
+              189.0
+            ]
+          ],
+          "row_count": 7
+        },
+        "sql": "SELECT t.RoomTypeName,avg(r.RoomRate) AS total FROM fact_reservations r JOIN dim_room_type t ON r.RoomTypeKey=t.RoomTypeKey WHERE r.IsCancelled=0 GROUP BY t.RoomTypeName"
+      }
+    ],
+    "sales_followup_1": [
+      {
+        "status": "plan_review",
+        "agents": [
+          "contoso_sales"
+        ]
+      },
+      {
+        "status": "success",
+        "agents": [
+          "contoso_sales"
+        ],
+        "table": {
+          "columns": [
+            "total"
+          ],
+          "rows": [
+            [
+              208
+            ]
+          ],
+          "row_count": 1
+        },
+        "sql": "SELECT count(*) AS total FROM orders"
+      },
+      {
+        "status": "plan_review",
+        "agents": [
+          "contoso_sales"
+        ]
+      },
+      {
+        "status": "success",
+        "agents": [
+          "contoso_sales"
+        ],
+        "table": {
+          "columns": [
+            "total"
+          ],
+          "rows": [
+            [
+              -999
+            ]
+          ],
+          "row_count": 1
+        },
+        "sql": "SELECT count(*) AS total FROM customers"
+      }
+    ],
+    "sales_followup_2": [
+      {
+        "status": "plan_review",
+        "agents": [
+          "contoso_sales"
+        ]
+      },
+      {
+        "status": "success",
+        "agents": [
+          "contoso_sales"
+        ],
+        "table": {
+          "columns": [
+            "total"
+          ],
+          "rows": [
+            [
+              131
+            ]
+          ],
+          "row_count": 1
+        },
+        "sql": "SELECT count(*) AS total FROM orders WHERE status='delivered'"
+      },
+      {
+        "status": "plan_review",
+        "agents": [
+          "contoso_sales"
+        ]
+      },
+      {
+        "status": "success",
+        "agents": [
+          "contoso_sales"
+        ],
+        "table": {
+          "columns": [
+            "total"
+          ],
+          "rows": [
+            [
+              0
+            ]
+          ],
+          "row_count": 1
+        },
+        "sql": "SELECT count(*) AS total FROM orders WHERE total_amount>=1000"
+      }
+    ],
+    "sales_followup_3": [
+      {
+        "status": "plan_review",
+        "agents": [
+          "contoso_sales"
+        ]
+      },
+      {
+        "status": "success",
+        "agents": [
+          "contoso_sales"
+        ],
+        "table": {
+          "columns": [
+            "status",
+            "total"
+          ],
+          "rows": [
+            [
+              "cancelled",
+              8
+            ],
+            [
+              "delivered",
+              131
+            ],
+            [
+              "pending",
+              18
+            ],
+            [
+              "processing",
+              24
+            ],
+            [
+              "shipped",
+              27
+            ]
+          ],
+          "row_count": 5
+        },
+        "sql": "SELECT status,count(*) AS total FROM orders GROUP BY status"
+      },
+      {
+        "status": "plan_review",
+        "agents": [
+          "contoso_sales"
+        ]
+      },
+      {
+        "status": "success",
+        "agents": [
+          "contoso_sales"
+        ],
+        "table": {
+          "columns": [
+            "status",
+            "total"
+          ],
+          "rows": [
+            [
+              "cancelled",
+              1534.47
+            ],
+            [
+              "delivered",
+              31377.760000000002
+            ],
+            [
+              "pending",
+              3124.69
+            ],
+            [
+              "processing",
+              5604.4800000000005
+            ],
+            [
+              "shipped",
+              6274.55
+            ]
+          ],
+          "row_count": 5
+        },
+        "sql": "SELECT status,sum(total_amount) AS total FROM orders GROUP BY status"
+      }
+    ],
+    "sales_followup_4": [
+      {
+        "status": "plan_review",
+        "agents": [
+          "contoso_sales"
+        ]
+      },
+      {
+        "status": "success",
+        "agents": [
+          "contoso_sales"
+        ],
+        "table": {
+          "columns": [
+            "order_id",
+            "total_amount"
+          ],
+          "rows": [
+            [
+              "ORD-000017",
+              899.99
+            ],
+            [
+              "ORD-000045",
+              899.99
+            ],
+            [
+              "ORD-000106",
+              749.99
+            ],
+            [
+              "ORD-000006",
+              699.99
+            ],
+            [
+              "ORD-000065",
+              699.99
+            ]
+          ],
+          "row_count": 5
+        },
+        "sql": "SELECT order_id,total_amount FROM orders ORDER BY total_amount DESC,order_id ASC LIMIT 5"
+      },
+      {
+        "status": "plan_review",
+        "agents": [
+          "contoso_sales"
+        ]
+      },
+      {
+        "status": "success",
+        "agents": [
+          "contoso_sales"
+        ],
+        "table": {
+          "columns": [
+            "order_id",
+            "total_amount"
+          ],
+          "rows": [
+            [
+              "ORD-000201",
+              17.99
+            ],
+            [
+              "ORD-000005",
+              24.99
+            ],
+            [
+              "ORD-000034",
+              24.99
+            ],
+            [
+              "ORD-000054",
+              24.99
+            ],
+            [
+              "ORD-000072",
+              24.99
+            ]
+          ],
+          "row_count": 5
+        },
+        "sql": "SELECT order_id,total_amount FROM orders ORDER BY total_amount ASC,order_id ASC LIMIT 5"
+      }
+    ],
+    "sales_followup_5": [
+      {
+        "status": "plan_review",
+        "agents": [
+          "contoso_sales"
+        ]
+      },
+      {
+        "status": "success",
+        "agents": [
+          "contoso_sales"
+        ],
+        "table": {
+          "columns": [
+            "region",
+            "total"
+          ],
+          "rows": [
+            [
+              "Central",
+              14430.880000000001
+            ],
+            [
+              "East",
+              14503.32
+            ],
+            [
+              "West",
+              18981.75
+            ]
+          ],
+          "row_count": 3
+        },
+        "sql": "SELECT c.region,sum(o.total_amount) AS total FROM orders o JOIN customers c ON o.customer_id=c.customer_id GROUP BY c.region"
+      },
+      {
+        "status": "plan_review",
+        "agents": [
+          "contoso_sales"
+        ]
+      },
+      {
+        "status": "success",
+        "agents": [
+          "contoso_sales"
+        ],
+        "table": {
+          "columns": [
+            "total"
+          ],
+          "rows": [
+            [
+              0
+            ]
+          ],
+          "row_count": 1
+        },
+        "sql": "SELECT count(*) AS total FROM customers c WHERE NOT EXISTS (SELECT 1 FROM orders o WHERE o.customer_id=c.customer_id)"
+      }
+    ],
+    "products_followup_1": [
+      {
+        "status": "plan_review",
+        "agents": [
+          "contoso_products"
+        ]
+      },
+      {
+        "status": "success",
+        "agents": [
+          "contoso_products"
+        ],
+        "table": {
+          "columns": [
+            "total"
+          ],
+          "rows": [
+            [
+              45
+            ]
+          ],
+          "row_count": 1
+        },
+        "sql": "SELECT count(*) AS total FROM products"
+      },
+      {
+        "status": "plan_review",
+        "agents": [
+          "contoso_products"
+        ]
+      },
+      {
+        "status": "success",
+        "agents": [
+          "contoso_products"
+        ],
+        "table": {
+          "columns": [
+            "total"
+          ],
+          "rows": [
+            [
+              4
+            ]
+          ],
+          "row_count": 1
+        },
+        "sql": "SELECT count(DISTINCT category) AS total FROM products"
+      }
+    ],
+    "products_followup_2": [
+      {
+        "status": "plan_review",
+        "agents": [
+          "contoso_products"
+        ]
+      },
+      {
+        "status": "success",
+        "agents": [
+          "contoso_products"
+        ],
+        "table": {
+          "columns": [
+            "total"
+          ],
+          "rows": [
+            [
+              44
+            ]
+          ],
+          "row_count": 1
+        },
+        "sql": "SELECT count(*) AS total FROM products WHERE is_active=1"
+      },
+      {
+        "status": "plan_review",
+        "agents": [
+          "contoso_products"
+        ]
+      },
+      {
+        "status": "success",
+        "agents": [
+          "contoso_products"
+        ],
+        "table": {
+          "columns": [
+            "total"
+          ],
+          "rows": [
+            [
+              0
+            ]
+          ],
+          "row_count": 1
+        },
+        "sql": "SELECT count(*) AS total FROM products WHERE price=0"
+      }
+    ],
+    "products_followup_3": [
+      {
+        "status": "plan_review",
+        "agents": [
+          "contoso_products"
+        ]
+      },
+      {
+        "status": "success",
+        "agents": [
+          "contoso_products"
+        ],
+        "table": {
+          "columns": [
+            "category",
+            "total"
+          ],
+          "rows": [
+            [
+              "clothing",
+              11
+            ],
+            [
+              "electronics",
+              12
+            ],
+            [
+              "home",
+              11
+            ],
+            [
+              "sports",
+              11
+            ]
+          ],
+          "row_count": 4
+        },
+        "sql": "SELECT category,count(*) AS total FROM products GROUP BY category"
+      },
+      {
+        "status": "plan_review",
+        "agents": [
+          "contoso_products"
+        ]
+      },
+      {
+        "status": "success",
+        "agents": [
+          "contoso_products"
+        ],
+        "table": {
+          "columns": [
+            "category",
+            "total"
+          ],
+          "rows": [
+            [
+              "clothing",
+              73.17181818181818
+            ],
+            [
+              "electronics",
+              252.49
+            ],
+            [
+              "home",
+              105.89909090909092
+            ],
+            [
+              "sports",
+              149.99
+            ]
+          ],
+          "row_count": 4
+        },
+        "sql": "SELECT category,avg(price) AS total FROM products GROUP BY category"
+      }
+    ],
+    "products_followup_4": [
+      {
+        "status": "plan_review",
+        "agents": [
+          "contoso_products"
+        ]
+      },
+      {
+        "status": "success",
+        "agents": [
+          "contoso_products"
+        ],
+        "table": {
+          "columns": [
+            "id",
+            "price"
+          ],
+          "rows": [
+            [
+              "prod-009",
+              899.99
+            ],
+            [
+              "prod-002",
+              699.99
+            ],
+            [
+              "prod-040",
+              599.99
+            ],
+            [
+              "prod-008",
+              349.99
+            ],
+            [
+              "prod-024",
+              349.99
+            ]
+          ],
+          "row_count": 5
+        },
+        "sql": "SELECT id,price FROM products ORDER BY price DESC,id ASC LIMIT 5"
+      },
+      {
+        "status": "plan_review",
+        "agents": [
+          "contoso_products"
+        ]
+      },
+      {
+        "status": "success",
+        "agents": [
+          "contoso_products"
+        ],
+        "table": {
+          "columns": [
+            "id",
+            "price"
+          ],
+          "rows": [
+            [
+              "prod-039",
+              19.99
+            ],
+            [
+              "prod-011",
+              24.99
+            ],
+            [
+              "prod-036",
+              24.99
+            ],
+            [
+              "prod-031",
+              29.99
+            ],
+            [
+              "prod-043",
+              29.99
+            ]
+          ],
+          "row_count": 5
+        },
+        "sql": "SELECT id,price FROM products ORDER BY price ASC,id ASC LIMIT 5"
+      }
+    ],
+    "products_followup_5": [
+      {
+        "status": "plan_review",
+        "agents": [
+          "contoso_products"
+        ]
+      },
+      {
+        "status": "success",
+        "agents": [
+          "contoso_products"
+        ],
+        "table": {
+          "columns": [
+            "total"
+          ],
+          "rows": [
+            [
+              14
+            ]
+          ],
+          "row_count": 1
+        },
+        "sql": "SELECT count(*) AS total FROM products WHERE price>(SELECT avg(price) FROM products)"
+      },
+      {
+        "status": "plan_review",
+        "agents": [
+          "contoso_products"
+        ]
+      },
+      {
+        "status": "success",
+        "agents": [
+          "contoso_products"
+        ],
+        "table": {
+          "columns": [
+            "category",
+            "total"
+          ],
+          "rows": [
+            [
+              "electronics",
+              252.49
+            ],
+            [
+              "home",
+              105.89909090909092
+            ],
+            [
+              "sports",
+              149.99
+            ]
+          ],
+          "row_count": 3
+        },
+        "sql": "SELECT category,avg(price) AS total FROM products GROUP BY category HAVING avg(price)>100"
+      }
+    ],
+    "inventory_followup_1": [
+      {
+        "status": "plan_review",
+        "agents": [
+          "contoso_inventory"
+        ]
+      },
+      {
+        "status": "success",
+        "agents": [
+          "contoso_inventory"
+        ],
+        "table": {
+          "columns": [
+            "total"
+          ],
+          "rows": [
+            [
+              10
+            ]
+          ],
+          "row_count": 1
+        },
+        "sql": "SELECT count(*) AS total FROM warehouses"
+      },
+      {
+        "status": "plan_review",
+        "agents": [
+          "contoso_inventory"
+        ]
+      },
+      {
+        "status": "success",
+        "agents": [
+          "contoso_inventory"
+        ],
+        "table": {
+          "columns": [
+            "total"
+          ],
+          "rows": [
+            [
+              615000
+            ]
+          ],
+          "row_count": 1
+        },
+        "sql": "SELECT sum(capacity) AS total FROM warehouses"
+      }
+    ],
+    "inventory_followup_2": [
+      {
+        "status": "plan_review",
+        "agents": [
+          "contoso_inventory"
+        ]
+      },
+      {
+        "status": "success",
+        "agents": [
+          "contoso_inventory"
+        ],
+        "table": {
+          "columns": [
+            "total"
+          ],
+          "rows": [
+            [
+              22
+            ]
+          ],
+          "row_count": 1
+        },
+        "sql": "SELECT count(*) AS total FROM inventory WHERE quantity<reorder_level"
+      },
+      {
+        "status": "plan_review",
+        "agents": [
+          "contoso_inventory"
+        ]
+      },
+      {
+        "status": "success",
+        "agents": [
+          "contoso_inventory"
+        ],
+        "table": {
+          "columns": [
+            "total"
+          ],
+          "rows": [
+            [
+              3
+            ]
+          ],
+          "row_count": 1
+        },
+        "sql": "SELECT count(*) AS total FROM inventory WHERE quantity=0"
+      }
+    ],
+    "inventory_followup_3": [
+      {
+        "status": "plan_review",
+        "agents": [
+          "contoso_inventory"
+        ]
+      },
+      {
+        "status": "success",
+        "agents": [
+          "contoso_inventory"
+        ],
+        "table": {
+          "columns": [
+            "warehouse_id",
+            "total"
+          ],
+          "rows": [
+            [
+              1,
+              11703
+            ],
+            [
+              2,
+              7144
+            ],
+            [
+              3,
+              4462
+            ],
+            [
+              4,
+              4844
+            ],
+            [
+              5,
+              4802
+            ],
+            [
+              6,
+              4164
+            ],
+            [
+              7,
+              2863
+            ],
+            [
+              9,
+              1473
+            ],
+            [
+              10,
+              1647
+            ]
+          ],
+          "row_count": 9
+        },
+        "sql": "SELECT warehouse_id,sum(quantity) AS total FROM inventory GROUP BY warehouse_id"
+      },
+      {
+        "status": "plan_review",
+        "agents": [
+          "contoso_inventory"
+        ]
+      },
+      {
+        "status": "success",
+        "agents": [
+          "contoso_inventory"
+        ],
+        "table": {
+          "columns": [
+            "warehouse_id",
+            "total"
+          ],
+          "rows": [
+            [
+              1,
+              3
+            ],
+            [
+              2,
+              2
+            ],
+            [
+              3,
+              6
+            ],
+            [
+              4,
+              4
+            ],
+            [
+              5,
+              1
+            ],
+            [
+              6,
+              2
+            ],
+            [
+              7,
+              2
+            ],
+            [
+              9,
+              2
+            ]
+          ],
+          "row_count": 8
+        },
+        "sql": "SELECT warehouse_id,count(*) AS total FROM inventory WHERE quantity<reorder_level GROUP BY warehouse_id"
+      }
+    ],
+    "inventory_followup_4": [
+      {
+        "status": "plan_review",
+        "agents": [
+          "contoso_inventory"
+        ]
+      },
+      {
+        "status": "success",
+        "agents": [
+          "contoso_inventory"
+        ],
+        "table": {
+          "columns": [
+            "inventory_id",
+            "quantity"
+          ],
+          "rows": [
+            [
+              6,
+              0
+            ],
+            [
+              35,
+              0
+            ],
+            [
+              63,
+              0
+            ],
+            [
+              106,
+              1
+            ],
+            [
+              52,
+              2
+            ]
+          ],
+          "row_count": 5
+        },
+        "sql": "SELECT inventory_id,quantity FROM inventory ORDER BY quantity ASC,inventory_id ASC LIMIT 5"
+      },
+      {
+        "status": "plan_review",
+        "agents": [
+          "contoso_inventory"
+        ]
+      },
+      {
+        "status": "success",
+        "agents": [
+          "contoso_inventory"
+        ],
+        "table": {
+          "columns": [
+            "inventory_id",
+            "quantity"
+          ],
+          "rows": [
+            [
+              4,
+              890
+            ],
+            [
+              22,
+              890
+            ],
+            [
+              41,
+              890
+            ],
+            [
+              87,
+              890
+            ],
+            [
+              107,
+              890
+            ]
+          ],
+          "row_count": 5
+        },
+        "sql": "SELECT inventory_id,quantity FROM inventory ORDER BY quantity DESC,inventory_id ASC LIMIT 5"
+      }
+    ],
+    "inventory_followup_5": [
+      {
+        "status": "plan_review",
+        "agents": [
+          "contoso_inventory"
+        ]
+      },
+      {
+        "status": "success",
+        "agents": [
+          "contoso_inventory"
+        ],
+        "table": {
+          "columns": [
+            "location",
+            "total"
+          ],
+          "rows": [
+            [
+              "Atlanta, GA",
+              1473
+            ],
+            [
+              "Boston, MA",
+              1647
+            ],
+            [
+              "Chicago, IL",
+              4462
+            ],
+            [
+              "Dallas, TX",
+              7144
+            ],
+            [
+              "Denver, CO",
+              2863
+            ],
+            [
+              "Los Angeles, CA",
+              4802
+            ],
+            [
+              "Miami, FL",
+              4164
+            ],
+            [
+              "Newark, NJ",
+              4844
+            ],
+            [
+              "Seattle, WA",
+              11703
+            ]
+          ],
+          "row_count": 9
+        },
+        "sql": "SELECT w.location,sum(i.quantity) AS total FROM inventory i JOIN warehouses w ON i.warehouse_id=w.warehouse_id GROUP BY w.location"
+      },
+      {
+        "status": "plan_review",
+        "agents": [
+          "contoso_inventory"
+        ]
+      },
+      {
+        "status": "success",
+        "agents": [
+          "contoso_inventory"
+        ],
+        "table": {
+          "columns": [
+            "total"
+          ],
+          "rows": [
+            [
+              null
+            ]
+          ],
+          "row_count": 1
+        },
+        "sql": "SELECT sum(i.quantity) AS total FROM inventory i JOIN warehouses w ON i.warehouse_id=w.warehouse_id WHERE w.is_active=0"
+      }
+    ],
+    "hr_followup_1": [
+      {
+        "status": "plan_review",
+        "agents": [
+          "contoso_hr"
+        ]
+      },
+      {
+        "status": "success",
+        "agents": [
+          "contoso_hr"
+        ],
+        "table": {
+          "columns": [
+            "total"
+          ],
+          "rows": [
+            [
+              40
+            ]
+          ],
+          "row_count": 1
+        },
+        "sql": "SELECT count(*) AS total FROM employees"
+      },
+      {
+        "status": "plan_review",
+        "agents": [
+          "contoso_hr"
+        ]
+      },
+      {
+        "status": "success",
+        "agents": [
+          "contoso_hr"
+        ],
+        "table": {
+          "columns": [
+            "total"
+          ],
+          "rows": [
+            [
+              8
+            ]
+          ],
+          "row_count": 1
+        },
+        "sql": "SELECT count(*) AS total FROM departments"
+      }
+    ],
+    "hr_followup_2": [
+      {
+        "status": "plan_review",
+        "agents": [
+          "contoso_hr"
+        ]
+      },
+      {
+        "status": "success",
+        "agents": [
+          "contoso_hr"
+        ],
+        "table": {
+          "columns": [
+            "total"
+          ],
+          "rows": [
+            [
+              39
+            ]
+          ],
+          "row_count": 1
+        },
+        "sql": "SELECT count(*) AS total FROM employees WHERE IsActive=1"
+      },
+      {
+        "status": "plan_review",
+        "agents": [
+          "contoso_hr"
+        ]
+      },
+      {
+        "status": "success",
+        "agents": [
+          "contoso_hr"
+        ],
+        "table": {
+          "columns": [
+            "total"
+          ],
+          "rows": [
+            [
+              18
+            ]
+          ],
+          "row_count": 1
+        },
+        "sql": "SELECT count(*) AS total FROM employees WHERE Salary>=100000"
+      }
+    ],
+    "hr_followup_3": [
+      {
+        "status": "plan_review",
+        "agents": [
+          "contoso_hr"
+        ]
+      },
+      {
+        "status": "success",
+        "agents": [
+          "contoso_hr"
+        ],
+        "table": {
+          "columns": [
+            "DepartmentID",
+            "total"
+          ],
+          "rows": [
+            [
+              1,
+              5
+            ],
+            [
+              2,
+              5
+            ],
+            [
+              3,
+              5
+            ],
+            [
+              4,
+              5
+            ],
+            [
+              5,
+              5
+            ],
+            [
+              6,
+              5
+            ],
+            [
+              7,
+              5
+            ],
+            [
+              8,
+              5
+            ]
+          ],
+          "row_count": 8
+        },
+        "sql": "SELECT DepartmentID,count(*) AS total FROM employees GROUP BY DepartmentID"
+      },
+      {
+        "status": "plan_review",
+        "agents": [
+          "contoso_hr"
+        ]
+      },
+      {
+        "status": "success",
+        "agents": [
+          "contoso_hr"
+        ],
+        "table": {
+          "columns": [
+            "DepartmentID",
+            "total"
+          ],
+          "rows": [
+            [
+              1,
+              136000.0
+            ],
+            [
+              2,
+              108000.0
+            ],
+            [
+              3,
+              90000.0
+            ],
+            [
+              4,
+              86000.0
+            ],
+            [
+              5,
+              101800.0
+            ],
+            [
+              6,
+              95600.0
+            ],
+            [
+              7,
+              77000.0
+            ],
+            [
+              8,
+              127000.0
+            ]
+          ],
+          "row_count": 8
+        },
+        "sql": "SELECT DepartmentID,avg(Salary) AS total FROM employees GROUP BY DepartmentID"
+      }
+    ],
+    "hr_followup_4": [
+      {
+        "status": "plan_review",
+        "agents": [
+          "contoso_hr"
+        ]
+      },
+      {
+        "status": "success",
+        "agents": [
+          "contoso_hr"
+        ],
+        "table": {
+          "columns": [
+            "EmployeeID",
+            "Salary"
+          ],
+          "rows": [
+            [
+              20,
+              195000.0
+            ],
+            [
+              1,
+              185000.0
+            ],
+            [
+              35,
+              175000.0
+            ],
+            [
+              5,
+              165000.0
+            ],
+            [
+              25,
+              160000.0
+            ]
+          ],
+          "row_count": 5
+        },
+        "sql": "SELECT EmployeeID,Salary FROM employees ORDER BY Salary DESC,EmployeeID ASC LIMIT 5"
+      },
+      {
+        "status": "plan_review",
+        "agents": [
+          "contoso_hr"
+        ]
+      },
+      {
+        "status": "success",
+        "agents": [
+          "contoso_hr"
+        ],
+        "table": {
+          "columns": [
+            "EmployeeID",
+            "Salary"
+          ],
+          "rows": [
+            [
+              24,
+              52000.0
+            ],
+            [
+              34,
+              52000.0
+            ],
+            [
+              14,
+              55000.0
+            ],
+            [
+              18,
+              55000.0
+            ],
+            [
+              33,
+              55000.0
+            ]
+          ],
+          "row_count": 5
+        },
+        "sql": "SELECT EmployeeID,Salary FROM employees ORDER BY Salary ASC,EmployeeID ASC LIMIT 5"
+      }
+    ],
+    "hr_followup_5": [
+      {
+        "status": "plan_review",
+        "agents": [
+          "contoso_hr"
+        ]
+      },
+      {
+        "status": "success",
+        "agents": [
+          "contoso_hr"
+        ],
+        "table": {
+          "columns": [
+            "Name",
+            "total"
+          ],
+          "rows": [
+            [
+              "Customer Support",
+              385000.0
+            ],
+            [
+              "Engineering",
+              680000.0
+            ],
+            [
+              "Finance",
+              509000.0
+            ],
+            [
+              "Human Resources",
+              430000.0
+            ],
+            [
+              "Marketing",
+              450000.0
+            ],
+            [
+              "Operations",
+              478000.0
+            ],
+            [
+              "Research & Development",
+              635000.0
+            ],
+            [
+              "Sales",
+              540000.0
+            ]
+          ],
+          "row_count": 8
+        },
+        "sql": "SELECT d.Name,sum(e.Salary) AS total FROM employees e JOIN departments d ON e.DepartmentID=d.DepartmentID GROUP BY d.Name"
+      },
+      {
+        "status": "plan_review",
+        "agents": [
+          "contoso_hr"
+        ]
+      },
+      {
+        "status": "success",
+        "agents": [
+          "contoso_hr"
+        ],
+        "table": {
+          "columns": [
+            "total"
+          ],
+          "rows": [
+            [
+              0
+            ]
+          ],
+          "row_count": 1
+        },
+        "sql": "SELECT count(*) AS total FROM departments d WHERE NOT EXISTS (SELECT 1 FROM employees e WHERE e.DepartmentID=d.DepartmentID)"
+      }
+    ],
+    "finance_followup_1": [
+      {
+        "status": "plan_review",
+        "agents": [
+          "financial_transactions"
+        ]
+      },
+      {
+        "status": "success",
+        "agents": [
+          "financial_transactions"
+        ],
+        "table": {
+          "columns": [
+            "total"
+          ],
+          "rows": [
+            [
+              17
+            ]
+          ],
+          "row_count": 1
+        },
+        "sql": "SELECT count(*) AS total FROM accounts"
+      },
+      {
+        "status": "plan_review",
+        "agents": [
+          "financial_transactions"
+        ]
+      },
+      {
+        "status": "success",
+        "agents": [
+          "financial_transactions"
+        ],
+        "table": {
+          "columns": [
+            "total"
+          ],
+          "rows": [
+            [
+              10
+            ]
+          ],
+          "row_count": 1
+        },
+        "sql": "SELECT count(*) AS total FROM customers"
+      }
+    ],
+    "finance_followup_2": [
+      {
+        "status": "plan_review",
+        "agents": [
+          "financial_transactions"
+        ]
+      },
+      {
+        "status": "success",
+        "agents": [
+          "financial_transactions"
+        ],
+        "table": {
+          "columns": [
+            "total"
+          ],
+          "rows": [
+            [
+              15
+            ]
+          ],
+          "row_count": 1
+        },
+        "sql": "SELECT count(*) AS total FROM accounts WHERE credit_limit IS NULL"
+      },
+      {
+        "status": "plan_review",
+        "agents": [
+          "financial_transactions"
+        ]
+      },
+      {
+        "status": "success",
+        "agents": [
+          "financial_transactions"
+        ],
+        "table": {
+          "columns": [
+            "total"
+          ],
+          "rows": [
+            [
+              2
+            ]
+          ],
+          "row_count": 1
+        },
+        "sql": "SELECT count(*) AS total FROM accounts WHERE current_balance<0"
+      }
+    ],
+    "finance_followup_3": [
+      {
+        "status": "plan_review",
+        "agents": [
+          "financial_transactions"
+        ]
+      },
+      {
+        "status": "success",
+        "agents": [
+          "financial_transactions"
+        ],
+        "table": {
+          "columns": [
+            "account_type",
+            "total"
+          ],
+          "rows": [
+            [
+              "Checking",
+              10
+            ],
+            [
+              "Credit",
+              2
+            ],
+            [
+              "Investment",
+              2
+            ],
+            [
+              "Savings",
+              3
+            ]
+          ],
+          "row_count": 4
+        },
+        "sql": "SELECT account_type,count(*) AS total FROM accounts GROUP BY account_type"
+      },
+      {
+        "status": "plan_review",
+        "agents": [
+          "financial_transactions"
+        ]
+      },
+      {
+        "status": "success",
+        "agents": [
+          "financial_transactions"
+        ],
+        "table": {
+          "columns": [
+            "channel",
+            "total"
+          ],
+          "rows": [
+            [
+              "ATM",
+              1
+            ],
+            [
+              "Branch",
+              4
+            ],
+            [
+              "Mobile",
+              7
+            ],
+            [
+              "Online",
+              14
+            ],
+            [
+              "POS",
+              4
+            ]
+          ],
+          "row_count": 5
+        },
+        "sql": "SELECT channel,count(*) AS total FROM transactions GROUP BY channel"
+      }
+    ],
+    "finance_followup_4": [
+      {
+        "status": "plan_review",
+        "agents": [
+          "financial_transactions"
+        ]
+      },
+      {
+        "status": "success",
+        "agents": [
+          "financial_transactions"
+        ],
+        "table": {
+          "columns": [
+            "transaction_id",
+            "amount"
+          ],
+          "rows": [
+            [
+              "TXN-2024-000018",
+              25000.0
+            ],
+            [
+              "TXN-2024-000017",
+              15000.0
+            ],
+            [
+              "TXN-2024-000019",
+              12000.0
+            ],
+            [
+              "TXN-2024-000004",
+              10000.0
+            ],
+            [
+              "TXN-2024-000012",
+              6500.0
+            ]
+          ],
+          "row_count": 5
+        },
+        "sql": "SELECT transaction_id,amount FROM transactions ORDER BY amount DESC,transaction_id ASC LIMIT 5"
+      },
+      {
+        "status": "plan_review",
+        "agents": [
+          "financial_transactions"
+        ]
+      },
+      {
+        "status": "success",
+        "agents": [
+          "financial_transactions"
+        ],
+        "table": {
+          "columns": [
+            "transaction_id",
+            "amount"
+          ],
+          "rows": [
+            [
+              "TXN-2024-000003",
+              -10000.0
+            ],
+            [
+              "TXN-2024-000025",
+              -8000.0
+            ],
+            [
+              "TXN-2024-000023",
+              -2500.0
+            ],
+            [
+              "TXN-2024-000024",
+              -1800.0
+            ],
+            [
+              "TXN-2024-000013",
+              -1500.0
+            ]
+          ],
+          "row_count": 5
+        },
+        "sql": "SELECT transaction_id,amount FROM transactions ORDER BY amount ASC,transaction_id ASC LIMIT 5"
+      }
+    ],
+    "finance_followup_5": [
+      {
+        "status": "plan_review",
+        "agents": [
+          "financial_transactions"
+        ]
+      },
+      {
+        "status": "success",
+        "agents": [
+          "financial_transactions"
+        ],
+        "table": {
+          "columns": [
+            "customer_segment",
+            "total"
+          ],
+          "rows": [
+            [
+              "Premium",
+              32030.55
+            ],
+            [
+              "Standard",
+              25380.75
+            ],
+            [
+              "VIP",
+              1446730.5
+            ]
+          ],
+          "row_count": 3
+        },
+        "sql": "SELECT c.customer_segment,sum(a.current_balance) AS total FROM accounts a JOIN customers c ON a.customer_id=c.customer_id GROUP BY c.customer_segment"
+      },
+      {
+        "status": "plan_review",
+        "agents": [
+          "financial_transactions"
+        ]
+      },
+      {
+        "status": "success",
+        "agents": [
+          "financial_transactions"
+        ],
+        "table": {
+          "columns": [
+            "total"
+          ],
+          "rows": [
+            [
+              0
+            ]
+          ],
+          "row_count": 1
+        },
+        "sql": "SELECT count(*) AS total FROM customers c WHERE NOT EXISTS (SELECT 1 FROM accounts a WHERE a.customer_id=c.customer_id)"
+      }
+    ],
+    "hotel_followup_1": [
+      {
+        "status": "plan_review",
+        "agents": [
+          "hotel_analytics"
+        ]
+      },
+      {
+        "status": "success",
+        "agents": [
+          "hotel_analytics"
+        ],
+        "table": {
+          "columns": [
+            "total"
+          ],
+          "rows": [
+            [
+              10
+            ]
+          ],
+          "row_count": 1
+        },
+        "sql": "SELECT count(*) AS total FROM dim_hotel"
+      },
+      {
+        "status": "plan_review",
+        "agents": [
+          "hotel_analytics"
+        ]
+      },
+      {
+        "status": "success",
+        "agents": [
+          "hotel_analytics"
+        ],
+        "table": {
+          "columns": [
+            "total"
+          ],
+          "rows": [
+            [
+              15
+            ]
+          ],
+          "row_count": 1
+        },
+        "sql": "SELECT count(*) AS total FROM dim_guest"
+      }
+    ],
+    "hotel_followup_2": [
+      {
+        "status": "plan_review",
+        "agents": [
+          "hotel_analytics"
+        ]
+      },
+      {
+        "status": "success",
+        "agents": [
+          "hotel_analytics"
+        ],
+        "table": {
+          "columns": [
+            "total"
+          ],
+          "rows": [
+            [
+              3
+            ]
+          ],
+          "row_count": 1
+        },
+        "sql": "SELECT count(*) AS total FROM fact_reservations WHERE IsCancelled=1"
+      },
+      {
+        "status": "plan_review",
+        "agents": [
+          "hotel_analytics"
+        ]
+      },
+      {
+        "status": "success",
+        "agents": [
+          "hotel_analytics"
+        ],
+        "table": {
+          "columns": [
+            "total"
+          ],
+          "rows": [
+            [
+              44256.0
+            ]
+          ],
+          "row_count": 1
+        },
+        "sql": "SELECT sum(TotalRevenue) AS total FROM fact_reservations WHERE IsCancelled=0"
+      }
+    ],
+    "hotel_followup_3": [
+      {
+        "status": "plan_review",
+        "agents": [
+          "hotel_analytics"
+        ]
+      },
+      {
+        "status": "success",
+        "agents": [
+          "hotel_analytics"
+        ],
+        "table": {
+          "columns": [
+            "Region",
+            "total"
+          ],
+          "rows": [
+            [
+              "Central",
+              2
+            ],
+            [
+              "East",
+              3
+            ],
+            [
+              "Mountain",
+              2
+            ],
+            [
+              "South",
+              1
+            ],
+            [
+              "West",
+              2
+            ]
+          ],
+          "row_count": 5
+        },
+        "sql": "SELECT Region,count(*) AS total FROM dim_hotel GROUP BY Region"
+      },
+      {
+        "status": "plan_review",
+        "agents": [
+          "hotel_analytics"
+        ]
+      },
+      {
+        "status": "success",
+        "agents": [
+          "hotel_analytics"
+        ],
+        "table": {
+          "columns": [
+            "HotelKey",
+            "total"
+          ],
+          "rows": [
+            [
+              1,
+              8915.0
+            ],
+            [
+              2,
+              2805.0
+            ],
+            [
+              3,
+              2110.0
+            ],
+            [
+              4,
+              22650.0
+            ],
+            [
+              5,
+              1281.0
+            ],
+            [
+              6,
+              1805.0
+            ],
+            [
+              7,
+              2065.0
+            ],
+            [
+              8,
+              680.0
+            ],
+            [
+              9,
+              2150.0
+            ],
+            [
+              10,
+              2345.0
+            ]
+          ],
+          "row_count": 10
+        },
+        "sql": "SELECT HotelKey,sum(TotalRevenue) AS total FROM fact_reservations GROUP BY HotelKey"
+      }
+    ],
+    "hotel_followup_4": [
+      {
+        "status": "plan_review",
+        "agents": [
+          "hotel_analytics"
+        ]
+      },
+      {
+        "status": "success",
+        "agents": [
+          "hotel_analytics"
+        ],
+        "table": {
+          "columns": [
+            "ReservationKey",
+            "TotalRevenue"
+          ],
+          "rows": [
+            [
+              12,
+              9605.0
+            ],
+            [
+              18,
+              5460.0
+            ],
+            [
+              17,
+              4645.0
+            ],
+            [
+              2,
+              2695.0
+            ],
+            [
+              10,
+              2545.0
+            ]
+          ],
+          "row_count": 5
+        },
+        "sql": "SELECT ReservationKey,TotalRevenue FROM fact_reservations ORDER BY TotalRevenue DESC,ReservationKey ASC LIMIT 5"
+      },
+      {
+        "status": "plan_review",
+        "agents": [
+          "hotel_analytics"
+        ]
+      },
+      {
+        "status": "success",
+        "agents": [
+          "hotel_analytics"
+        ],
+        "table": {
+          "columns": [
+            "ReservationKey",
+            "TotalRevenue"
+          ],
+          "rows": [
+            [
+              6,
+              403.0
+            ],
+            [
+              13,
+              680.0
+            ],
+            [
+              20,
+              690.0
+            ],
+            [
+              22,
+              765.0
+            ],
+            [
+              3,
+              770.0
+            ]
+          ],
+          "row_count": 5
+        },
+        "sql": "SELECT ReservationKey,TotalRevenue FROM fact_reservations ORDER BY TotalRevenue ASC,ReservationKey ASC LIMIT 5"
+      }
+    ],
+    "hotel_followup_5": [
+      {
+        "status": "plan_review",
+        "agents": [
+          "hotel_analytics"
+        ]
+      },
+      {
+        "status": "success",
+        "agents": [
+          "hotel_analytics"
+        ],
+        "table": {
+          "columns": [
+            "Region",
+            "total"
+          ],
+          "rows": [
+            [
+              "Central",
+              3495.0
+            ],
+            [
+              "East",
+              4306.0
+            ],
+            [
+              "Mountain",
+              3775.0
+            ],
+            [
+              "South",
+              22650.0
+            ],
+            [
+              "West",
+              10030.0
+            ]
+          ],
+          "row_count": 5
+        },
+        "sql": "SELECT h.Region,sum(r.TotalRevenue) AS total FROM fact_reservations r JOIN dim_hotel h ON r.HotelKey=h.HotelKey WHERE r.IsCancelled=0 GROUP BY h.Region"
+      },
+      {
+        "status": "plan_review",
+        "agents": [
+          "hotel_analytics"
+        ]
+      },
+      {
+        "status": "success",
+        "agents": [
+          "hotel_analytics"
+        ],
+        "table": {
+          "columns": [
+            "total"
+          ],
+          "rows": [
+            [
+              0
+            ]
+          ],
+          "row_count": 1
+        },
+        "sql": "SELECT count(*) AS total FROM dim_hotel h WHERE NOT EXISTS (SELECT 1 FROM fact_reservations r WHERE r.HotelKey=h.HotelKey)"
+      }
+    ],
+    "collaboration_1_pause": [
+      {
+        "status": "plan_review",
+        "agents": [
+          "contoso_products",
+          "contoso_sales"
+        ]
+      }
+    ],
+    "collaboration_1_cancel": [
+      {
+        "status": "plan_review",
+        "agents": [
+          "contoso_products",
+          "contoso_sales"
+        ]
+      },
+      {
+        "status": "cancelled",
+        "error": "cancelled"
+      }
+    ],
+    "collaboration_1_approve": [
+      {
+        "status": "plan_review",
+        "agents": [
+          "contoso_products",
+          "contoso_sales"
+        ]
+      },
+      {
+        "status": "success",
+        "agents": [
+          "contoso_products",
+          "contoso_sales"
+        ],
+        "evidence": [
+          {
+            "task_id": "left",
+            "agent_name": "contoso_sales",
+            "status": "success",
+            "result": {
+              "columns": [
+                "total"
+              ],
+              "rows": [
+                [
+                  -999
+                ]
+              ],
+              "ordered": false,
+              "row_count": 1
+            }
+          },
+          {
+            "task_id": "right",
+            "agent_name": "contoso_products",
+            "status": "success",
+            "result": {
+              "columns": [
+                "total"
+              ],
+              "rows": [
+                [
+                  147.76777777777778
+                ]
+              ],
+              "ordered": false,
+              "row_count": 1
+            }
+          }
+        ]
+      }
+    ],
+    "collaboration_1_revise": [
+      {
+        "status": "plan_review",
+        "agents": [
+          "contoso_products",
+          "contoso_sales"
+        ]
+      },
+      {
+        "status": "plan_review",
+        "agents": [
+          "contoso_sales"
+        ]
+      },
+      {
+        "status": "success",
+        "agents": [
+          "contoso_sales"
+        ],
+        "table": {
+          "columns": [
+            "total"
+          ],
+          "rows": [
+            [
+              47915.950000000004
+            ]
+          ],
+          "row_count": 1
+        },
+        "sql": "SELECT sum(total_amount) AS total FROM orders"
+      }
+    ],
+    "collaboration_2_pause": [
+      {
+        "status": "plan_review",
+        "agents": [
+          "contoso_hr",
+          "contoso_inventory"
+        ]
+      }
+    ],
+    "collaboration_2_cancel": [
+      {
+        "status": "plan_review",
+        "agents": [
+          "contoso_hr",
+          "contoso_inventory"
+        ]
+      },
+      {
+        "status": "cancelled",
+        "error": "cancelled"
+      }
+    ],
+    "collaboration_2_approve": [
+      {
+        "status": "plan_review",
+        "agents": [
+          "contoso_hr",
+          "contoso_inventory"
+        ]
+      },
+      {
+        "status": "success",
+        "agents": [
+          "contoso_hr",
+          "contoso_inventory"
+        ],
+        "evidence": [
+          {
+            "task_id": "left",
+            "agent_name": "contoso_inventory",
+            "status": "success",
+            "result": {
+              "columns": [
+                "total"
+              ],
+              "rows": [
+                [
+                  615000
+                ]
+              ],
+              "ordered": false,
+              "row_count": 1
+            }
+          },
+          {
+            "task_id": "right",
+            "agent_name": "contoso_hr",
+            "status": "success",
+            "result": {
+              "columns": [
+                "total"
+              ],
+              "rows": [
+                [
+                  4107000.0
+                ]
+              ],
+              "ordered": false,
+              "row_count": 1
+            }
+          }
+        ]
+      }
+    ],
+    "collaboration_2_revise": [
+      {
+        "status": "plan_review",
+        "agents": [
+          "contoso_hr",
+          "contoso_inventory"
+        ]
+      },
+      {
+        "status": "plan_review",
+        "agents": [
+          "contoso_inventory"
+        ]
+      },
+      {
+        "status": "success",
+        "agents": [
+          "contoso_inventory"
+        ],
+        "table": {
+          "columns": [
+            "total"
+          ],
+          "rows": [
+            [
+              615000
+            ]
+          ],
+          "row_count": 1
+        },
+        "sql": "SELECT sum(capacity) AS total FROM warehouses"
+      }
+    ],
+    "collaboration_3_pause": [
+      {
+        "status": "plan_review",
+        "agents": [
+          "financial_transactions",
+          "hotel_analytics"
+        ]
+      }
+    ],
+    "collaboration_3_cancel": [
+      {
+        "status": "plan_review",
+        "agents": [
+          "financial_transactions",
+          "hotel_analytics"
+        ]
+      },
+      {
+        "status": "cancelled",
+        "error": "cancelled"
+      }
+    ],
+    "collaboration_3_approve": [
+      {
+        "status": "plan_review",
+        "agents": [
+          "financial_transactions",
+          "hotel_analytics"
+        ]
+      },
+      {
+        "status": "success",
+        "agents": [
+          "financial_transactions",
+          "hotel_analytics"
+        ],
+        "evidence": [
+          {
+            "task_id": "left",
+            "agent_name": "financial_transactions",
+            "status": "success",
+            "result": {
+              "columns": [
+                "total"
+              ],
+              "rows": [
+                [
+                  30
+                ]
+              ],
+              "ordered": false,
+              "row_count": 1
+            }
+          },
+          {
+            "task_id": "right",
+            "agent_name": "hotel_analytics",
+            "status": "success",
+            "result": {
+              "columns": [
+                "total"
+              ],
+              "rows": [
+                [
+                  22
+                ]
+              ],
+              "ordered": false,
+              "row_count": 1
+            }
+          }
+        ]
+      }
+    ],
+    "collaboration_3_revise": [
+      {
+        "status": "plan_review",
+        "agents": [
+          "financial_transactions",
+          "hotel_analytics"
+        ]
+      },
+      {
+        "status": "plan_review",
+        "agents": [
+          "financial_transactions"
+        ]
+      },
+      {
+        "status": "success",
+        "agents": [
+          "financial_transactions"
+        ],
+        "table": {
+          "columns": [
+            "total"
+          ],
+          "rows": [
+            [
+              30
+            ]
+          ],
+          "row_count": 1
+        },
+        "sql": "SELECT count(*) AS total FROM transactions"
+      }
+    ],
+    "collaboration_4_pause": [
+      {
+        "status": "plan_review",
+        "agents": [
+          "contoso_sales",
+          "financial_transactions"
+        ]
+      }
+    ],
+    "collaboration_4_cancel": [
+      {
+        "status": "plan_review",
+        "agents": [
+          "contoso_sales",
+          "financial_transactions"
+        ]
+      },
+      {
+        "status": "cancelled",
+        "error": "cancelled"
+      }
+    ],
+    "collaboration_4_approve": [
+      {
+        "status": "plan_review",
+        "agents": [
+          "contoso_sales",
+          "financial_transactions"
+        ]
+      },
+      {
+        "status": "success",
+        "agents": [
+          "contoso_sales",
+          "financial_transactions"
+        ],
+        "evidence": [
+          {
+            "task_id": "left",
+            "agent_name": "contoso_sales",
+            "status": "success",
+            "result": {
+              "columns": [
+                "total"
+              ],
+              "rows": [
+                [
+                  57
+                ]
+              ],
+              "ordered": false,
+              "row_count": 1
+            }
+          },
+          {
+            "task_id": "right",
+            "agent_name": "financial_transactions",
+            "status": "success",
+            "result": {
+              "columns": [
+                "total"
+              ],
+              "rows": [
+                [
+                  29
+                ]
+              ],
+              "ordered": false,
+              "row_count": 1
+            }
+          }
+        ]
+      }
+    ],
+    "collaboration_4_revise": [
+      {
+        "status": "plan_review",
+        "agents": [
+          "contoso_sales",
+          "financial_transactions"
+        ]
+      },
+      {
+        "status": "plan_review",
+        "agents": [
+          "contoso_sales"
+        ]
+      },
+      {
+        "status": "success",
+        "agents": [
+          "contoso_sales"
+        ],
+        "table": {
+          "columns": [
+            "total"
+          ],
+          "rows": [
+            [
+              57
+            ]
+          ],
+          "row_count": 1
+        },
+        "sql": "SELECT count(*) AS total FROM orders WHERE order_date>='2025-01-01' AND order_date<'2025-02-01'"
+      }
+    ],
+    "collaboration_5_pause": [
+      {
+        "status": "plan_review",
+        "agents": [
+          "contoso_hr",
+          "contoso_products"
+        ]
+      }
+    ],
+    "collaboration_5_cancel": [
+      {
+        "status": "plan_review",
+        "agents": [
+          "contoso_hr",
+          "contoso_products"
+        ]
+      },
+      {
+        "status": "cancelled",
+        "error": "cancelled"
+      }
+    ],
+    "collaboration_5_approve": [
+      {
+        "status": "plan_review",
+        "agents": [
+          "contoso_hr",
+          "contoso_products"
+        ]
+      },
+      {
+        "status": "success",
+        "agents": [
+          "contoso_hr",
+          "contoso_products"
+        ],
+        "evidence": [
+          {
+            "task_id": "left",
+            "agent_name": "contoso_hr",
+            "status": "success",
+            "result": {
+              "columns": [
+                "total"
+              ],
+              "rows": [
+                [
+                  18
+                ]
+              ],
+              "ordered": false,
+              "row_count": 1
+            }
+          },
+          {
+            "task_id": "right",
+            "agent_name": "contoso_products",
+            "status": "success",
+            "result": {
+              "columns": [
+                "total"
+              ],
+              "rows": [
+                [
+                  14
+                ]
+              ],
+              "ordered": false,
+              "row_count": 1
+            }
+          }
+        ]
+      }
+    ],
+    "collaboration_5_revise": [
+      {
+        "status": "plan_review",
+        "agents": [
+          "contoso_hr",
+          "contoso_products"
+        ]
+      },
+      {
+        "status": "plan_review",
+        "agents": [
+          "contoso_hr"
+        ]
+      },
+      {
+        "status": "success",
+        "agents": [
+          "contoso_hr"
+        ],
+        "table": {
+          "columns": [
+            "total"
+          ],
+          "rows": [
+            [
+              18
+            ]
+          ],
+          "row_count": 1
+        },
+        "sql": "SELECT count(*) AS total FROM employees WHERE Salary>(SELECT avg(Salary) FROM employees)"
+      }
+    ]
+  }
+}

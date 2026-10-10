@@ -1,0 +1,624 @@
+{
+  "schema_version": 1,
+  "data_version": "sample-7bac333c58e8",
+  "description": "合成演示输出，包含 5 个故意错误；不是模型执行记录。",
+  "observations": {
+    "sales_count": [
+      {
+        "status": "success",
+        "agents": [
+          "contoso_sales"
+        ],
+        "table": {
+          "columns": [
+            "total"
+          ],
+          "rows": [
+            [
+              999
+            ]
+          ],
+          "row_count": 1
+        },
+        "sql": "SELECT count(*) AS total FROM orders"
+      }
+    ],
+    "sales_customers": [
+      {
+        "status": "success",
+        "agents": [
+          "contoso_sales"
+        ],
+        "table": {
+          "columns": [
+            "total"
+          ],
+          "rows": [
+            [
+              50
+            ]
+          ],
+          "row_count": 1
+        },
+        "sql": "SELECT count(*) AS total FROM customers"
+      }
+    ],
+    "sales_amount": [
+      {
+        "status": "success",
+        "agents": [
+          "contoso_sales"
+        ],
+        "table": {
+          "columns": [
+            "total"
+          ],
+          "rows": [
+            [
+              47915.950000000004
+            ]
+          ],
+          "row_count": 1
+        },
+        "sql": "SELECT sum(total_amount) AS total FROM orders"
+      }
+    ],
+    "sales_status": [
+      {
+        "status": "success",
+        "agents": [
+          "contoso_sales"
+        ],
+        "table": {
+          "columns": [
+            "status",
+            "total"
+          ],
+          "rows": [
+            [
+              "cancelled",
+              8
+            ],
+            [
+              "delivered",
+              131
+            ],
+            [
+              "pending",
+              18
+            ],
+            [
+              "processing",
+              24
+            ],
+            [
+              "shipped",
+              27
+            ]
+          ],
+          "row_count": 5
+        },
+        "sql": "SELECT status, count(*) AS total FROM orders GROUP BY status"
+      }
+    ],
+    "sales_region": [
+      {
+        "status": "success",
+        "agents": [
+          "contoso_sales"
+        ],
+        "table": {
+          "columns": [
+            "region",
+            "total"
+          ],
+          "rows": [
+            [
+              "Central",
+              16
+            ],
+            [
+              "East",
+              17
+            ],
+            [
+              "West",
+              17
+            ]
+          ],
+          "row_count": 3
+        },
+        "sql": "SELECT region, count(*) AS total FROM customers GROUP BY region"
+      }
+    ],
+    "sales_empty": [
+      {
+        "status": "success",
+        "agents": [
+          "contoso_sales"
+        ],
+        "table": {
+          "columns": [
+            "order_id"
+          ],
+          "rows": [],
+          "row_count": 0
+        },
+        "sql": "SELECT order_id FROM orders WHERE order_id='NOT-EXIST'"
+      }
+    ],
+    "product_count": [
+      {
+        "status": "success",
+        "agents": [
+          "contoso_sales"
+        ],
+        "table": {
+          "columns": [
+            "total"
+          ],
+          "rows": [
+            [
+              45
+            ]
+          ],
+          "row_count": 1
+        },
+        "sql": "SELECT count(*) AS total FROM products"
+      }
+    ],
+    "product_active": [
+      {
+        "status": "success",
+        "agents": [
+          "contoso_products"
+        ],
+        "table": {
+          "columns": [
+            "total"
+          ],
+          "rows": [
+            [
+              44
+            ]
+          ],
+          "row_count": 1
+        },
+        "sql": "SELECT count(*) AS total FROM products WHERE is_active=1"
+      }
+    ],
+    "product_price": [
+      {
+        "status": "success",
+        "agents": [
+          "contoso_products"
+        ],
+        "table": {
+          "columns": [
+            "total"
+          ],
+          "rows": [
+            [
+              899.99
+            ]
+          ],
+          "row_count": 1
+        },
+        "sql": "SELECT max(price) AS total FROM products"
+      }
+    ],
+    "product_category": [
+      {
+        "status": "success",
+        "agents": [
+          "contoso_products"
+        ],
+        "table": {
+          "columns": [
+            "category",
+            "total"
+          ],
+          "rows": [
+            [
+              "clothing",
+              11
+            ],
+            [
+              "electronics",
+              12
+            ],
+            [
+              "home",
+              11
+            ],
+            [
+              "sports",
+              11
+            ]
+          ],
+          "row_count": 4
+        },
+        "sql": "SELECT category, count(*) AS total FROM products GROUP BY category"
+      }
+    ],
+    "inventory_count": [
+      {
+        "status": "success",
+        "agents": [
+          "contoso_inventory"
+        ],
+        "table": {
+          "columns": [
+            "total"
+          ],
+          "rows": [
+            [
+              125
+            ]
+          ],
+          "row_count": 1,
+          "metadata": {
+            "truncated": true
+          }
+        },
+        "sql": "SELECT count(*) AS total FROM inventory"
+      }
+    ],
+    "inventory_quantity": [
+      {
+        "status": "success",
+        "agents": [
+          "contoso_inventory"
+        ],
+        "table": {
+          "columns": [
+            "total"
+          ],
+          "rows": [
+            [
+              43102
+            ]
+          ],
+          "row_count": 1
+        },
+        "sql": "SELECT sum(quantity) AS total FROM inventory"
+      }
+    ],
+    "inventory_warehouses": [
+      {
+        "status": "success",
+        "agents": [
+          "contoso_inventory"
+        ],
+        "table": {
+          "columns": [
+            "total"
+          ],
+          "rows": [
+            [
+              10
+            ]
+          ],
+          "row_count": 1
+        },
+        "sql": "SELECT count(*) AS total FROM warehouses"
+      }
+    ],
+    "inventory_low": [
+      {
+        "status": "success",
+        "agents": [
+          "contoso_inventory"
+        ],
+        "table": {
+          "columns": [
+            "total"
+          ],
+          "rows": [
+            [
+              22
+            ]
+          ],
+          "row_count": 1
+        },
+        "sql": "SELECT count(*) AS total FROM inventory WHERE quantity < reorder_level"
+      }
+    ],
+    "hr_count": [
+      {
+        "status": "success",
+        "agents": [
+          "contoso_hr"
+        ],
+        "table": {
+          "columns": [
+            "total"
+          ],
+          "rows": [
+            [
+              40
+            ]
+          ],
+          "row_count": 1
+        },
+        "sql": "SELECT count(*) AS total FROM employees"
+      }
+    ],
+    "hr_active": [
+      {
+        "status": "success",
+        "agents": [
+          "contoso_hr"
+        ],
+        "table": {
+          "columns": [
+            "total"
+          ],
+          "rows": [
+            [
+              39
+            ]
+          ],
+          "row_count": 1
+        },
+        "sql": "SELECT count(*) AS total FROM employees WHERE IsActive=1"
+      }
+    ],
+    "hr_salary": [
+      {
+        "status": "success",
+        "agents": [
+          "contoso_hr"
+        ],
+        "table": {
+          "columns": [
+            "total"
+          ],
+          "rows": [
+            [
+              0
+            ]
+          ],
+          "row_count": 1
+        },
+        "sql": "SELECT avg(Salary) AS total FROM employees"
+      }
+    ],
+    "hr_departments": [
+      {
+        "status": "success",
+        "agents": [
+          "contoso_hr"
+        ],
+        "table": {
+          "columns": [
+            "total"
+          ],
+          "rows": [
+            [
+              8
+            ]
+          ],
+          "row_count": 1
+        },
+        "sql": "SELECT count(*) AS total FROM departments"
+      }
+    ],
+    "finance_accounts": [
+      {
+        "status": "success",
+        "agents": [
+          "financial_transactions"
+        ],
+        "table": {
+          "columns": [
+            "total"
+          ],
+          "rows": [
+            [
+              17
+            ]
+          ],
+          "row_count": 1
+        },
+        "sql": "SELECT count(*) AS total FROM accounts"
+      }
+    ],
+    "finance_transactions": [
+      {
+        "status": "success",
+        "agents": [
+          "financial_transactions"
+        ],
+        "table": {
+          "columns": [
+            "total"
+          ],
+          "rows": [
+            [
+              30
+            ]
+          ],
+          "row_count": 1
+        },
+        "sql": "SELECT count(*) AS total FROM transactions"
+      }
+    ],
+    "finance_alerts": [
+      {
+        "status": "success",
+        "agents": [
+          "financial_transactions"
+        ],
+        "table": {
+          "columns": [
+            "total"
+          ],
+          "rows": [
+            [
+              5
+            ]
+          ],
+          "row_count": 1
+        },
+        "sql": "SELECT count(*) AS total FROM fraud_alerts"
+      }
+    ],
+    "finance_null": [
+      {
+        "status": "success",
+        "agents": [
+          "financial_transactions"
+        ],
+        "table": {
+          "columns": [
+            "total"
+          ],
+          "rows": [
+            [
+              15
+            ]
+          ],
+          "row_count": 1
+        },
+        "sql": "SELECT count(*) AS total FROM accounts WHERE credit_limit IS NULL"
+      }
+    ],
+    "hotel_count": [
+      {
+        "status": "success",
+        "agents": [
+          "hotel_analytics"
+        ],
+        "table": {
+          "columns": [
+            "total"
+          ],
+          "rows": [
+            [
+              10
+            ]
+          ],
+          "row_count": 1
+        },
+        "sql": "SELECT count(*) AS total FROM dim_hotel"
+      }
+    ],
+    "hotel_cancelled": [
+      {
+        "status": "success",
+        "agents": [
+          "hotel_analytics"
+        ],
+        "table": {
+          "columns": [
+            "total"
+          ],
+          "rows": [
+            [
+              3
+            ]
+          ],
+          "row_count": 1
+        },
+        "sql": "SELECT count(*) AS total FROM fact_reservations WHERE IsCancelled=1"
+      }
+    ],
+    "followup": [
+      {
+        "status": "success",
+        "agents": [
+          "contoso_hr"
+        ],
+        "table": {
+          "columns": [
+            "total"
+          ],
+          "rows": [
+            [
+              40
+            ]
+          ],
+          "row_count": 1
+        },
+        "sql": "SELECT count(*) AS total FROM employees"
+      },
+      {
+        "status": "success",
+        "agents": [
+          "contoso_hr"
+        ],
+        "table": {
+          "columns": [
+            "total"
+          ],
+          "rows": [
+            [
+              39
+            ]
+          ],
+          "row_count": 1
+        },
+        "sql": "SELECT count(*) AS total FROM employees WHERE IsActive=1"
+      }
+    ],
+    "review_pause": [
+      {
+        "status": "success",
+        "agents": [
+          "contoso_sales",
+          "contoso_inventory"
+        ]
+      }
+    ],
+    "review_cancel": [
+      {
+        "status": "plan_review",
+        "agents": [
+          "contoso_sales",
+          "contoso_inventory"
+        ]
+      },
+      {
+        "status": "cancelled",
+        "error": "cancelled"
+      }
+    ],
+    "review_approve": [
+      {
+        "status": "plan_review",
+        "agents": [
+          "contoso_sales",
+          "contoso_inventory"
+        ]
+      },
+      {
+        "status": "success",
+        "agents": [
+          "contoso_sales",
+          "contoso_inventory"
+        ]
+      }
+    ],
+    "review_revise": [
+      {
+        "status": "plan_review",
+        "agents": [
+          "contoso_sales",
+          "contoso_inventory"
+        ]
+      },
+      {
+        "status": "plan_review",
+        "agents": [
+          "contoso_inventory"
+        ]
+      }
+    ],
+    "clarification": [
+      {
+        "status": "clarification_needed"
+      }
+    ]
+  }
+}

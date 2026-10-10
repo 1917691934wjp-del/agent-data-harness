@@ -11,6 +11,8 @@ from langchain_core.language_models import BaseChatModel
 from langchain_core.messages import AIMessage, HumanMessage, SystemMessage
 
 from data_agent.config import DataAgentConfig
+from data_agent.context import context_message
+from data_agent.harness.budget import invoke_model
 from data_agent.models.outputs import ResponseGeneratorOutput
 from data_agent.utils.message_utils import get_recent_history
 
@@ -49,7 +51,7 @@ class ResponseNode:
         self._config = config
         self._response_llm = llm.with_structured_output(ResponseGeneratorOutput)
 
-    def generate_response(self, state: "AgentState") -> dict[str, Any]:
+    async def generate_response(self, state: "AgentState") -> dict[str, Any]:
         """Generate natural language response from query results.
 
         Args:
@@ -59,6 +61,7 @@ class ResponseNode:
             State update with final response and messages.
         """
         prompt = self._config.response_prompt or DEFAULT_RESPONSE_PROMPT
+        prompt += "\n请使用简体中文回答，包括解释、结论和表格标题。保留原始数据值、专有名称和 SQL 标识符，不编造翻译后的数据。"
 
         question = state["question"]
         sql = state.get("generated_sql", "")
@@ -75,6 +78,7 @@ class ResponseNode:
         messages = [
             SystemMessage(content=prompt),
             *history,
+            HumanMessage(content=context_message(state.get("query_context", {}))),
             HumanMessage(
                 content=(
                     f"Question: {question}\n\nSQL Query: {sql}\n\nResults: {result}"
@@ -83,7 +87,7 @@ class ResponseNode:
         ]
 
         logger.debug("Generating response for question: %s", question[:100])
-        response_result = self._response_llm.invoke(messages)
+        response_result = await invoke_model(self._response_llm, messages)
         response = (
             response_result.response
             if isinstance(response_result, ResponseGeneratorOutput)

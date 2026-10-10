@@ -1,10 +1,9 @@
 intent_detection_agent:
   llm:
-    model: gpt-5-mini
-    provider: azure_openai
-    api_version: 2024-12-01-preview
-    temperature: 1.0
-    max_tokens: 500
+    model: deepseek-flash
+    provider: deepseek
+    temperature: 0.0
+    max_tokens: 4096
   system_prompt: |
     You are an intent detection assistant responsible for routing user questions to the appropriate data agent.
 
@@ -33,11 +32,10 @@ data_agents:
       catalog: hive_metastore
       db_schema: sales
     llm:
-      model: gpt-5-mini
-      provider: azure_openai
-      api_version: 2024-12-01-preview
-      temperature: 1.0
-      max_tokens: 2000
+      model: deepseek-flash
+      provider: deepseek
+      temperature: 0.0
+      max_tokens: 4096
     system_prompt: |
       You are an expert SQL assistant for the Contoso sales database running on Databricks.
 
@@ -207,11 +205,10 @@ data_agents:
       partition_key_path: /id
       use_aad: true
     llm:
-      model: gpt-5-mini
-      provider: azure_openai
-      api_version: 2024-12-01-preview
-      temperature: 1.0
-      max_tokens: 2000
+      model: deepseek-flash
+      provider: deepseek
+      temperature: 0.0
+      max_tokens: 4096
     system_prompt: |
       You are an expert query assistant for the Contoso product catalog stored in Azure Cosmos DB.
 
@@ -361,11 +358,10 @@ data_agents:
       password: ""
       schema: public
     llm:
-      model: gpt-5-mini
-      provider: azure_openai
-      api_version: 2024-12-01-preview
-      temperature: 1.0
-      max_tokens: 2000
+      model: deepseek-flash
+      provider: deepseek
+      temperature: 0.0
+      max_tokens: 4096
     system_prompt: |
       You are an expert SQL assistant for the Contoso inventory database running on PostgreSQL.
 

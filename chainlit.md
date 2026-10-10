@@ -1,14 +1,15 @@
-# Welcome to Chainlit! 🚀🤖
+# 欢迎使用中文数据助手
 
-Hi there, Developer! 👋 We're excited to have you on board. Chainlit is a powerful tool designed to help you prototype, debug and share applications built on top of LLMs.
+直接用中文描述你想了解的数据，助手会查询数据并给出中文回答。
 
-## Useful Links 🔗
+可以试着问：
 
-- **Documentation:** Get started with our comprehensive [Chainlit Documentation](https://docs.chainlit.io) 📚
-- **Discord Community:** Join our friendly [Chainlit Discord](https://discord.gg/k73SQ3FyUh) to ask questions, share your projects, and connect with other developers! 💬
+- 每个仓库分别有多少库存？
+- 各地区的订单总金额是多少？
+- 哪些商品的库存不足？
+- 按酒店统计总收入，并用柱状图展示。
 
-We can't wait to see what you create with Chainlit! Happy coding! 💻😊
+在页面上方选择业务范围，或选择“全部数据助手”自动分配问题。
+需要确认查询计划时，输入“确认”继续，输入“取消”结束，也可以直接描述修改意见。
 
-## Welcome screen
-
-To modify the welcome screen, edit the `chainlit.md` file at the root of your project. If you do not want a welcome screen, just leave this file empty.
+查询结果中的原始名称、编号和 SQL 标识符保留原样，便于核对。

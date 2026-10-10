@@ -1,10 +1,11 @@
 """LangGraph state definitions for the NL2SQL Data Agent."""
 
-from typing import Annotated, NotRequired, TypedDict
+from typing import Annotated, Any, NotRequired, TypedDict
 
 from langchain_core.messages import AnyMessage
 from langgraph.graph import add_messages
 
+from data_agent.models.collaboration import AgentTaskResult, CollaborationPlan
 from data_agent.models.outputs import QueryResult, SQLValidationOutput
 
 
@@ -14,10 +15,19 @@ class InputState(TypedDict):
     Attributes:
         question: Natural language question to answer.
         datasource_name: Name of the datasource to query.
+        messages: Recent conversation supplied to an isolated worker.
+        collaboration_context: Structured upstream task evidence, treated as data.
+        skip_visualization: Disable per-worker charts during multi-task execution.
+        skip_response: Return query evidence directly to the coordinator.
     """
 
     question: str
     datasource_name: str
+    messages: NotRequired[list[AnyMessage]]
+    collaboration_context: NotRequired[str]
+    skip_visualization: NotRequired[bool]
+    skip_response: NotRequired[bool]
+    query_context: NotRequired[dict[str, Any]]
 
 
 class OutputState(TypedDict):
@@ -34,6 +44,9 @@ class OutputState(TypedDict):
         visualization_image: Base64-encoded PNG image of chart (if visualization was requested).
         visualization_code: Generated Python code for visualization.
         visualization_error: Error message if visualization generation failed.
+        collaboration_plan: Validated task dependencies and optional join.
+        agent_results: Source-level SQL, results, statuses and errors.
+        collaboration_warnings: Partial failures and aggregation limitations.
     """
 
     generated_sql: str
@@ -46,6 +59,11 @@ class OutputState(TypedDict):
     visualization_image: NotRequired[str | None]
     visualization_code: NotRequired[str | None]
     visualization_error: NotRequired[str | None]
+    collaboration_plan: NotRequired[CollaborationPlan | None]
+    agent_results: NotRequired[list[AgentTaskResult]]
+    collaboration_warnings: NotRequired[list[str]]
+    query_context: NotRequired[dict[str, Any]]
+    confirmed_context: NotRequired[dict[str, Any]]
 
 
 class AgentState(TypedDict):
@@ -74,6 +92,12 @@ class AgentState(TypedDict):
     """
 
     question: str
+    query_context: NotRequired[dict[str, Any]]
+    confirmed_context: NotRequired[dict[str, Any]]
+    conversation_context: NotRequired[dict[str, Any]]
+    plan_version: NotRequired[str]
+    review_action: NotRequired[str | None]
+    review_required: NotRequired[bool]
     datasource_name: str
     dialect: NotRequired[str]
     schema_context: NotRequired[str]
@@ -89,3 +113,9 @@ class AgentState(TypedDict):
     visualization_image: NotRequired[str | None]
     visualization_code: NotRequired[str | None]
     visualization_error: NotRequired[str | None]
+    collaboration_plan: NotRequired[CollaborationPlan | None]
+    agent_results: NotRequired[list[AgentTaskResult]]
+    collaboration_warnings: NotRequired[list[str]]
+    collaboration_context: NotRequired[str]
+    skip_visualization: NotRequired[bool]
+    skip_response: NotRequired[bool]

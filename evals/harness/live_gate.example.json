@@ -1,0 +1,11 @@
+{
+  "metrics": {
+    "pass_rate": {"min": 0.9, "max_drop": 0.02},
+    "routing_accuracy": {"min": 0.93, "max_drop": 0.02},
+    "result_accuracy": {"min": 0.9, "max_drop": 0.02},
+    "p95_ms": {"max": 120000, "max_increase": 10000},
+    "avg_llm_calls": {"max": 20},
+    "avg_tokens": {"max": 30000},
+    "timeout_rate": {"max": 0.05}
+  }
+}

@@ -1,0 +1,443 @@
+{
+  "schema_version": 1,
+  "name": "多数据源 Agent 200 案例基准 v1 smoke",
+  "description": "150 个独立查询，30 个同域多轮任务切换，20 个跨源审批交互。review_policy=always；所有确认均在题目内显式编写。",
+  "data_version": "benchmark200-v1-7bac333c58e8",
+  "data_files_sha256": {
+    "azure_sql_data.json": "3bf9731aaa6d263077a80929d3e892bddee9d88c8f1a15861a1cd30c4e8bb073",
+    "bigquery_data.json": "37ff2857a38e7a51f652a92e0071196bf111c96eecbcfc2b268b3b13295c1edf",
+    "cosmos_data.json": "0b94302a808864f48ff3f9fcfcb7c45e35190e76fe9311ed9be6a9013dd1cbb5",
+    "databricks_data.json": "ffff83bc36a7b8c6cba103e090e8ead6e6e78de93c9144d71480cc5774336663",
+    "postgres_data.json": "d464ac771aac7f8de46e69a3f841793e9d638accb690d54a60a71427e890d63c",
+    "synapse_data.json": "fb1694970ac4fd7b984e244246384c74cf1ff46d573825e1cbd06b70f5cc0bfb"
+  },
+  "cases": [
+    {
+      "id": "sales_03",
+      "category": "基础统计",
+      "description": "sales / 基础统计 / 先审阅再执行",
+      "steps": [
+        {
+          "question": "计算所有订单金额总和，不过滤状态。结果列名必须为 total；只查询以上要求的范围。",
+          "expect": {
+            "status": "plan_review",
+            "agents": [
+              "contoso_sales"
+            ]
+          }
+        },
+        {
+          "resume": {
+            "action": "approve"
+          },
+          "expect": {
+            "status": "success",
+            "agents": [
+              "contoso_sales"
+            ],
+            "table": {
+              "columns": [
+                "total"
+              ],
+              "rows": [
+                [
+                  47915.950000000004
+                ]
+              ],
+              "ordered": false
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "products_03",
+      "category": "基础统计",
+      "description": "products / 基础统计 / 先审阅再执行",
+      "steps": [
+        {
+          "question": "计算目录产品的平均价格。结果列名必须为 total；只查询以上要求的范围。",
+          "expect": {
+            "status": "plan_review",
+            "agents": [
+              "contoso_products"
+            ]
+          }
+        },
+        {
+          "resume": {
+            "action": "approve"
+          },
+          "expect": {
+            "status": "success",
+            "agents": [
+              "contoso_products"
+            ],
+            "table": {
+              "columns": [
+                "total"
+              ],
+              "rows": [
+                [
+                  147.76777777777778
+                ]
+              ],
+              "ordered": false
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "inventory_03",
+      "category": "基础统计",
+      "description": "inventory / 基础统计 / 先审阅再执行",
+      "steps": [
+        {
+          "question": "计算库存表 quantity 总和。结果列名必须为 total；只查询以上要求的范围。",
+          "expect": {
+            "status": "plan_review",
+            "agents": [
+              "contoso_inventory"
+            ]
+          }
+        },
+        {
+          "resume": {
+            "action": "approve"
+          },
+          "expect": {
+            "status": "success",
+            "agents": [
+              "contoso_inventory"
+            ],
+            "table": {
+              "columns": [
+                "total"
+              ],
+              "rows": [
+                [
+                  43102
+                ]
+              ],
+              "ordered": false
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "hr_03",
+      "category": "基础统计",
+      "description": "hr / 基础统计 / 先审阅再执行",
+      "steps": [
+        {
+          "question": "计算全部员工 Salary 平均值。结果列名必须为 total；只查询以上要求的范围。",
+          "expect": {
+            "status": "plan_review",
+            "agents": [
+              "contoso_hr"
+            ]
+          }
+        },
+        {
+          "resume": {
+            "action": "approve"
+          },
+          "expect": {
+            "status": "success",
+            "agents": [
+              "contoso_hr"
+            ],
+            "table": {
+              "columns": [
+                "total"
+              ],
+              "rows": [
+                [
+                  102675.0
+                ]
+              ],
+              "ordered": false
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "finance_03",
+      "category": "基础统计",
+      "description": "finance / 基础统计 / 先审阅再执行",
+      "steps": [
+        {
+          "question": "计算金融账户 current_balance 总和，不折算币种。结果列名必须为 total；只查询以上要求的范围。",
+          "expect": {
+            "status": "plan_review",
+            "agents": [
+              "financial_transactions"
+            ]
+          }
+        },
+        {
+          "resume": {
+            "action": "approve"
+          },
+          "expect": {
+            "status": "success",
+            "agents": [
+              "financial_transactions"
+            ],
+            "table": {
+              "columns": [
+                "total"
+              ],
+              "rows": [
+                [
+                  1504141.8
+                ]
+              ],
+              "ordered": false
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "hotel_03",
+      "category": "基础统计",
+      "description": "hotel / 基础统计 / 先审阅再执行",
+      "steps": [
+        {
+          "question": "统计酒店预订记录数。结果列名必须为 total；只查询以上要求的范围。",
+          "expect": {
+            "status": "plan_review",
+            "agents": [
+              "hotel_analytics"
+            ]
+          }
+        },
+        {
+          "resume": {
+            "action": "approve"
+          },
+          "expect": {
+            "status": "success",
+            "agents": [
+              "hotel_analytics"
+            ],
+            "table": {
+              "columns": [
+                "total"
+              ],
+              "rows": [
+                [
+                  22
+                ]
+              ],
+              "ordered": false
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "sales_followup_1",
+      "category": "多轮任务切换",
+      "description": "sales / 基础统计 / 同一会话更改查询",
+      "steps": [
+        {
+          "question": "统计销售订单数量。结果列名必须为 total；只查询以上要求的范围。",
+          "expect": {
+            "status": "plan_review",
+            "agents": [
+              "contoso_sales"
+            ]
+          }
+        },
+        {
+          "resume": {
+            "action": "approve"
+          },
+          "expect": {
+            "status": "success",
+            "agents": [
+              "contoso_sales"
+            ],
+            "table": {
+              "columns": [
+                "total"
+              ],
+              "rows": [
+                [
+                  208
+                ]
+              ],
+              "ordered": false
+            }
+          }
+        },
+        {
+          "question": "继续刚才的数据源，改查下面这个口径，统计销售客户数量。结果列名必须为 total；只查询以上要求的范围。",
+          "expect": {
+            "status": "plan_review",
+            "agents": [
+              "contoso_sales"
+            ]
+          }
+        },
+        {
+          "resume": {
+            "action": "approve"
+          },
+          "expect": {
+            "status": "success",
+            "agents": [
+              "contoso_sales"
+            ],
+            "table": {
+              "columns": [
+                "total"
+              ],
+              "rows": [
+                [
+                  50
+                ]
+              ],
+              "ordered": false
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "collaboration_1_approve",
+      "category": "协作与审批",
+      "description": "跨源场景 1 / approve",
+      "steps": [
+        {
+          "question": "分别完成两个查询，分开报告，不关联、不合并表格、不计算两者差值或比率：第一项 计算所有订单金额总和，不过滤状态。结果列名必须为 total；只查询以上要求的范围。 第二项 计算目录产品的平均价格。结果列名必须为 total；只查询以上要求的范围。",
+          "expect": {
+            "status": "plan_review",
+            "agents": [
+              "contoso_products",
+              "contoso_sales"
+            ]
+          }
+        },
+        {
+          "resume": {
+            "action": "approve"
+          },
+          "expect": {
+            "status": "success",
+            "agents": [
+              "contoso_products",
+              "contoso_sales"
+            ],
+            "agent_tables": {
+              "contoso_sales": {
+                "columns": [
+                  "total"
+                ],
+                "rows": [
+                  [
+                    47915.950000000004
+                  ]
+                ],
+                "ordered": false
+              },
+              "contoso_products": {
+                "columns": [
+                  "total"
+                ],
+                "rows": [
+                  [
+                    147.76777777777778
+                  ]
+                ],
+                "ordered": false
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "collaboration_2_revise",
+      "category": "协作与审批",
+      "description": "跨源场景 2 / revise",
+      "steps": [
+        {
+          "question": "分别完成两个查询，分开报告，不关联、不合并表格、不计算两者差值或比率：第一项 计算全部仓库 capacity 总和。结果列名必须为 total；只查询以上要求的范围。 第二项 计算全部员工 Salary 总和。结果列名必须为 total；只查询以上要求的范围。",
+          "expect": {
+            "status": "plan_review",
+            "agents": [
+              "contoso_hr",
+              "contoso_inventory"
+            ]
+          }
+        },
+        {
+          "resume": {
+            "action": "revise",
+            "feedback": "删除第二项，只保留第一项查询：计算全部仓库 capacity 总和。结果列名必须为 total；只查询以上要求的范围。"
+          },
+          "expect": {
+            "status": "plan_review",
+            "agents": [
+              "contoso_inventory"
+            ]
+          }
+        },
+        {
+          "resume": {
+            "action": "approve"
+          },
+          "expect": {
+            "status": "success",
+            "agents": [
+              "contoso_inventory"
+            ],
+            "table": {
+              "columns": [
+                "total"
+              ],
+              "rows": [
+                [
+                  615000
+                ]
+              ],
+              "ordered": false
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "collaboration_3_cancel",
+      "category": "协作与审批",
+      "description": "跨源场景 3 / cancel",
+      "steps": [
+        {
+          "question": "分别完成两个查询，分开报告，不关联、不合并表格、不计算两者差值或比率：第一项 统计金融交易记录数。结果列名必须为 total；只查询以上要求的范围。 第二项 统计酒店预订记录数。结果列名必须为 total；只查询以上要求的范围。",
+          "expect": {
+            "status": "plan_review",
+            "agents": [
+              "financial_transactions",
+              "hotel_analytics"
+            ]
+          }
+        },
+        {
+          "resume": {
+            "action": "cancel"
+          },
+          "expect": {
+            "status": "cancelled",
+            "error_contains": "cancelled"
+          }
+        }
+      ]
+    }
+  ]
+}

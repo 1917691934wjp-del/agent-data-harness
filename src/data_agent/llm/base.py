@@ -110,11 +110,12 @@ def get_llm(provider: str, **kwargs: Any) -> BaseChatModel:
     Returns:
         Configured BaseChatModel instance.
     """
-    from data_agent.llm.provider import AzureOpenAIProvider
+    from data_agent.llm.provider import AzureOpenAIProvider, DeepSeekProvider
 
     global _default_factory
     if _default_factory is None:
         _default_factory = LLMFactory()
         _default_factory.register_provider(AzureOpenAIProvider())
+        _default_factory.register_provider(DeepSeekProvider())
 
     return _default_factory.create_llm(provider, **kwargs)

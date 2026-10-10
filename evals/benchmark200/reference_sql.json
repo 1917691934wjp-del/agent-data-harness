@@ -1,0 +1,6135 @@
+{
+  "sales_01": [
+    {
+      "step": 2,
+      "agent": "contoso_sales",
+      "source": "databricks_data.json",
+      "sql": "SELECT count(*) AS total FROM orders",
+      "reference_table": {
+        "columns": [
+          "total"
+        ],
+        "rows": [
+          [
+            208
+          ]
+        ],
+        "ordered": false
+      }
+    }
+  ],
+  "sales_02": [
+    {
+      "step": 2,
+      "agent": "contoso_sales",
+      "source": "databricks_data.json",
+      "sql": "SELECT count(*) AS total FROM customers",
+      "reference_table": {
+        "columns": [
+          "total"
+        ],
+        "rows": [
+          [
+            50
+          ]
+        ],
+        "ordered": false
+      }
+    }
+  ],
+  "sales_03": [
+    {
+      "step": 2,
+      "agent": "contoso_sales",
+      "source": "databricks_data.json",
+      "sql": "SELECT sum(total_amount) AS total FROM orders",
+      "reference_table": {
+        "columns": [
+          "total"
+        ],
+        "rows": [
+          [
+            47915.950000000004
+          ]
+        ],
+        "ordered": false
+      }
+    }
+  ],
+  "sales_04": [
+    {
+      "step": 2,
+      "agent": "contoso_sales",
+      "source": "databricks_data.json",
+      "sql": "SELECT avg(total_amount) AS total FROM orders",
+      "reference_table": {
+        "columns": [
+          "total"
+        ],
+        "rows": [
+          [
+            230.36514423076926
+          ]
+        ],
+        "ordered": false
+      }
+    }
+  ],
+  "sales_05": [
+    {
+      "step": 2,
+      "agent": "contoso_sales",
+      "source": "databricks_data.json",
+      "sql": "SELECT max(total_amount) AS total FROM orders",
+      "reference_table": {
+        "columns": [
+          "total"
+        ],
+        "rows": [
+          [
+            899.99
+          ]
+        ],
+        "ordered": false
+      }
+    }
+  ],
+  "sales_06": [
+    {
+      "step": 2,
+      "agent": "contoso_sales",
+      "source": "databricks_data.json",
+      "sql": "SELECT count(*) AS total FROM orders WHERE status='delivered'",
+      "reference_table": {
+        "columns": [
+          "total"
+        ],
+        "rows": [
+          [
+            131
+          ]
+        ],
+        "ordered": false
+      }
+    }
+  ],
+  "sales_07": [
+    {
+      "step": 2,
+      "agent": "contoso_sales",
+      "source": "databricks_data.json",
+      "sql": "SELECT count(*) AS total FROM orders WHERE total_amount>=1000",
+      "reference_table": {
+        "columns": [
+          "total"
+        ],
+        "rows": [
+          [
+            0
+          ]
+        ],
+        "ordered": false
+      }
+    }
+  ],
+  "sales_08": [
+    {
+      "step": 2,
+      "agent": "contoso_sales",
+      "source": "databricks_data.json",
+      "sql": "SELECT count(*) AS total FROM orders WHERE total_amount=0",
+      "reference_table": {
+        "columns": [
+          "total"
+        ],
+        "rows": [
+          [
+            0
+          ]
+        ],
+        "ordered": false
+      }
+    }
+  ],
+  "sales_09": [
+    {
+      "step": 2,
+      "agent": "contoso_sales",
+      "source": "databricks_data.json",
+      "sql": "SELECT count(*) AS total FROM orders WHERE customer_id IS NULL",
+      "reference_table": {
+        "columns": [
+          "total"
+        ],
+        "rows": [
+          [
+            0
+          ]
+        ],
+        "ordered": false
+      }
+    }
+  ],
+  "sales_10": [
+    {
+      "step": 2,
+      "agent": "contoso_sales",
+      "source": "databricks_data.json",
+      "sql": "SELECT order_id FROM orders WHERE order_id='NOT-EXIST'",
+      "reference_table": {
+        "columns": [
+          "order_id"
+        ],
+        "rows": [],
+        "ordered": false
+      }
+    }
+  ],
+  "sales_11": [
+    {
+      "step": 2,
+      "agent": "contoso_sales",
+      "source": "databricks_data.json",
+      "sql": "SELECT status,count(*) AS total FROM orders GROUP BY status",
+      "reference_table": {
+        "columns": [
+          "status",
+          "total"
+        ],
+        "rows": [
+          [
+            "cancelled",
+            8
+          ],
+          [
+            "delivered",
+            131
+          ],
+          [
+            "pending",
+            18
+          ],
+          [
+            "processing",
+            24
+          ],
+          [
+            "shipped",
+            27
+          ]
+        ],
+        "ordered": false
+      }
+    }
+  ],
+  "sales_12": [
+    {
+      "step": 2,
+      "agent": "contoso_sales",
+      "source": "databricks_data.json",
+      "sql": "SELECT status,sum(total_amount) AS total FROM orders GROUP BY status",
+      "reference_table": {
+        "columns": [
+          "status",
+          "total"
+        ],
+        "rows": [
+          [
+            "cancelled",
+            1534.47
+          ],
+          [
+            "delivered",
+            31377.760000000002
+          ],
+          [
+            "pending",
+            3124.69
+          ],
+          [
+            "processing",
+            5604.4800000000005
+          ],
+          [
+            "shipped",
+            6274.55
+          ]
+        ],
+        "ordered": false
+      }
+    }
+  ],
+  "sales_13": [
+    {
+      "step": 2,
+      "agent": "contoso_sales",
+      "source": "databricks_data.json",
+      "sql": "SELECT region,count(*) AS total FROM customers GROUP BY region",
+      "reference_table": {
+        "columns": [
+          "region",
+          "total"
+        ],
+        "rows": [
+          [
+            "Central",
+            16
+          ],
+          [
+            "East",
+            17
+          ],
+          [
+            "West",
+            17
+          ]
+        ],
+        "ordered": false
+      }
+    }
+  ],
+  "sales_14": [
+    {
+      "step": 2,
+      "agent": "contoso_sales",
+      "source": "databricks_data.json",
+      "sql": "SELECT status,avg(total_amount) AS total FROM orders GROUP BY status",
+      "reference_table": {
+        "columns": [
+          "status",
+          "total"
+        ],
+        "rows": [
+          [
+            "cancelled",
+            191.80875
+          ],
+          [
+            "delivered",
+            239.52488549618323
+          ],
+          [
+            "pending",
+            173.5938888888889
+          ],
+          [
+            "processing",
+            233.52
+          ],
+          [
+            "shipped",
+            232.39074074074074
+          ]
+        ],
+        "ordered": false
+      }
+    }
+  ],
+  "sales_15": [
+    {
+      "step": 2,
+      "agent": "contoso_sales",
+      "source": "databricks_data.json",
+      "sql": "SELECT customer_id,count(*) AS total FROM orders GROUP BY customer_id HAVING count(*)>=5",
+      "reference_table": {
+        "columns": [
+          "customer_id",
+          "total"
+        ],
+        "rows": [
+          [
+            "CUST-0001",
+            6
+          ],
+          [
+            "CUST-0002",
+            5
+          ],
+          [
+            "CUST-0003",
+            5
+          ],
+          [
+            "CUST-0004",
+            5
+          ],
+          [
+            "CUST-0005",
+            5
+          ],
+          [
+            "CUST-0006",
+            5
+          ],
+          [
+            "CUST-0007",
+            5
+          ],
+          [
+            "CUST-0008",
+            6
+          ],
+          [
+            "CUST-0009",
+            5
+          ],
+          [
+            "CUST-0010",
+            5
+          ],
+          [
+            "CUST-0011",
+            5
+          ],
+          [
+            "CUST-0012",
+            5
+          ],
+          [
+            "CUST-0013",
+            5
+          ],
+          [
+            "CUST-0014",
+            5
+          ],
+          [
+            "CUST-0015",
+            6
+          ],
+          [
+            "CUST-0016",
+            5
+          ],
+          [
+            "CUST-0017",
+            5
+          ],
+          [
+            "CUST-0018",
+            5
+          ],
+          [
+            "CUST-0019",
+            5
+          ],
+          [
+            "CUST-0020",
+            5
+          ],
+          [
+            "CUST-0021",
+            5
+          ],
+          [
+            "CUST-0022",
+            5
+          ]
+        ],
+        "ordered": false
+      }
+    }
+  ],
+  "sales_16": [
+    {
+      "step": 2,
+      "agent": "contoso_sales",
+      "source": "databricks_data.json",
+      "sql": "SELECT order_id,total_amount FROM orders ORDER BY total_amount DESC,order_id ASC LIMIT 5",
+      "reference_table": {
+        "columns": [
+          "order_id",
+          "total_amount"
+        ],
+        "rows": [
+          [
+            "ORD-000017",
+            899.99
+          ],
+          [
+            "ORD-000045",
+            899.99
+          ],
+          [
+            "ORD-000106",
+            749.99
+          ],
+          [
+            "ORD-000006",
+            699.99
+          ],
+          [
+            "ORD-000065",
+            699.99
+          ]
+        ],
+        "ordered": true
+      }
+    }
+  ],
+  "sales_17": [
+    {
+      "step": 2,
+      "agent": "contoso_sales",
+      "source": "databricks_data.json",
+      "sql": "SELECT order_id,total_amount FROM orders ORDER BY total_amount ASC,order_id ASC LIMIT 5",
+      "reference_table": {
+        "columns": [
+          "order_id",
+          "total_amount"
+        ],
+        "rows": [
+          [
+            "ORD-000201",
+            17.99
+          ],
+          [
+            "ORD-000005",
+            24.99
+          ],
+          [
+            "ORD-000034",
+            24.99
+          ],
+          [
+            "ORD-000054",
+            24.99
+          ],
+          [
+            "ORD-000072",
+            24.99
+          ]
+        ],
+        "ordered": true
+      }
+    }
+  ],
+  "sales_18": [
+    {
+      "step": 2,
+      "agent": "contoso_sales",
+      "source": "databricks_data.json",
+      "sql": "SELECT count(*) AS total FROM orders WHERE order_date>='2025-01-01' AND order_date<'2025-02-01'",
+      "reference_table": {
+        "columns": [
+          "total"
+        ],
+        "rows": [
+          [
+            57
+          ]
+        ],
+        "ordered": false
+      }
+    }
+  ],
+  "sales_19": [
+    {
+      "step": 2,
+      "agent": "contoso_sales",
+      "source": "databricks_data.json",
+      "sql": "SELECT order_id,order_date FROM orders ORDER BY order_date ASC,order_id ASC LIMIT 5",
+      "reference_table": {
+        "columns": [
+          "order_id",
+          "order_date"
+        ],
+        "rows": [
+          [
+            "ORD-000001",
+            "2025-01-02"
+          ],
+          [
+            "ORD-000201",
+            "2025-01-02"
+          ],
+          [
+            "ORD-000002",
+            "2025-01-03"
+          ],
+          [
+            "ORD-000131",
+            "2025-01-03"
+          ],
+          [
+            "ORD-000003",
+            "2025-01-04"
+          ]
+        ],
+        "ordered": true
+      }
+    }
+  ],
+  "sales_20": [
+    {
+      "step": 2,
+      "agent": "contoso_sales",
+      "source": "databricks_data.json",
+      "sql": "SELECT min(order_date) AS first_date,max(order_date) AS last_date FROM orders",
+      "reference_table": {
+        "columns": [
+          "first_date",
+          "last_date"
+        ],
+        "rows": [
+          [
+            "2025-01-02",
+            "2025-04-11"
+          ]
+        ],
+        "ordered": false
+      }
+    }
+  ],
+  "sales_21": [
+    {
+      "step": 2,
+      "agent": "contoso_sales",
+      "source": "databricks_data.json",
+      "sql": "SELECT c.region,sum(o.total_amount) AS total FROM orders o JOIN customers c ON o.customer_id=c.customer_id GROUP BY c.region",
+      "reference_table": {
+        "columns": [
+          "region",
+          "total"
+        ],
+        "rows": [
+          [
+            "Central",
+            14430.880000000001
+          ],
+          [
+            "East",
+            14503.32
+          ],
+          [
+            "West",
+            18981.75
+          ]
+        ],
+        "ordered": false
+      }
+    }
+  ],
+  "sales_22": [
+    {
+      "step": 2,
+      "agent": "contoso_sales",
+      "source": "databricks_data.json",
+      "sql": "SELECT count(*) AS total FROM customers c WHERE NOT EXISTS (SELECT 1 FROM orders o WHERE o.customer_id=c.customer_id)",
+      "reference_table": {
+        "columns": [
+          "total"
+        ],
+        "rows": [
+          [
+            0
+          ]
+        ],
+        "ordered": false
+      }
+    }
+  ],
+  "sales_23": [
+    {
+      "step": 2,
+      "agent": "contoso_sales",
+      "source": "databricks_data.json",
+      "sql": "SELECT count(*) AS total FROM orders o LEFT JOIN customers c ON o.customer_id=c.customer_id WHERE c.customer_id IS NULL",
+      "reference_table": {
+        "columns": [
+          "total"
+        ],
+        "rows": [
+          [
+            0
+          ]
+        ],
+        "ordered": false
+      }
+    }
+  ],
+  "sales_24": [
+    {
+      "step": 2,
+      "agent": "contoso_sales",
+      "source": "databricks_data.json",
+      "sql": "SELECT count(*) AS total FROM orders WHERE total_amount>(SELECT avg(total_amount) FROM orders)",
+      "reference_table": {
+        "columns": [
+          "total"
+        ],
+        "rows": [
+          [
+            82
+          ]
+        ],
+        "ordered": false
+      }
+    }
+  ],
+  "sales_25": [
+    {
+      "step": 2,
+      "agent": "contoso_sales",
+      "source": "databricks_data.json",
+      "sql": "SELECT c.region,count(DISTINCT o.customer_id) AS total FROM orders o JOIN customers c ON o.customer_id=c.customer_id GROUP BY c.region",
+      "reference_table": {
+        "columns": [
+          "region",
+          "total"
+        ],
+        "rows": [
+          [
+            "Central",
+            16
+          ],
+          [
+            "East",
+            17
+          ],
+          [
+            "West",
+            17
+          ]
+        ],
+        "ordered": false
+      }
+    }
+  ],
+  "products_01": [
+    {
+      "step": 2,
+      "agent": "contoso_products",
+      "source": "cosmos_data.json",
+      "sql": "SELECT count(*) AS total FROM products",
+      "reference_table": {
+        "columns": [
+          "total"
+        ],
+        "rows": [
+          [
+            45
+          ]
+        ],
+        "ordered": false
+      }
+    }
+  ],
+  "products_02": [
+    {
+      "step": 2,
+      "agent": "contoso_products",
+      "source": "cosmos_data.json",
+      "sql": "SELECT count(DISTINCT category) AS total FROM products",
+      "reference_table": {
+        "columns": [
+          "total"
+        ],
+        "rows": [
+          [
+            4
+          ]
+        ],
+        "ordered": false
+      }
+    }
+  ],
+  "products_03": [
+    {
+      "step": 2,
+      "agent": "contoso_products",
+      "source": "cosmos_data.json",
+      "sql": "SELECT avg(price) AS total FROM products",
+      "reference_table": {
+        "columns": [
+          "total"
+        ],
+        "rows": [
+          [
+            147.76777777777778
+          ]
+        ],
+        "ordered": false
+      }
+    }
+  ],
+  "products_04": [
+    {
+      "step": 2,
+      "agent": "contoso_products",
+      "source": "cosmos_data.json",
+      "sql": "SELECT max(price) AS total FROM products",
+      "reference_table": {
+        "columns": [
+          "total"
+        ],
+        "rows": [
+          [
+            899.99
+          ]
+        ],
+        "ordered": false
+      }
+    }
+  ],
+  "products_05": [
+    {
+      "step": 2,
+      "agent": "contoso_products",
+      "source": "cosmos_data.json",
+      "sql": "SELECT sum(inventory_count) AS total FROM products",
+      "reference_table": {
+        "columns": [
+          "total"
+        ],
+        "rows": [
+          [
+            14764
+          ]
+        ],
+        "ordered": false
+      }
+    }
+  ],
+  "products_06": [
+    {
+      "step": 2,
+      "agent": "contoso_products",
+      "source": "cosmos_data.json",
+      "sql": "SELECT count(*) AS total FROM products WHERE is_active=1",
+      "reference_table": {
+        "columns": [
+          "total"
+        ],
+        "rows": [
+          [
+            44
+          ]
+        ],
+        "ordered": false
+      }
+    }
+  ],
+  "products_07": [
+    {
+      "step": 2,
+      "agent": "contoso_products",
+      "source": "cosmos_data.json",
+      "sql": "SELECT count(*) AS total FROM products WHERE price=0",
+      "reference_table": {
+        "columns": [
+          "total"
+        ],
+        "rows": [
+          [
+            0
+          ]
+        ],
+        "ordered": false
+      }
+    }
+  ],
+  "products_08": [
+    {
+      "step": 2,
+      "agent": "contoso_products",
+      "source": "cosmos_data.json",
+      "sql": "SELECT count(*) AS total FROM products WHERE price>=100 AND price<500",
+      "reference_table": {
+        "columns": [
+          "total"
+        ],
+        "rows": [
+          [
+            14
+          ]
+        ],
+        "ordered": false
+      }
+    }
+  ],
+  "products_09": [
+    {
+      "step": 2,
+      "agent": "contoso_products",
+      "source": "cosmos_data.json",
+      "sql": "SELECT count(*) AS total FROM products WHERE category IS NULL",
+      "reference_table": {
+        "columns": [
+          "total"
+        ],
+        "rows": [
+          [
+            0
+          ]
+        ],
+        "ordered": false
+      }
+    }
+  ],
+  "products_10": [
+    {
+      "step": 2,
+      "agent": "contoso_products",
+      "source": "cosmos_data.json",
+      "sql": "SELECT id FROM products WHERE id='NOT-EXIST'",
+      "reference_table": {
+        "columns": [
+          "id"
+        ],
+        "rows": [],
+        "ordered": false
+      }
+    }
+  ],
+  "products_11": [
+    {
+      "step": 2,
+      "agent": "contoso_products",
+      "source": "cosmos_data.json",
+      "sql": "SELECT category,count(*) AS total FROM products GROUP BY category",
+      "reference_table": {
+        "columns": [
+          "category",
+          "total"
+        ],
+        "rows": [
+          [
+            "clothing",
+            11
+          ],
+          [
+            "electronics",
+            12
+          ],
+          [
+            "home",
+            11
+          ],
+          [
+            "sports",
+            11
+          ]
+        ],
+        "ordered": false
+      }
+    }
+  ],
+  "products_12": [
+    {
+      "step": 2,
+      "agent": "contoso_products",
+      "source": "cosmos_data.json",
+      "sql": "SELECT category,avg(price) AS total FROM products GROUP BY category",
+      "reference_table": {
+        "columns": [
+          "category",
+          "total"
+        ],
+        "rows": [
+          [
+            "clothing",
+            73.17181818181818
+          ],
+          [
+            "electronics",
+            252.49
+          ],
+          [
+            "home",
+            105.89909090909092
+          ],
+          [
+            "sports",
+            149.99
+          ]
+        ],
+        "ordered": false
+      }
+    }
+  ],
+  "products_13": [
+    {
+      "step": 2,
+      "agent": "contoso_products",
+      "source": "cosmos_data.json",
+      "sql": "SELECT category,sum(inventory_count) AS total FROM products GROUP BY category",
+      "reference_table": {
+        "columns": [
+          "category",
+          "total"
+        ],
+        "rows": [
+          [
+            "clothing",
+            5080
+          ],
+          [
+            "electronics",
+            2430
+          ],
+          [
+            "home",
+            3614
+          ],
+          [
+            "sports",
+            3640
+          ]
+        ],
+        "ordered": false
+      }
+    }
+  ],
+  "products_14": [
+    {
+      "step": 2,
+      "agent": "contoso_products",
+      "source": "cosmos_data.json",
+      "sql": "SELECT is_active,count(*) AS total FROM products GROUP BY is_active",
+      "reference_table": {
+        "columns": [
+          "is_active",
+          "total"
+        ],
+        "rows": [
+          [
+            0,
+            1
+          ],
+          [
+            1,
+            44
+          ]
+        ],
+        "ordered": false
+      }
+    }
+  ],
+  "products_15": [
+    {
+      "step": 2,
+      "agent": "contoso_products",
+      "source": "cosmos_data.json",
+      "sql": "SELECT category,max(price) AS max_price,min(price) AS min_price FROM products GROUP BY category",
+      "reference_table": {
+        "columns": [
+          "category",
+          "max_price",
+          "min_price"
+        ],
+        "rows": [
+          [
+            "clothing",
+            199.99,
+            24.99
+          ],
+          [
+            "electronics",
+            899.99,
+            49.99
+          ],
+          [
+            "home",
+            349.99,
+            34.99
+          ],
+          [
+            "sports",
+            599.99,
+            19.99
+          ]
+        ],
+        "ordered": false
+      }
+    }
+  ],
+  "products_16": [
+    {
+      "step": 2,
+      "agent": "contoso_products",
+      "source": "cosmos_data.json",
+      "sql": "SELECT id,price FROM products ORDER BY price DESC,id ASC LIMIT 5",
+      "reference_table": {
+        "columns": [
+          "id",
+          "price"
+        ],
+        "rows": [
+          [
+            "prod-009",
+            899.99
+          ],
+          [
+            "prod-002",
+            699.99
+          ],
+          [
+            "prod-040",
+            599.99
+          ],
+          [
+            "prod-008",
+            349.99
+          ],
+          [
+            "prod-024",
+            349.99
+          ]
+        ],
+        "ordered": true
+      }
+    }
+  ],
+  "products_17": [
+    {
+      "step": 2,
+      "agent": "contoso_products",
+      "source": "cosmos_data.json",
+      "sql": "SELECT id,price FROM products ORDER BY price ASC,id ASC LIMIT 5",
+      "reference_table": {
+        "columns": [
+          "id",
+          "price"
+        ],
+        "rows": [
+          [
+            "prod-039",
+            19.99
+          ],
+          [
+            "prod-011",
+            24.99
+          ],
+          [
+            "prod-036",
+            24.99
+          ],
+          [
+            "prod-031",
+            29.99
+          ],
+          [
+            "prod-043",
+            29.99
+          ]
+        ],
+        "ordered": true
+      }
+    }
+  ],
+  "products_18": [
+    {
+      "step": 2,
+      "agent": "contoso_products",
+      "source": "cosmos_data.json",
+      "sql": "SELECT count(*) AS total FROM products WHERE created_at>='2025-01-01' AND created_at<'2026-01-01'",
+      "reference_table": {
+        "columns": [
+          "total"
+        ],
+        "rows": [
+          [
+            44
+          ]
+        ],
+        "ordered": false
+      }
+    }
+  ],
+  "products_19": [
+    {
+      "step": 2,
+      "agent": "contoso_products",
+      "source": "cosmos_data.json",
+      "sql": "SELECT id,created_at FROM products ORDER BY created_at DESC,id ASC LIMIT 5",
+      "reference_table": {
+        "columns": [
+          "id",
+          "created_at"
+        ],
+        "rows": [
+          [
+            "prod-045",
+            "2025-06-20T13:00:00Z"
+          ],
+          [
+            "prod-044",
+            "2025-06-15T08:15:00Z"
+          ],
+          [
+            "prod-043",
+            "2025-06-10T11:30:00Z"
+          ],
+          [
+            "prod-041",
+            "2025-06-01T10:00:00Z"
+          ],
+          [
+            "prod-020",
+            "2025-05-20T11:15:00Z"
+          ]
+        ],
+        "ordered": true
+      }
+    }
+  ],
+  "products_20": [
+    {
+      "step": 2,
+      "agent": "contoso_products",
+      "source": "cosmos_data.json",
+      "sql": "SELECT substr(created_at,1,4) AS year,count(*) AS total FROM products GROUP BY substr(created_at,1,4)",
+      "reference_table": {
+        "columns": [
+          "year",
+          "total"
+        ],
+        "rows": [
+          [
+            "2024",
+            1
+          ],
+          [
+            "2025",
+            44
+          ]
+        ],
+        "ordered": false
+      }
+    }
+  ],
+  "products_21": [
+    {
+      "step": 2,
+      "agent": "contoso_products",
+      "source": "cosmos_data.json",
+      "sql": "SELECT count(*) AS total FROM products WHERE price>(SELECT avg(price) FROM products)",
+      "reference_table": {
+        "columns": [
+          "total"
+        ],
+        "rows": [
+          [
+            14
+          ]
+        ],
+        "ordered": false
+      }
+    }
+  ],
+  "products_22": [
+    {
+      "step": 2,
+      "agent": "contoso_products",
+      "source": "cosmos_data.json",
+      "sql": "SELECT category,avg(price) AS total FROM products GROUP BY category HAVING avg(price)>100",
+      "reference_table": {
+        "columns": [
+          "category",
+          "total"
+        ],
+        "rows": [
+          [
+            "electronics",
+            252.49
+          ],
+          [
+            "home",
+            105.89909090909092
+          ],
+          [
+            "sports",
+            149.99
+          ]
+        ],
+        "ordered": false
+      }
+    }
+  ],
+  "products_23": [
+    {
+      "step": 2,
+      "agent": "contoso_products",
+      "source": "cosmos_data.json",
+      "sql": "SELECT count(*) AS total FROM products WHERE json_array_length(tags)=0",
+      "reference_table": {
+        "columns": [
+          "total"
+        ],
+        "rows": [
+          [
+            0
+          ]
+        ],
+        "ordered": false
+      }
+    }
+  ],
+  "products_24": [
+    {
+      "step": 2,
+      "agent": "contoso_products",
+      "source": "cosmos_data.json",
+      "sql": "SELECT category,sum(json_array_length(variants)) AS total FROM products GROUP BY category",
+      "reference_table": {
+        "columns": [
+          "category",
+          "total"
+        ],
+        "rows": [
+          [
+            "clothing",
+            76
+          ],
+          [
+            "electronics",
+            20
+          ],
+          [
+            "home",
+            19
+          ],
+          [
+            "sports",
+            29
+          ]
+        ],
+        "ordered": false
+      }
+    }
+  ],
+  "products_25": [
+    {
+      "step": 2,
+      "agent": "contoso_products",
+      "source": "cosmos_data.json",
+      "sql": "SELECT p.id,p.category,p.price FROM products p WHERE p.price=(SELECT max(p2.price) FROM products p2 WHERE p2.category=p.category)",
+      "reference_table": {
+        "columns": [
+          "id",
+          "category",
+          "price"
+        ],
+        "rows": [
+          [
+            "prod-009",
+            "electronics",
+            899.99
+          ],
+          [
+            "prod-018",
+            "clothing",
+            199.99
+          ],
+          [
+            "prod-024",
+            "home",
+            349.99
+          ],
+          [
+            "prod-040",
+            "sports",
+            599.99
+          ]
+        ],
+        "ordered": false
+      }
+    }
+  ],
+  "inventory_01": [
+    {
+      "step": 2,
+      "agent": "contoso_inventory",
+      "source": "postgres_data.json",
+      "sql": "SELECT count(*) AS total FROM warehouses",
+      "reference_table": {
+        "columns": [
+          "total"
+        ],
+        "rows": [
+          [
+            10
+          ]
+        ],
+        "ordered": false
+      }
+    }
+  ],
+  "inventory_02": [
+    {
+      "step": 2,
+      "agent": "contoso_inventory",
+      "source": "postgres_data.json",
+      "sql": "SELECT sum(capacity) AS total FROM warehouses",
+      "reference_table": {
+        "columns": [
+          "total"
+        ],
+        "rows": [
+          [
+            615000
+          ]
+        ],
+        "ordered": false
+      }
+    }
+  ],
+  "inventory_03": [
+    {
+      "step": 2,
+      "agent": "contoso_inventory",
+      "source": "postgres_data.json",
+      "sql": "SELECT sum(quantity) AS total FROM inventory",
+      "reference_table": {
+        "columns": [
+          "total"
+        ],
+        "rows": [
+          [
+            43102
+          ]
+        ],
+        "ordered": false
+      }
+    }
+  ],
+  "inventory_04": [
+    {
+      "step": 2,
+      "agent": "contoso_inventory",
+      "source": "postgres_data.json",
+      "sql": "SELECT count(DISTINCT product_id) AS total FROM inventory",
+      "reference_table": {
+        "columns": [
+          "total"
+        ],
+        "rows": [
+          [
+            50
+          ]
+        ],
+        "ordered": false
+      }
+    }
+  ],
+  "inventory_05": [
+    {
+      "step": 2,
+      "agent": "contoso_inventory",
+      "source": "postgres_data.json",
+      "sql": "SELECT count(*) AS total FROM shipments",
+      "reference_table": {
+        "columns": [
+          "total"
+        ],
+        "rows": [
+          [
+            60
+          ]
+        ],
+        "ordered": false
+      }
+    }
+  ],
+  "inventory_06": [
+    {
+      "step": 2,
+      "agent": "contoso_inventory",
+      "source": "postgres_data.json",
+      "sql": "SELECT count(*) AS total FROM inventory WHERE quantity<reorder_level",
+      "reference_table": {
+        "columns": [
+          "total"
+        ],
+        "rows": [
+          [
+            22
+          ]
+        ],
+        "ordered": false
+      }
+    }
+  ],
+  "inventory_07": [
+    {
+      "step": 2,
+      "agent": "contoso_inventory",
+      "source": "postgres_data.json",
+      "sql": "SELECT count(*) AS total FROM inventory WHERE quantity=0",
+      "reference_table": {
+        "columns": [
+          "total"
+        ],
+        "rows": [
+          [
+            3
+          ]
+        ],
+        "ordered": false
+      }
+    }
+  ],
+  "inventory_08": [
+    {
+      "step": 2,
+      "agent": "contoso_inventory",
+      "source": "postgres_data.json",
+      "sql": "SELECT count(*) AS total FROM inventory WHERE quantity=reorder_level",
+      "reference_table": {
+        "columns": [
+          "total"
+        ],
+        "rows": [
+          [
+            0
+          ]
+        ],
+        "ordered": false
+      }
+    }
+  ],
+  "inventory_09": [
+    {
+      "step": 2,
+      "agent": "contoso_inventory",
+      "source": "postgres_data.json",
+      "sql": "SELECT count(*) AS total FROM shipments WHERE actual_date IS NULL",
+      "reference_table": {
+        "columns": [
+          "total"
+        ],
+        "rows": [
+          [
+            34
+          ]
+        ],
+        "ordered": false
+      }
+    }
+  ],
+  "inventory_10": [
+    {
+      "step": 2,
+      "agent": "contoso_inventory",
+      "source": "postgres_data.json",
+      "sql": "SELECT inventory_id FROM inventory WHERE product_id='NOT-EXIST'",
+      "reference_table": {
+        "columns": [
+          "inventory_id"
+        ],
+        "rows": [],
+        "ordered": false
+      }
+    }
+  ],
+  "inventory_11": [
+    {
+      "step": 2,
+      "agent": "contoso_inventory",
+      "source": "postgres_data.json",
+      "sql": "SELECT warehouse_id,sum(quantity) AS total FROM inventory GROUP BY warehouse_id",
+      "reference_table": {
+        "columns": [
+          "warehouse_id",
+          "total"
+        ],
+        "rows": [
+          [
+            1,
+            11703
+          ],
+          [
+            2,
+            7144
+          ],
+          [
+            3,
+            4462
+          ],
+          [
+            4,
+            4844
+          ],
+          [
+            5,
+            4802
+          ],
+          [
+            6,
+            4164
+          ],
+          [
+            7,
+            2863
+          ],
+          [
+            9,
+            1473
+          ],
+          [
+            10,
+            1647
+          ]
+        ],
+        "ordered": false
+      }
+    }
+  ],
+  "inventory_12": [
+    {
+      "step": 2,
+      "agent": "contoso_inventory",
+      "source": "postgres_data.json",
+      "sql": "SELECT warehouse_id,count(*) AS total FROM inventory WHERE quantity<reorder_level GROUP BY warehouse_id",
+      "reference_table": {
+        "columns": [
+          "warehouse_id",
+          "total"
+        ],
+        "rows": [
+          [
+            1,
+            3
+          ],
+          [
+            2,
+            2
+          ],
+          [
+            3,
+            6
+          ],
+          [
+            4,
+            4
+          ],
+          [
+            5,
+            1
+          ],
+          [
+            6,
+            2
+          ],
+          [
+            7,
+            2
+          ],
+          [
+            9,
+            2
+          ]
+        ],
+        "ordered": false
+      }
+    }
+  ],
+  "inventory_13": [
+    {
+      "step": 2,
+      "agent": "contoso_inventory",
+      "source": "postgres_data.json",
+      "sql": "SELECT status,count(*) AS total FROM shipments GROUP BY status",
+      "reference_table": {
+        "columns": [
+          "status",
+          "total"
+        ],
+        "rows": [
+          [
+            "cancelled",
+            5
+          ],
+          [
+            "delivered",
+            26
+          ],
+          [
+            "in_transit",
+            16
+          ],
+          [
+            "pending",
+            13
+          ]
+        ],
+        "ordered": false
+      }
+    }
+  ],
+  "inventory_14": [
+    {
+      "step": 2,
+      "agent": "contoso_inventory",
+      "source": "postgres_data.json",
+      "sql": "SELECT shipment_type,count(*) AS total FROM shipments GROUP BY shipment_type",
+      "reference_table": {
+        "columns": [
+          "shipment_type",
+          "total"
+        ],
+        "rows": [
+          [
+            "inbound",
+            31
+          ],
+          [
+            "outbound",
+            29
+          ]
+        ],
+        "ordered": false
+      }
+    }
+  ],
+  "inventory_15": [
+    {
+      "step": 2,
+      "agent": "contoso_inventory",
+      "source": "postgres_data.json",
+      "sql": "SELECT is_active,count(*) AS total FROM warehouses GROUP BY is_active",
+      "reference_table": {
+        "columns": [
+          "is_active",
+          "total"
+        ],
+        "rows": [
+          [
+            0,
+            1
+          ],
+          [
+            1,
+            9
+          ]
+        ],
+        "ordered": false
+      }
+    }
+  ],
+  "inventory_16": [
+    {
+      "step": 2,
+      "agent": "contoso_inventory",
+      "source": "postgres_data.json",
+      "sql": "SELECT inventory_id,quantity FROM inventory ORDER BY quantity ASC,inventory_id ASC LIMIT 5",
+      "reference_table": {
+        "columns": [
+          "inventory_id",
+          "quantity"
+        ],
+        "rows": [
+          [
+            6,
+            0
+          ],
+          [
+            35,
+            0
+          ],
+          [
+            63,
+            0
+          ],
+          [
+            106,
+            1
+          ],
+          [
+            52,
+            2
+          ]
+        ],
+        "ordered": true
+      }
+    }
+  ],
+  "inventory_17": [
+    {
+      "step": 2,
+      "agent": "contoso_inventory",
+      "source": "postgres_data.json",
+      "sql": "SELECT inventory_id,quantity FROM inventory ORDER BY quantity DESC,inventory_id ASC LIMIT 5",
+      "reference_table": {
+        "columns": [
+          "inventory_id",
+          "quantity"
+        ],
+        "rows": [
+          [
+            4,
+            890
+          ],
+          [
+            22,
+            890
+          ],
+          [
+            41,
+            890
+          ],
+          [
+            87,
+            890
+          ],
+          [
+            107,
+            890
+          ]
+        ],
+        "ordered": true
+      }
+    }
+  ],
+  "inventory_18": [
+    {
+      "step": 2,
+      "agent": "contoso_inventory",
+      "source": "postgres_data.json",
+      "sql": "SELECT count(*) AS total FROM shipments WHERE scheduled_date>='2025-12-01' AND scheduled_date<'2026-01-01'",
+      "reference_table": {
+        "columns": [
+          "total"
+        ],
+        "rows": [
+          [
+            60
+          ]
+        ],
+        "ordered": false
+      }
+    }
+  ],
+  "inventory_19": [
+    {
+      "step": 2,
+      "agent": "contoso_inventory",
+      "source": "postgres_data.json",
+      "sql": "SELECT warehouse_id,capacity FROM warehouses ORDER BY capacity DESC,warehouse_id ASC LIMIT 3",
+      "reference_table": {
+        "columns": [
+          "warehouse_id",
+          "capacity"
+        ],
+        "rows": [
+          [
+            1,
+            100000
+          ],
+          [
+            5,
+            85000
+          ],
+          [
+            2,
+            75000
+          ]
+        ],
+        "ordered": true
+      }
+    }
+  ],
+  "inventory_20": [
+    {
+      "step": 2,
+      "agent": "contoso_inventory",
+      "source": "postgres_data.json",
+      "sql": "SELECT count(*) AS total FROM shipments WHERE actual_date IS NOT NULL AND actual_date>scheduled_date",
+      "reference_table": {
+        "columns": [
+          "total"
+        ],
+        "rows": [
+          [
+            12
+          ]
+        ],
+        "ordered": false
+      }
+    }
+  ],
+  "inventory_21": [
+    {
+      "step": 2,
+      "agent": "contoso_inventory",
+      "source": "postgres_data.json",
+      "sql": "SELECT w.location,sum(i.quantity) AS total FROM inventory i JOIN warehouses w ON i.warehouse_id=w.warehouse_id GROUP BY w.location",
+      "reference_table": {
+        "columns": [
+          "location",
+          "total"
+        ],
+        "rows": [
+          [
+            "Atlanta, GA",
+            1473
+          ],
+          [
+            "Boston, MA",
+            1647
+          ],
+          [
+            "Chicago, IL",
+            4462
+          ],
+          [
+            "Dallas, TX",
+            7144
+          ],
+          [
+            "Denver, CO",
+            2863
+          ],
+          [
+            "Los Angeles, CA",
+            4802
+          ],
+          [
+            "Miami, FL",
+            4164
+          ],
+          [
+            "Newark, NJ",
+            4844
+          ],
+          [
+            "Seattle, WA",
+            11703
+          ]
+        ],
+        "ordered": false
+      }
+    }
+  ],
+  "inventory_22": [
+    {
+      "step": 2,
+      "agent": "contoso_inventory",
+      "source": "postgres_data.json",
+      "sql": "SELECT sum(i.quantity) AS total FROM inventory i JOIN warehouses w ON i.warehouse_id=w.warehouse_id WHERE w.is_active=0",
+      "reference_table": {
+        "columns": [
+          "total"
+        ],
+        "rows": [
+          [
+            null
+          ]
+        ],
+        "ordered": false
+      }
+    }
+  ],
+  "inventory_23": [
+    {
+      "step": 2,
+      "agent": "contoso_inventory",
+      "source": "postgres_data.json",
+      "sql": "SELECT count(*) AS total FROM warehouses w WHERE NOT EXISTS (SELECT 1 FROM inventory i WHERE i.warehouse_id=w.warehouse_id)",
+      "reference_table": {
+        "columns": [
+          "total"
+        ],
+        "rows": [
+          [
+            1
+          ]
+        ],
+        "ordered": false
+      }
+    }
+  ],
+  "inventory_24": [
+    {
+      "step": 2,
+      "agent": "contoso_inventory",
+      "source": "postgres_data.json",
+      "sql": "SELECT count(*) AS total FROM inventory i LEFT JOIN warehouses w ON i.warehouse_id=w.warehouse_id WHERE w.warehouse_id IS NULL",
+      "reference_table": {
+        "columns": [
+          "total"
+        ],
+        "rows": [
+          [
+            0
+          ]
+        ],
+        "ordered": false
+      }
+    }
+  ],
+  "inventory_25": [
+    {
+      "step": 2,
+      "agent": "contoso_inventory",
+      "source": "postgres_data.json",
+      "sql": "SELECT count(*) AS total FROM inventory WHERE quantity>(SELECT avg(quantity) FROM inventory)",
+      "reference_table": {
+        "columns": [
+          "total"
+        ],
+        "rows": [
+          [
+            63
+          ]
+        ],
+        "ordered": false
+      }
+    }
+  ],
+  "hr_01": [
+    {
+      "step": 2,
+      "agent": "contoso_hr",
+      "source": "azure_sql_data.json",
+      "sql": "SELECT count(*) AS total FROM employees",
+      "reference_table": {
+        "columns": [
+          "total"
+        ],
+        "rows": [
+          [
+            40
+          ]
+        ],
+        "ordered": false
+      }
+    }
+  ],
+  "hr_02": [
+    {
+      "step": 2,
+      "agent": "contoso_hr",
+      "source": "azure_sql_data.json",
+      "sql": "SELECT count(*) AS total FROM departments",
+      "reference_table": {
+        "columns": [
+          "total"
+        ],
+        "rows": [
+          [
+            8
+          ]
+        ],
+        "ordered": false
+      }
+    }
+  ],
+  "hr_03": [
+    {
+      "step": 2,
+      "agent": "contoso_hr",
+      "source": "azure_sql_data.json",
+      "sql": "SELECT avg(Salary) AS total FROM employees",
+      "reference_table": {
+        "columns": [
+          "total"
+        ],
+        "rows": [
+          [
+            102675.0
+          ]
+        ],
+        "ordered": false
+      }
+    }
+  ],
+  "hr_04": [
+    {
+      "step": 2,
+      "agent": "contoso_hr",
+      "source": "azure_sql_data.json",
+      "sql": "SELECT sum(Salary) AS total FROM employees",
+      "reference_table": {
+        "columns": [
+          "total"
+        ],
+        "rows": [
+          [
+            4107000.0
+          ]
+        ],
+        "ordered": false
+      }
+    }
+  ],
+  "hr_05": [
+    {
+      "step": 2,
+      "agent": "contoso_hr",
+      "source": "azure_sql_data.json",
+      "sql": "SELECT count(*) AS total FROM performance_reviews",
+      "reference_table": {
+        "columns": [
+          "total"
+        ],
+        "rows": [
+          [
+            17
+          ]
+        ],
+        "ordered": false
+      }
+    }
+  ],
+  "hr_06": [
+    {
+      "step": 2,
+      "agent": "contoso_hr",
+      "source": "azure_sql_data.json",
+      "sql": "SELECT count(*) AS total FROM employees WHERE IsActive=1",
+      "reference_table": {
+        "columns": [
+          "total"
+        ],
+        "rows": [
+          [
+            39
+          ]
+        ],
+        "ordered": false
+      }
+    }
+  ],
+  "hr_07": [
+    {
+      "step": 2,
+      "agent": "contoso_hr",
+      "source": "azure_sql_data.json",
+      "sql": "SELECT count(*) AS total FROM employees WHERE Salary>=100000",
+      "reference_table": {
+        "columns": [
+          "total"
+        ],
+        "rows": [
+          [
+            18
+          ]
+        ],
+        "ordered": false
+      }
+    }
+  ],
+  "hr_08": [
+    {
+      "step": 2,
+      "agent": "contoso_hr",
+      "source": "azure_sql_data.json",
+      "sql": "SELECT count(*) AS total FROM employees WHERE ManagerID IS NULL",
+      "reference_table": {
+        "columns": [
+          "total"
+        ],
+        "rows": [
+          [
+            8
+          ]
+        ],
+        "ordered": false
+      }
+    }
+  ],
+  "hr_09": [
+    {
+      "step": 2,
+      "agent": "contoso_hr",
+      "source": "azure_sql_data.json",
+      "sql": "SELECT count(*) AS total FROM time_off_requests WHERE Status='Approved'",
+      "reference_table": {
+        "columns": [
+          "total"
+        ],
+        "rows": [
+          [
+            7
+          ]
+        ],
+        "ordered": false
+      }
+    }
+  ],
+  "hr_10": [
+    {
+      "step": 2,
+      "agent": "contoso_hr",
+      "source": "azure_sql_data.json",
+      "sql": "SELECT EmployeeID FROM employees WHERE EmployeeID=-1",
+      "reference_table": {
+        "columns": [
+          "EmployeeID"
+        ],
+        "rows": [],
+        "ordered": false
+      }
+    }
+  ],
+  "hr_11": [
+    {
+      "step": 2,
+      "agent": "contoso_hr",
+      "source": "azure_sql_data.json",
+      "sql": "SELECT DepartmentID,count(*) AS total FROM employees GROUP BY DepartmentID",
+      "reference_table": {
+        "columns": [
+          "DepartmentID",
+          "total"
+        ],
+        "rows": [
+          [
+            1,
+            5
+          ],
+          [
+            2,
+            5
+          ],
+          [
+            3,
+            5
+          ],
+          [
+            4,
+            5
+          ],
+          [
+            5,
+            5
+          ],
+          [
+            6,
+            5
+          ],
+          [
+            7,
+            5
+          ],
+          [
+            8,
+            5
+          ]
+        ],
+        "ordered": false
+      }
+    }
+  ],
+  "hr_12": [
+    {
+      "step": 2,
+      "agent": "contoso_hr",
+      "source": "azure_sql_data.json",
+      "sql": "SELECT DepartmentID,avg(Salary) AS total FROM employees GROUP BY DepartmentID",
+      "reference_table": {
+        "columns": [
+          "DepartmentID",
+          "total"
+        ],
+        "rows": [
+          [
+            1,
+            136000.0
+          ],
+          [
+            2,
+            108000.0
+          ],
+          [
+            3,
+            90000.0
+          ],
+          [
+            4,
+            86000.0
+          ],
+          [
+            5,
+            101800.0
+          ],
+          [
+            6,
+            95600.0
+          ],
+          [
+            7,
+            77000.0
+          ],
+          [
+            8,
+            127000.0
+          ]
+        ],
+        "ordered": false
+      }
+    }
+  ],
+  "hr_13": [
+    {
+      "step": 2,
+      "agent": "contoso_hr",
+      "source": "azure_sql_data.json",
+      "sql": "SELECT Rating,count(*) AS total FROM performance_reviews GROUP BY Rating",
+      "reference_table": {
+        "columns": [
+          "Rating",
+          "total"
+        ],
+        "rows": [
+          [
+            3,
+            3
+          ],
+          [
+            4,
+            9
+          ],
+          [
+            5,
+            5
+          ]
+        ],
+        "ordered": false
+      }
+    }
+  ],
+  "hr_14": [
+    {
+      "step": 2,
+      "agent": "contoso_hr",
+      "source": "azure_sql_data.json",
+      "sql": "SELECT Type,sum(DaysRequested) AS total FROM time_off_requests GROUP BY Type",
+      "reference_table": {
+        "columns": [
+          "Type",
+          "total"
+        ],
+        "rows": [
+          [
+            "Conference",
+            5
+          ],
+          [
+            "Personal",
+            2
+          ],
+          [
+            "Sick",
+            3
+          ],
+          [
+            "Vacation",
+            30
+          ]
+        ],
+        "ordered": false
+      }
+    }
+  ],
+  "hr_15": [
+    {
+      "step": 2,
+      "agent": "contoso_hr",
+      "source": "azure_sql_data.json",
+      "sql": "SELECT Title,count(*) AS total FROM employees GROUP BY Title",
+      "reference_table": {
+        "columns": [
+          "Title",
+          "total"
+        ],
+        "rows": [
+          [
+            "Account Executive",
+            2
+          ],
+          [
+            "Accountant",
+            1
+          ],
+          [
+            "Accounts Payable Clerk",
+            1
+          ],
+          [
+            "Benefits Specialist",
+            1
+          ],
+          [
+            "CFO",
+            1
+          ],
+          [
+            "Content Marketing Manager",
+            1
+          ],
+          [
+            "DevOps Engineer",
+            1
+          ],
+          [
+            "Digital Marketing Specialist",
+            1
+          ],
+          [
+            "Financial Analyst",
+            1
+          ],
+          [
+            "Graphic Designer",
+            1
+          ],
+          [
+            "HR Coordinator",
+            1
+          ],
+          [
+            "HR Director",
+            1
+          ],
+          [
+            "HR Manager",
+            1
+          ],
+          [
+            "Lab Technician",
+            1
+          ],
+          [
+            "Logistics Coordinator",
+            1
+          ],
+          [
+            "Marketing Coordinator",
+            1
+          ],
+          [
+            "Marketing Director",
+            1
+          ],
+          [
+            "Operations Director",
+            1
+          ],
+          [
+            "Operations Manager",
+            1
+          ],
+          [
+            "Principal Research Scientist",
+            1
+          ],
+          [
+            "R&D Director",
+            1
+          ],
+          [
+            "Recruiter",
+            1
+          ],
+          [
+            "Research Engineer",
+            1
+          ],
+          [
+            "Research Scientist",
+            1
+          ],
+          [
+            "Sales Development Rep",
+            1
+          ],
+          [
+            "Sales Director",
+            1
+          ],
+          [
+            "Senior Account Executive",
+            1
+          ],
+          [
+            "Senior Accountant",
+            1
+          ],
+          [
+            "Senior Software Engineer",
+            1
+          ],
+          [
+            "Software Engineer",
+            2
+          ],
+          [
+            "Supply Chain Analyst",
+            1
+          ],
+          [
+            "Support Director",
+            1
+          ],
+          [
+            "Support Specialist",
+            3
+          ],
+          [
+            "Support Team Lead",
+            1
+          ],
+          [
+            "VP of Engineering",
+            1
+          ],
+          [
+            "Warehouse Supervisor",
+            1
+          ]
+        ],
+        "ordered": false
+      }
+    }
+  ],
+  "hr_16": [
+    {
+      "step": 2,
+      "agent": "contoso_hr",
+      "source": "azure_sql_data.json",
+      "sql": "SELECT EmployeeID,Salary FROM employees ORDER BY Salary DESC,EmployeeID ASC LIMIT 5",
+      "reference_table": {
+        "columns": [
+          "EmployeeID",
+          "Salary"
+        ],
+        "rows": [
+          [
+            20,
+            195000.0
+          ],
+          [
+            1,
+            185000.0
+          ],
+          [
+            35,
+            175000.0
+          ],
+          [
+            5,
+            165000.0
+          ],
+          [
+            25,
+            160000.0
+          ]
+        ],
+        "ordered": true
+      }
+    }
+  ],
+  "hr_17": [
+    {
+      "step": 2,
+      "agent": "contoso_hr",
+      "source": "azure_sql_data.json",
+      "sql": "SELECT EmployeeID,Salary FROM employees ORDER BY Salary ASC,EmployeeID ASC LIMIT 5",
+      "reference_table": {
+        "columns": [
+          "EmployeeID",
+          "Salary"
+        ],
+        "rows": [
+          [
+            24,
+            52000.0
+          ],
+          [
+            34,
+            52000.0
+          ],
+          [
+            14,
+            55000.0
+          ],
+          [
+            18,
+            55000.0
+          ],
+          [
+            33,
+            55000.0
+          ]
+        ],
+        "ordered": true
+      }
+    }
+  ],
+  "hr_18": [
+    {
+      "step": 2,
+      "agent": "contoso_hr",
+      "source": "azure_sql_data.json",
+      "sql": "SELECT count(*) AS total FROM employees WHERE HireDate>='2020-01-01'",
+      "reference_table": {
+        "columns": [
+          "total"
+        ],
+        "rows": [
+          [
+            25
+          ]
+        ],
+        "ordered": false
+      }
+    }
+  ],
+  "hr_19": [
+    {
+      "step": 2,
+      "agent": "contoso_hr",
+      "source": "azure_sql_data.json",
+      "sql": "SELECT substr(HireDate,1,4) AS year,count(*) AS total FROM employees GROUP BY substr(HireDate,1,4)",
+      "reference_table": {
+        "columns": [
+          "year",
+          "total"
+        ],
+        "rows": [
+          [
+            "2015",
+            1
+          ],
+          [
+            "2016",
+            2
+          ],
+          [
+            "2017",
+            2
+          ],
+          [
+            "2018",
+            5
+          ],
+          [
+            "2019",
+            5
+          ],
+          [
+            "2020",
+            8
+          ],
+          [
+            "2021",
+            8
+          ],
+          [
+            "2022",
+            5
+          ],
+          [
+            "2023",
+            4
+          ]
+        ],
+        "ordered": false
+      }
+    }
+  ],
+  "hr_20": [
+    {
+      "step": 2,
+      "agent": "contoso_hr",
+      "source": "azure_sql_data.json",
+      "sql": "SELECT count(*) AS total FROM performance_reviews WHERE ReviewDate>='2024-01-01' AND ReviewDate<'2025-01-01'",
+      "reference_table": {
+        "columns": [
+          "total"
+        ],
+        "rows": [
+          [
+            17
+          ]
+        ],
+        "ordered": false
+      }
+    }
+  ],
+  "hr_21": [
+    {
+      "step": 2,
+      "agent": "contoso_hr",
+      "source": "azure_sql_data.json",
+      "sql": "SELECT d.Name,sum(e.Salary) AS total FROM employees e JOIN departments d ON e.DepartmentID=d.DepartmentID GROUP BY d.Name",
+      "reference_table": {
+        "columns": [
+          "Name",
+          "total"
+        ],
+        "rows": [
+          [
+            "Customer Support",
+            385000.0
+          ],
+          [
+            "Engineering",
+            680000.0
+          ],
+          [
+            "Finance",
+            509000.0
+          ],
+          [
+            "Human Resources",
+            430000.0
+          ],
+          [
+            "Marketing",
+            450000.0
+          ],
+          [
+            "Operations",
+            478000.0
+          ],
+          [
+            "Research & Development",
+            635000.0
+          ],
+          [
+            "Sales",
+            540000.0
+          ]
+        ],
+        "ordered": false
+      }
+    }
+  ],
+  "hr_22": [
+    {
+      "step": 2,
+      "agent": "contoso_hr",
+      "source": "azure_sql_data.json",
+      "sql": "SELECT count(*) AS total FROM departments d WHERE NOT EXISTS (SELECT 1 FROM employees e WHERE e.DepartmentID=d.DepartmentID)",
+      "reference_table": {
+        "columns": [
+          "total"
+        ],
+        "rows": [
+          [
+            0
+          ]
+        ],
+        "ordered": false
+      }
+    }
+  ],
+  "hr_23": [
+    {
+      "step": 2,
+      "agent": "contoso_hr",
+      "source": "azure_sql_data.json",
+      "sql": "SELECT count(*) AS total FROM employees WHERE Salary>(SELECT avg(Salary) FROM employees)",
+      "reference_table": {
+        "columns": [
+          "total"
+        ],
+        "rows": [
+          [
+            18
+          ]
+        ],
+        "ordered": false
+      }
+    }
+  ],
+  "hr_24": [
+    {
+      "step": 2,
+      "agent": "contoso_hr",
+      "source": "azure_sql_data.json",
+      "sql": "SELECT e.DepartmentID,avg(p.Rating) AS total FROM performance_reviews p JOIN employees e ON p.EmployeeID=e.EmployeeID GROUP BY e.DepartmentID",
+      "reference_table": {
+        "columns": [
+          "DepartmentID",
+          "total"
+        ],
+        "rows": [
+          [
+            1,
+            4.0
+          ],
+          [
+            2,
+            3.6666666666666665
+          ],
+          [
+            3,
+            4.5
+          ],
+          [
+            4,
+            4.5
+          ],
+          [
+            5,
+            3.5
+          ],
+          [
+            6,
+            4.0
+          ],
+          [
+            7,
+            5.0
+          ],
+          [
+            8,
+            4.5
+          ]
+        ],
+        "ordered": false
+      }
+    }
+  ],
+  "hr_25": [
+    {
+      "step": 2,
+      "agent": "contoso_hr",
+      "source": "azure_sql_data.json",
+      "sql": "SELECT e.DepartmentID,sum(t.DaysRequested) AS total FROM time_off_requests t JOIN employees e ON t.EmployeeID=e.EmployeeID WHERE t.Status='Approved' GROUP BY e.DepartmentID",
+      "reference_table": {
+        "columns": [
+          "DepartmentID",
+          "total"
+        ],
+        "rows": [
+          [
+            1,
+            6
+          ],
+          [
+            2,
+            4
+          ],
+          [
+            4,
+            5
+          ],
+          [
+            5,
+            5
+          ],
+          [
+            8,
+            5
+          ]
+        ],
+        "ordered": false
+      }
+    }
+  ],
+  "finance_01": [
+    {
+      "step": 2,
+      "agent": "financial_transactions",
+      "source": "bigquery_data.json",
+      "sql": "SELECT count(*) AS total FROM accounts",
+      "reference_table": {
+        "columns": [
+          "total"
+        ],
+        "rows": [
+          [
+            17
+          ]
+        ],
+        "ordered": false
+      }
+    }
+  ],
+  "finance_02": [
+    {
+      "step": 2,
+      "agent": "financial_transactions",
+      "source": "bigquery_data.json",
+      "sql": "SELECT count(*) AS total FROM customers",
+      "reference_table": {
+        "columns": [
+          "total"
+        ],
+        "rows": [
+          [
+            10
+          ]
+        ],
+        "ordered": false
+      }
+    }
+  ],
+  "finance_03": [
+    {
+      "step": 2,
+      "agent": "financial_transactions",
+      "source": "bigquery_data.json",
+      "sql": "SELECT sum(current_balance) AS total FROM accounts",
+      "reference_table": {
+        "columns": [
+          "total"
+        ],
+        "rows": [
+          [
+            1504141.8
+          ]
+        ],
+        "ordered": false
+      }
+    }
+  ],
+  "finance_04": [
+    {
+      "step": 2,
+      "agent": "financial_transactions",
+      "source": "bigquery_data.json",
+      "sql": "SELECT count(*) AS total FROM transactions",
+      "reference_table": {
+        "columns": [
+          "total"
+        ],
+        "rows": [
+          [
+            30
+          ]
+        ],
+        "ordered": false
+      }
+    }
+  ],
+  "finance_05": [
+    {
+      "step": 2,
+      "agent": "financial_transactions",
+      "source": "bigquery_data.json",
+      "sql": "SELECT count(*) AS total FROM fraud_alerts",
+      "reference_table": {
+        "columns": [
+          "total"
+        ],
+        "rows": [
+          [
+            5
+          ]
+        ],
+        "ordered": false
+      }
+    }
+  ],
+  "finance_06": [
+    {
+      "step": 2,
+      "agent": "financial_transactions",
+      "source": "bigquery_data.json",
+      "sql": "SELECT count(*) AS total FROM accounts WHERE credit_limit IS NULL",
+      "reference_table": {
+        "columns": [
+          "total"
+        ],
+        "rows": [
+          [
+            15
+          ]
+        ],
+        "ordered": false
+      }
+    }
+  ],
+  "finance_07": [
+    {
+      "step": 2,
+      "agent": "financial_transactions",
+      "source": "bigquery_data.json",
+      "sql": "SELECT count(*) AS total FROM accounts WHERE current_balance<0",
+      "reference_table": {
+        "columns": [
+          "total"
+        ],
+        "rows": [
+          [
+            2
+          ]
+        ],
+        "ordered": false
+      }
+    }
+  ],
+  "finance_08": [
+    {
+      "step": 2,
+      "agent": "financial_transactions",
+      "source": "bigquery_data.json",
+      "sql": "SELECT count(*) AS total FROM customers WHERE risk_score>=50",
+      "reference_table": {
+        "columns": [
+          "total"
+        ],
+        "rows": [
+          [
+            0
+          ]
+        ],
+        "ordered": false
+      }
+    }
+  ],
+  "finance_09": [
+    {
+      "step": 2,
+      "agent": "financial_transactions",
+      "source": "bigquery_data.json",
+      "sql": "SELECT count(*) AS total FROM transactions WHERE status='Completed'",
+      "reference_table": {
+        "columns": [
+          "total"
+        ],
+        "rows": [
+          [
+            29
+          ]
+        ],
+        "ordered": false
+      }
+    }
+  ],
+  "finance_10": [
+    {
+      "step": 2,
+      "agent": "financial_transactions",
+      "source": "bigquery_data.json",
+      "sql": "SELECT account_id FROM accounts WHERE account_id='NOT-EXIST'",
+      "reference_table": {
+        "columns": [
+          "account_id"
+        ],
+        "rows": [],
+        "ordered": false
+      }
+    }
+  ],
+  "finance_11": [
+    {
+      "step": 2,
+      "agent": "financial_transactions",
+      "source": "bigquery_data.json",
+      "sql": "SELECT account_type,count(*) AS total FROM accounts GROUP BY account_type",
+      "reference_table": {
+        "columns": [
+          "account_type",
+          "total"
+        ],
+        "rows": [
+          [
+            "Checking",
+            10
+          ],
+          [
+            "Credit",
+            2
+          ],
+          [
+            "Investment",
+            2
+          ],
+          [
+            "Savings",
+            3
+          ]
+        ],
+        "ordered": false
+      }
+    }
+  ],
+  "finance_12": [
+    {
+      "step": 2,
+      "agent": "financial_transactions",
+      "source": "bigquery_data.json",
+      "sql": "SELECT channel,count(*) AS total FROM transactions GROUP BY channel",
+      "reference_table": {
+        "columns": [
+          "channel",
+          "total"
+        ],
+        "rows": [
+          [
+            "ATM",
+            1
+          ],
+          [
+            "Branch",
+            4
+          ],
+          [
+            "Mobile",
+            7
+          ],
+          [
+            "Online",
+            14
+          ],
+          [
+            "POS",
+            4
+          ]
+        ],
+        "ordered": false
+      }
+    }
+  ],
+  "finance_13": [
+    {
+      "step": 2,
+      "agent": "financial_transactions",
+      "source": "bigquery_data.json",
+      "sql": "SELECT currency,sum(amount) AS total FROM transactions GROUP BY currency",
+      "reference_table": {
+        "columns": [
+          "currency",
+          "total"
+        ],
+        "rows": [
+          [
+            "USD",
+            61468.0
+          ]
+        ],
+        "ordered": false
+      }
+    }
+  ],
+  "finance_14": [
+    {
+      "step": 2,
+      "agent": "financial_transactions",
+      "source": "bigquery_data.json",
+      "sql": "SELECT customer_segment,count(*) AS total FROM customers GROUP BY customer_segment",
+      "reference_table": {
+        "columns": [
+          "customer_segment",
+          "total"
+        ],
+        "rows": [
+          [
+            "Premium",
+            3
+          ],
+          [
+            "Standard",
+            4
+          ],
+          [
+            "VIP",
+            3
+          ]
+        ],
+        "ordered": false
+      }
+    }
+  ],
+  "finance_15": [
+    {
+      "step": 2,
+      "agent": "financial_transactions",
+      "source": "bigquery_data.json",
+      "sql": "SELECT severity,count(*) AS total FROM fraud_alerts GROUP BY severity",
+      "reference_table": {
+        "columns": [
+          "severity",
+          "total"
+        ],
+        "rows": [
+          [
+            "Critical",
+            1
+          ],
+          [
+            "High",
+            1
+          ],
+          [
+            "Low",
+            2
+          ],
+          [
+            "Medium",
+            1
+          ]
+        ],
+        "ordered": false
+      }
+    }
+  ],
+  "finance_16": [
+    {
+      "step": 2,
+      "agent": "financial_transactions",
+      "source": "bigquery_data.json",
+      "sql": "SELECT transaction_id,amount FROM transactions ORDER BY amount DESC,transaction_id ASC LIMIT 5",
+      "reference_table": {
+        "columns": [
+          "transaction_id",
+          "amount"
+        ],
+        "rows": [
+          [
+            "TXN-2024-000018",
+            25000.0
+          ],
+          [
+            "TXN-2024-000017",
+            15000.0
+          ],
+          [
+            "TXN-2024-000019",
+            12000.0
+          ],
+          [
+            "TXN-2024-000004",
+            10000.0
+          ],
+          [
+            "TXN-2024-000012",
+            6500.0
+          ]
+        ],
+        "ordered": true
+      }
+    }
+  ],
+  "finance_17": [
+    {
+      "step": 2,
+      "agent": "financial_transactions",
+      "source": "bigquery_data.json",
+      "sql": "SELECT transaction_id,amount FROM transactions ORDER BY amount ASC,transaction_id ASC LIMIT 5",
+      "reference_table": {
+        "columns": [
+          "transaction_id",
+          "amount"
+        ],
+        "rows": [
+          [
+            "TXN-2024-000003",
+            -10000.0
+          ],
+          [
+            "TXN-2024-000025",
+            -8000.0
+          ],
+          [
+            "TXN-2024-000023",
+            -2500.0
+          ],
+          [
+            "TXN-2024-000024",
+            -1800.0
+          ],
+          [
+            "TXN-2024-000013",
+            -1500.0
+          ]
+        ],
+        "ordered": true
+      }
+    }
+  ],
+  "finance_18": [
+    {
+      "step": 2,
+      "agent": "financial_transactions",
+      "source": "bigquery_data.json",
+      "sql": "SELECT count(*) AS total FROM transactions WHERE transaction_date>='2024-12-01' AND transaction_date<'2025-01-01'",
+      "reference_table": {
+        "columns": [
+          "total"
+        ],
+        "rows": [
+          [
+            29
+          ]
+        ],
+        "ordered": false
+      }
+    }
+  ],
+  "finance_19": [
+    {
+      "step": 2,
+      "agent": "financial_transactions",
+      "source": "bigquery_data.json",
+      "sql": "SELECT transaction_date,count(*) AS total FROM transactions GROUP BY transaction_date",
+      "reference_table": {
+        "columns": [
+          "transaction_date",
+          "total"
+        ],
+        "rows": [
+          [
+            "2024-11-15",
+            1
+          ],
+          [
+            "2024-12-01",
+            8
+          ],
+          [
+            "2024-12-02",
+            6
+          ],
+          [
+            "2024-12-03",
+            7
+          ],
+          [
+            "2024-12-04",
+            2
+          ],
+          [
+            "2024-12-05",
+            6
+          ]
+        ],
+        "ordered": false
+      }
+    }
+  ],
+  "finance_20": [
+    {
+      "step": 2,
+      "agent": "financial_transactions",
+      "source": "bigquery_data.json",
+      "sql": "SELECT year_month,sum(transaction_count) AS total FROM monthly_summaries GROUP BY year_month",
+      "reference_table": {
+        "columns": [
+          "year_month",
+          "total"
+        ],
+        "rows": [
+          [
+            "2024-11",
+            173
+          ]
+        ],
+        "ordered": false
+      }
+    }
+  ],
+  "finance_21": [
+    {
+      "step": 2,
+      "agent": "financial_transactions",
+      "source": "bigquery_data.json",
+      "sql": "SELECT c.customer_segment,sum(a.current_balance) AS total FROM accounts a JOIN customers c ON a.customer_id=c.customer_id GROUP BY c.customer_segment",
+      "reference_table": {
+        "columns": [
+          "customer_segment",
+          "total"
+        ],
+        "rows": [
+          [
+            "Premium",
+            32030.55
+          ],
+          [
+            "Standard",
+            25380.75
+          ],
+          [
+            "VIP",
+            1446730.5
+          ]
+        ],
+        "ordered": false
+      }
+    }
+  ],
+  "finance_22": [
+    {
+      "step": 2,
+      "agent": "financial_transactions",
+      "source": "bigquery_data.json",
+      "sql": "SELECT count(*) AS total FROM customers c WHERE NOT EXISTS (SELECT 1 FROM accounts a WHERE a.customer_id=c.customer_id)",
+      "reference_table": {
+        "columns": [
+          "total"
+        ],
+        "rows": [
+          [
+            0
+          ]
+        ],
+        "ordered": false
+      }
+    }
+  ],
+  "finance_23": [
+    {
+      "step": 2,
+      "agent": "financial_transactions",
+      "source": "bigquery_data.json",
+      "sql": "SELECT a.account_type,count(*) AS total FROM transactions t JOIN accounts a ON t.account_id=a.account_id GROUP BY a.account_type",
+      "reference_table": {
+        "columns": [
+          "account_type",
+          "total"
+        ],
+        "rows": [
+          [
+            "Checking",
+            22
+          ],
+          [
+            "Credit",
+            4
+          ],
+          [
+            "Investment",
+            1
+          ],
+          [
+            "Savings",
+            3
+          ]
+        ],
+        "ordered": false
+      }
+    }
+  ],
+  "finance_24": [
+    {
+      "step": 2,
+      "agent": "financial_transactions",
+      "source": "bigquery_data.json",
+      "sql": "SELECT t.channel,count(*) AS total FROM fraud_alerts f JOIN transactions t ON f.transaction_id=t.transaction_id GROUP BY t.channel",
+      "reference_table": {
+        "columns": [
+          "channel",
+          "total"
+        ],
+        "rows": [
+          [
+            "Branch",
+            1
+          ],
+          [
+            "Online",
+            3
+          ],
+          [
+            "POS",
+            1
+          ]
+        ],
+        "ordered": false
+      }
+    }
+  ],
+  "finance_25": [
+    {
+      "step": 2,
+      "agent": "financial_transactions",
+      "source": "bigquery_data.json",
+      "sql": "SELECT count(*) AS total FROM transactions t LEFT JOIN accounts a ON t.account_id=a.account_id WHERE a.account_id IS NULL",
+      "reference_table": {
+        "columns": [
+          "total"
+        ],
+        "rows": [
+          [
+            0
+          ]
+        ],
+        "ordered": false
+      }
+    }
+  ],
+  "hotel_01": [
+    {
+      "step": 2,
+      "agent": "hotel_analytics",
+      "source": "synapse_data.json",
+      "sql": "SELECT count(*) AS total FROM dim_hotel",
+      "reference_table": {
+        "columns": [
+          "total"
+        ],
+        "rows": [
+          [
+            10
+          ]
+        ],
+        "ordered": false
+      }
+    }
+  ],
+  "hotel_02": [
+    {
+      "step": 2,
+      "agent": "hotel_analytics",
+      "source": "synapse_data.json",
+      "sql": "SELECT count(*) AS total FROM dim_guest",
+      "reference_table": {
+        "columns": [
+          "total"
+        ],
+        "rows": [
+          [
+            15
+          ]
+        ],
+        "ordered": false
+      }
+    }
+  ],
+  "hotel_03": [
+    {
+      "step": 2,
+      "agent": "hotel_analytics",
+      "source": "synapse_data.json",
+      "sql": "SELECT count(*) AS total FROM fact_reservations",
+      "reference_table": {
+        "columns": [
+          "total"
+        ],
+        "rows": [
+          [
+            22
+          ]
+        ],
+        "ordered": false
+      }
+    }
+  ],
+  "hotel_04": [
+    {
+      "step": 2,
+      "agent": "hotel_analytics",
+      "source": "synapse_data.json",
+      "sql": "SELECT sum(TotalRevenue) AS total FROM fact_reservations",
+      "reference_table": {
+        "columns": [
+          "total"
+        ],
+        "rows": [
+          [
+            46806.0
+          ]
+        ],
+        "ordered": false
+      }
+    }
+  ],
+  "hotel_05": [
+    {
+      "step": 2,
+      "agent": "hotel_analytics",
+      "source": "synapse_data.json",
+      "sql": "SELECT sum(NightsStayed) AS total FROM fact_reservations",
+      "reference_table": {
+        "columns": [
+          "total"
+        ],
+        "rows": [
+          [
+            71
+          ]
+        ],
+        "ordered": false
+      }
+    }
+  ],
+  "hotel_06": [
+    {
+      "step": 2,
+      "agent": "hotel_analytics",
+      "source": "synapse_data.json",
+      "sql": "SELECT count(*) AS total FROM fact_reservations WHERE IsCancelled=1",
+      "reference_table": {
+        "columns": [
+          "total"
+        ],
+        "rows": [
+          [
+            3
+          ]
+        ],
+        "ordered": false
+      }
+    }
+  ],
+  "hotel_07": [
+    {
+      "step": 2,
+      "agent": "hotel_analytics",
+      "source": "synapse_data.json",
+      "sql": "SELECT sum(TotalRevenue) AS total FROM fact_reservations WHERE IsCancelled=0",
+      "reference_table": {
+        "columns": [
+          "total"
+        ],
+        "rows": [
+          [
+            44256.0
+          ]
+        ],
+        "ordered": false
+      }
+    }
+  ],
+  "hotel_08": [
+    {
+      "step": 2,
+      "agent": "hotel_analytics",
+      "source": "synapse_data.json",
+      "sql": "SELECT count(*) AS total FROM dim_hotel WHERE HasPool=1",
+      "reference_table": {
+        "columns": [
+          "total"
+        ],
+        "rows": [
+          [
+            6
+          ]
+        ],
+        "ordered": false
+      }
+    }
+  ],
+  "hotel_09": [
+    {
+      "step": 2,
+      "agent": "hotel_analytics",
+      "source": "synapse_data.json",
+      "sql": "SELECT count(*) AS total FROM fact_reservations WHERE IsCancelled=0 AND CancellationReason IS NULL",
+      "reference_table": {
+        "columns": [
+          "total"
+        ],
+        "rows": [
+          [
+            19
+          ]
+        ],
+        "ordered": false
+      }
+    }
+  ],
+  "hotel_10": [
+    {
+      "step": 2,
+      "agent": "hotel_analytics",
+      "source": "synapse_data.json",
+      "sql": "SELECT HotelKey FROM dim_hotel WHERE HotelKey=-1",
+      "reference_table": {
+        "columns": [
+          "HotelKey"
+        ],
+        "rows": [],
+        "ordered": false
+      }
+    }
+  ],
+  "hotel_11": [
+    {
+      "step": 2,
+      "agent": "hotel_analytics",
+      "source": "synapse_data.json",
+      "sql": "SELECT Region,count(*) AS total FROM dim_hotel GROUP BY Region",
+      "reference_table": {
+        "columns": [
+          "Region",
+          "total"
+        ],
+        "rows": [
+          [
+            "Central",
+            2
+          ],
+          [
+            "East",
+            3
+          ],
+          [
+            "Mountain",
+            2
+          ],
+          [
+            "South",
+            1
+          ],
+          [
+            "West",
+            2
+          ]
+        ],
+        "ordered": false
+      }
+    }
+  ],
+  "hotel_12": [
+    {
+      "step": 2,
+      "agent": "hotel_analytics",
+      "source": "synapse_data.json",
+      "sql": "SELECT HotelKey,sum(TotalRevenue) AS total FROM fact_reservations GROUP BY HotelKey",
+      "reference_table": {
+        "columns": [
+          "HotelKey",
+          "total"
+        ],
+        "rows": [
+          [
+            1,
+            8915.0
+          ],
+          [
+            2,
+            2805.0
+          ],
+          [
+            3,
+            2110.0
+          ],
+          [
+            4,
+            22650.0
+          ],
+          [
+            5,
+            1281.0
+          ],
+          [
+            6,
+            1805.0
+          ],
+          [
+            7,
+            2065.0
+          ],
+          [
+            8,
+            680.0
+          ],
+          [
+            9,
+            2150.0
+          ],
+          [
+            10,
+            2345.0
+          ]
+        ],
+        "ordered": false
+      }
+    }
+  ],
+  "hotel_13": [
+    {
+      "step": 2,
+      "agent": "hotel_analytics",
+      "source": "synapse_data.json",
+      "sql": "SELECT StarRating,sum(TotalRooms) AS total FROM dim_hotel GROUP BY StarRating",
+      "reference_table": {
+        "columns": [
+          "StarRating",
+          "total"
+        ],
+        "rows": [
+          [
+            3,
+            200
+          ],
+          [
+            4,
+            1360
+          ],
+          [
+            5,
+            720
+          ]
+        ],
+        "ordered": false
+      }
+    }
+  ],
+  "hotel_14": [
+    {
+      "step": 2,
+      "agent": "hotel_analytics",
+      "source": "synapse_data.json",
+      "sql": "SELECT LoyaltyTier,count(*) AS total FROM dim_guest GROUP BY LoyaltyTier",
+      "reference_table": {
+        "columns": [
+          "LoyaltyTier",
+          "total"
+        ],
+        "rows": [
+          [
+            "Corporate",
+            3
+          ],
+          [
+            "Gold",
+            4
+          ],
+          [
+            "Member",
+            2
+          ],
+          [
+            "Platinum",
+            3
+          ],
+          [
+            "Silver",
+            3
+          ]
+        ],
+        "ordered": false
+      }
+    }
+  ],
+  "hotel_15": [
+    {
+      "step": 2,
+      "agent": "hotel_analytics",
+      "source": "synapse_data.json",
+      "sql": "SELECT ChannelKey,avg(RoomRate) AS total FROM fact_reservations GROUP BY ChannelKey",
+      "reference_table": {
+        "columns": [
+          "ChannelKey",
+          "total"
+        ],
+        "rows": [
+          [
+            1,
+            518.3333333333334
+          ],
+          [
+            2,
+            660.0
+          ],
+          [
+            3,
+            330.0
+          ],
+          [
+            4,
+            380.0
+          ],
+          [
+            5,
+            244.0
+          ],
+          [
+            6,
+            265.0
+          ],
+          [
+            7,
+            303.0
+          ]
+        ],
+        "ordered": false
+      }
+    }
+  ],
+  "hotel_16": [
+    {
+      "step": 2,
+      "agent": "hotel_analytics",
+      "source": "synapse_data.json",
+      "sql": "SELECT ReservationKey,TotalRevenue FROM fact_reservations ORDER BY TotalRevenue DESC,ReservationKey ASC LIMIT 5",
+      "reference_table": {
+        "columns": [
+          "ReservationKey",
+          "TotalRevenue"
+        ],
+        "rows": [
+          [
+            12,
+            9605.0
+          ],
+          [
+            18,
+            5460.0
+          ],
+          [
+            17,
+            4645.0
+          ],
+          [
+            2,
+            2695.0
+          ],
+          [
+            10,
+            2545.0
+          ]
+        ],
+        "ordered": true
+      }
+    }
+  ],
+  "hotel_17": [
+    {
+      "step": 2,
+      "agent": "hotel_analytics",
+      "source": "synapse_data.json",
+      "sql": "SELECT ReservationKey,TotalRevenue FROM fact_reservations ORDER BY TotalRevenue ASC,ReservationKey ASC LIMIT 5",
+      "reference_table": {
+        "columns": [
+          "ReservationKey",
+          "TotalRevenue"
+        ],
+        "rows": [
+          [
+            6,
+            403.0
+          ],
+          [
+            13,
+            680.0
+          ],
+          [
+            20,
+            690.0
+          ],
+          [
+            22,
+            765.0
+          ],
+          [
+            3,
+            770.0
+          ]
+        ],
+        "ordered": true
+      }
+    }
+  ],
+  "hotel_18": [
+    {
+      "step": 2,
+      "agent": "hotel_analytics",
+      "source": "synapse_data.json",
+      "sql": "SELECT count(*) AS total FROM fact_reservations WHERE CheckInDateKey BETWEEN 20250101 AND 20250131",
+      "reference_table": {
+        "columns": [
+          "total"
+        ],
+        "rows": [
+          [
+            3
+          ]
+        ],
+        "ordered": false
+      }
+    }
+  ],
+  "hotel_19": [
+    {
+      "step": 2,
+      "agent": "hotel_analytics",
+      "source": "synapse_data.json",
+      "sql": "SELECT HotelKey,TotalRooms FROM dim_hotel ORDER BY TotalRooms DESC,HotelKey ASC LIMIT 3",
+      "reference_table": {
+        "columns": [
+          "HotelKey",
+          "TotalRooms"
+        ],
+        "rows": [
+          [
+            4,
+            400
+          ],
+          [
+            1,
+            320
+          ],
+          [
+            3,
+            280
+          ]
+        ],
+        "ordered": true
+      }
+    }
+  ],
+  "hotel_20": [
+    {
+      "step": 2,
+      "agent": "hotel_analytics",
+      "source": "synapse_data.json",
+      "sql": "SELECT d.Year,sum(r.TotalRevenue) AS total FROM fact_reservations r JOIN dim_date d ON r.CheckInDateKey=d.DateKey GROUP BY d.Year",
+      "reference_table": {
+        "columns": [
+          "Year",
+          "total"
+        ],
+        "rows": [
+          [
+            2025,
+            46806.0
+          ]
+        ],
+        "ordered": false
+      }
+    }
+  ],
+  "hotel_21": [
+    {
+      "step": 2,
+      "agent": "hotel_analytics",
+      "source": "synapse_data.json",
+      "sql": "SELECT h.Region,sum(r.TotalRevenue) AS total FROM fact_reservations r JOIN dim_hotel h ON r.HotelKey=h.HotelKey WHERE r.IsCancelled=0 GROUP BY h.Region",
+      "reference_table": {
+        "columns": [
+          "Region",
+          "total"
+        ],
+        "rows": [
+          [
+            "Central",
+            3495.0
+          ],
+          [
+            "East",
+            4306.0
+          ],
+          [
+            "Mountain",
+            3775.0
+          ],
+          [
+            "South",
+            22650.0
+          ],
+          [
+            "West",
+            10030.0
+          ]
+        ],
+        "ordered": false
+      }
+    }
+  ],
+  "hotel_22": [
+    {
+      "step": 2,
+      "agent": "hotel_analytics",
+      "source": "synapse_data.json",
+      "sql": "SELECT count(*) AS total FROM dim_hotel h WHERE NOT EXISTS (SELECT 1 FROM fact_reservations r WHERE r.HotelKey=h.HotelKey)",
+      "reference_table": {
+        "columns": [
+          "total"
+        ],
+        "rows": [
+          [
+            0
+          ]
+        ],
+        "ordered": false
+      }
+    }
+  ],
+  "hotel_23": [
+    {
+      "step": 2,
+      "agent": "hotel_analytics",
+      "source": "synapse_data.json",
+      "sql": "SELECT c.ChannelName,count(*) AS total FROM fact_reservations r JOIN dim_booking_channel c ON r.ChannelKey=c.ChannelKey GROUP BY c.ChannelName",
+      "reference_table": {
+        "columns": [
+          "ChannelName",
+          "total"
+        ],
+        "rows": [
+          [
+            "Booking.com",
+            2
+          ],
+          [
+            "Corporate Portal",
+            5
+          ],
+          [
+            "Direct Website",
+            6
+          ],
+          [
+            "Expedia",
+            3
+          ],
+          [
+            "Hotels.com",
+            1
+          ],
+          [
+            "Mobile App",
+            3
+          ],
+          [
+            "Phone Reservation",
+            2
+          ]
+        ],
+        "ordered": false
+      }
+    }
+  ],
+  "hotel_24": [
+    {
+      "step": 2,
+      "agent": "hotel_analytics",
+      "source": "synapse_data.json",
+      "sql": "SELECT g.LoyaltyTier,sum(r.NightsStayed) AS total FROM fact_reservations r JOIN dim_guest g ON r.GuestKey=g.GuestKey GROUP BY g.LoyaltyTier",
+      "reference_table": {
+        "columns": [
+          "LoyaltyTier",
+          "total"
+        ],
+        "rows": [
+          [
+            "Corporate",
+            17
+          ],
+          [
+            "Gold",
+            18
+          ],
+          [
+            "Member",
+            5
+          ],
+          [
+            "Platinum",
+            22
+          ],
+          [
+            "Silver",
+            9
+          ]
+        ],
+        "ordered": false
+      }
+    }
+  ],
+  "hotel_25": [
+    {
+      "step": 2,
+      "agent": "hotel_analytics",
+      "source": "synapse_data.json",
+      "sql": "SELECT t.RoomTypeName,avg(r.RoomRate) AS total FROM fact_reservations r JOIN dim_room_type t ON r.RoomTypeKey=t.RoomTypeKey WHERE r.IsCancelled=0 GROUP BY t.RoomTypeName",
+      "reference_table": {
+        "columns": [
+          "RoomTypeName",
+          "total"
+        ],
+        "rows": [
+          [
+            "Deluxe King",
+            278.3333333333333
+          ],
+          [
+            "Executive Suite",
+            360.0
+          ],
+          [
+            "Family Room",
+            350.0
+          ],
+          [
+            "Ocean View Suite",
+            483.75
+          ],
+          [
+            "Presidential Suite",
+            850.0
+          ],
+          [
+            "Standard Double",
+            272.0
+          ],
+          [
+            "Standard King",
+            189.0
+          ]
+        ],
+        "ordered": false
+      }
+    }
+  ],
+  "sales_followup_1": [
+    {
+      "step": 2,
+      "agent": "contoso_sales",
+      "source": "databricks_data.json",
+      "sql": "SELECT count(*) AS total FROM orders",
+      "reference_table": {
+        "columns": [
+          "total"
+        ],
+        "rows": [
+          [
+            208
+          ]
+        ],
+        "ordered": false
+      }
+    },
+    {
+      "step": 4,
+      "agent": "contoso_sales",
+      "source": "databricks_data.json",
+      "sql": "SELECT count(*) AS total FROM customers",
+      "reference_table": {
+        "columns": [
+          "total"
+        ],
+        "rows": [
+          [
+            50
+          ]
+        ],
+        "ordered": false
+      }
+    }
+  ],
+  "sales_followup_2": [
+    {
+      "step": 2,
+      "agent": "contoso_sales",
+      "source": "databricks_data.json",
+      "sql": "SELECT count(*) AS total FROM orders WHERE status='delivered'",
+      "reference_table": {
+        "columns": [
+          "total"
+        ],
+        "rows": [
+          [
+            131
+          ]
+        ],
+        "ordered": false
+      }
+    },
+    {
+      "step": 4,
+      "agent": "contoso_sales",
+      "source": "databricks_data.json",
+      "sql": "SELECT count(*) AS total FROM orders WHERE total_amount>=1000",
+      "reference_table": {
+        "columns": [
+          "total"
+        ],
+        "rows": [
+          [
+            0
+          ]
+        ],
+        "ordered": false
+      }
+    }
+  ],
+  "sales_followup_3": [
+    {
+      "step": 2,
+      "agent": "contoso_sales",
+      "source": "databricks_data.json",
+      "sql": "SELECT status,count(*) AS total FROM orders GROUP BY status",
+      "reference_table": {
+        "columns": [
+          "status",
+          "total"
+        ],
+        "rows": [
+          [
+            "cancelled",
+            8
+          ],
+          [
+            "delivered",
+            131
+          ],
+          [
+            "pending",
+            18
+          ],
+          [
+            "processing",
+            24
+          ],
+          [
+            "shipped",
+            27
+          ]
+        ],
+        "ordered": false
+      }
+    },
+    {
+      "step": 4,
+      "agent": "contoso_sales",
+      "source": "databricks_data.json",
+      "sql": "SELECT status,sum(total_amount) AS total FROM orders GROUP BY status",
+      "reference_table": {
+        "columns": [
+          "status",
+          "total"
+        ],
+        "rows": [
+          [
+            "cancelled",
+            1534.47
+          ],
+          [
+            "delivered",
+            31377.760000000002
+          ],
+          [
+            "pending",
+            3124.69
+          ],
+          [
+            "processing",
+            5604.4800000000005
+          ],
+          [
+            "shipped",
+            6274.55
+          ]
+        ],
+        "ordered": false
+      }
+    }
+  ],
+  "sales_followup_4": [
+    {
+      "step": 2,
+      "agent": "contoso_sales",
+      "source": "databricks_data.json",
+      "sql": "SELECT order_id,total_amount FROM orders ORDER BY total_amount DESC,order_id ASC LIMIT 5",
+      "reference_table": {
+        "columns": [
+          "order_id",
+          "total_amount"
+        ],
+        "rows": [
+          [
+            "ORD-000017",
+            899.99
+          ],
+          [
+            "ORD-000045",
+            899.99
+          ],
+          [
+            "ORD-000106",
+            749.99
+          ],
+          [
+            "ORD-000006",
+            699.99
+          ],
+          [
+            "ORD-000065",
+            699.99
+          ]
+        ],
+        "ordered": true
+      }
+    },
+    {
+      "step": 4,
+      "agent": "contoso_sales",
+      "source": "databricks_data.json",
+      "sql": "SELECT order_id,total_amount FROM orders ORDER BY total_amount ASC,order_id ASC LIMIT 5",
+      "reference_table": {
+        "columns": [
+          "order_id",
+          "total_amount"
+        ],
+        "rows": [
+          [
+            "ORD-000201",
+            17.99
+          ],
+          [
+            "ORD-000005",
+            24.99
+          ],
+          [
+            "ORD-000034",
+            24.99
+          ],
+          [
+            "ORD-000054",
+            24.99
+          ],
+          [
+            "ORD-000072",
+            24.99
+          ]
+        ],
+        "ordered": true
+      }
+    }
+  ],
+  "sales_followup_5": [
+    {
+      "step": 2,
+      "agent": "contoso_sales",
+      "source": "databricks_data.json",
+      "sql": "SELECT c.region,sum(o.total_amount) AS total FROM orders o JOIN customers c ON o.customer_id=c.customer_id GROUP BY c.region",
+      "reference_table": {
+        "columns": [
+          "region",
+          "total"
+        ],
+        "rows": [
+          [
+            "Central",
+            14430.880000000001
+          ],
+          [
+            "East",
+            14503.32
+          ],
+          [
+            "West",
+            18981.75
+          ]
+        ],
+        "ordered": false
+      }
+    },
+    {
+      "step": 4,
+      "agent": "contoso_sales",
+      "source": "databricks_data.json",
+      "sql": "SELECT count(*) AS total FROM customers c WHERE NOT EXISTS (SELECT 1 FROM orders o WHERE o.customer_id=c.customer_id)",
+      "reference_table": {
+        "columns": [
+          "total"
+        ],
+        "rows": [
+          [
+            0
+          ]
+        ],
+        "ordered": false
+      }
+    }
+  ],
+  "products_followup_1": [
+    {
+      "step": 2,
+      "agent": "contoso_products",
+      "source": "cosmos_data.json",
+      "sql": "SELECT count(*) AS total FROM products",
+      "reference_table": {
+        "columns": [
+          "total"
+        ],
+        "rows": [
+          [
+            45
+          ]
+        ],
+        "ordered": false
+      }
+    },
+    {
+      "step": 4,
+      "agent": "contoso_products",
+      "source": "cosmos_data.json",
+      "sql": "SELECT count(DISTINCT category) AS total FROM products",
+      "reference_table": {
+        "columns": [
+          "total"
+        ],
+        "rows": [
+          [
+            4
+          ]
+        ],
+        "ordered": false
+      }
+    }
+  ],
+  "products_followup_2": [
+    {
+      "step": 2,
+      "agent": "contoso_products",
+      "source": "cosmos_data.json",
+      "sql": "SELECT count(*) AS total FROM products WHERE is_active=1",
+      "reference_table": {
+        "columns": [
+          "total"
+        ],
+        "rows": [
+          [
+            44
+          ]
+        ],
+        "ordered": false
+      }
+    },
+    {
+      "step": 4,
+      "agent": "contoso_products",
+      "source": "cosmos_data.json",
+      "sql": "SELECT count(*) AS total FROM products WHERE price=0",
+      "reference_table": {
+        "columns": [
+          "total"
+        ],
+        "rows": [
+          [
+            0
+          ]
+        ],
+        "ordered": false
+      }
+    }
+  ],
+  "products_followup_3": [
+    {
+      "step": 2,
+      "agent": "contoso_products",
+      "source": "cosmos_data.json",
+      "sql": "SELECT category,count(*) AS total FROM products GROUP BY category",
+      "reference_table": {
+        "columns": [
+          "category",
+          "total"
+        ],
+        "rows": [
+          [
+            "clothing",
+            11
+          ],
+          [
+            "electronics",
+            12
+          ],
+          [
+            "home",
+            11
+          ],
+          [
+            "sports",
+            11
+          ]
+        ],
+        "ordered": false
+      }
+    },
+    {
+      "step": 4,
+      "agent": "contoso_products",
+      "source": "cosmos_data.json",
+      "sql": "SELECT category,avg(price) AS total FROM products GROUP BY category",
+      "reference_table": {
+        "columns": [
+          "category",
+          "total"
+        ],
+        "rows": [
+          [
+            "clothing",
+            73.17181818181818
+          ],
+          [
+            "electronics",
+            252.49
+          ],
+          [
+            "home",
+            105.89909090909092
+          ],
+          [
+            "sports",
+            149.99
+          ]
+        ],
+        "ordered": false
+      }
+    }
+  ],
+  "products_followup_4": [
+    {
+      "step": 2,
+      "agent": "contoso_products",
+      "source": "cosmos_data.json",
+      "sql": "SELECT id,price FROM products ORDER BY price DESC,id ASC LIMIT 5",
+      "reference_table": {
+        "columns": [
+          "id",
+          "price"
+        ],
+        "rows": [
+          [
+            "prod-009",
+            899.99
+          ],
+          [
+            "prod-002",
+            699.99
+          ],
+          [
+            "prod-040",
+            599.99
+          ],
+          [
+            "prod-008",
+            349.99
+          ],
+          [
+            "prod-024",
+            349.99
+          ]
+        ],
+        "ordered": true
+      }
+    },
+    {
+      "step": 4,
+      "agent": "contoso_products",
+      "source": "cosmos_data.json",
+      "sql": "SELECT id,price FROM products ORDER BY price ASC,id ASC LIMIT 5",
+      "reference_table": {
+        "columns": [
+          "id",
+          "price"
+        ],
+        "rows": [
+          [
+            "prod-039",
+            19.99
+          ],
+          [
+            "prod-011",
+            24.99
+          ],
+          [
+            "prod-036",
+            24.99
+          ],
+          [
+            "prod-031",
+            29.99
+          ],
+          [
+            "prod-043",
+            29.99
+          ]
+        ],
+        "ordered": true
+      }
+    }
+  ],
+  "products_followup_5": [
+    {
+      "step": 2,
+      "agent": "contoso_products",
+      "source": "cosmos_data.json",
+      "sql": "SELECT count(*) AS total FROM products WHERE price>(SELECT avg(price) FROM products)",
+      "reference_table": {
+        "columns": [
+          "total"
+        ],
+        "rows": [
+          [
+            14
+          ]
+        ],
+        "ordered": false
+      }
+    },
+    {
+      "step": 4,
+      "agent": "contoso_products",
+      "source": "cosmos_data.json",
+      "sql": "SELECT category,avg(price) AS total FROM products GROUP BY category HAVING avg(price)>100",
+      "reference_table": {
+        "columns": [
+          "category",
+          "total"
+        ],
+        "rows": [
+          [
+            "electronics",
+            252.49
+          ],
+          [
+            "home",
+            105.89909090909092
+          ],
+          [
+            "sports",
+            149.99
+          ]
+        ],
+        "ordered": false
+      }
+    }
+  ],
+  "inventory_followup_1": [
+    {
+      "step": 2,
+      "agent": "contoso_inventory",
+      "source": "postgres_data.json",
+      "sql": "SELECT count(*) AS total FROM warehouses",
+      "reference_table": {
+        "columns": [
+          "total"
+        ],
+        "rows": [
+          [
+            10
+          ]
+        ],
+        "ordered": false
+      }
+    },
+    {
+      "step": 4,
+      "agent": "contoso_inventory",
+      "source": "postgres_data.json",
+      "sql": "SELECT sum(capacity) AS total FROM warehouses",
+      "reference_table": {
+        "columns": [
+          "total"
+        ],
+        "rows": [
+          [
+            615000
+          ]
+        ],
+        "ordered": false
+      }
+    }
+  ],
+  "inventory_followup_2": [
+    {
+      "step": 2,
+      "agent": "contoso_inventory",
+      "source": "postgres_data.json",
+      "sql": "SELECT count(*) AS total FROM inventory WHERE quantity<reorder_level",
+      "reference_table": {
+        "columns": [
+          "total"
+        ],
+        "rows": [
+          [
+            22
+          ]
+        ],
+        "ordered": false
+      }
+    },
+    {
+      "step": 4,
+      "agent": "contoso_inventory",
+      "source": "postgres_data.json",
+      "sql": "SELECT count(*) AS total FROM inventory WHERE quantity=0",
+      "reference_table": {
+        "columns": [
+          "total"
+        ],
+        "rows": [
+          [
+            3
+          ]
+        ],
+        "ordered": false
+      }
+    }
+  ],
+  "inventory_followup_3": [
+    {
+      "step": 2,
+      "agent": "contoso_inventory",
+      "source": "postgres_data.json",
+      "sql": "SELECT warehouse_id,sum(quantity) AS total FROM inventory GROUP BY warehouse_id",
+      "reference_table": {
+        "columns": [
+          "warehouse_id",
+          "total"
+        ],
+        "rows": [
+          [
+            1,
+            11703
+          ],
+          [
+            2,
+            7144
+          ],
+          [
+            3,
+            4462
+          ],
+          [
+            4,
+            4844
+          ],
+          [
+            5,
+            4802
+          ],
+          [
+            6,
+            4164
+          ],
+          [
+            7,
+            2863
+          ],
+          [
+            9,
+            1473
+          ],
+          [
+            10,
+            1647
+          ]
+        ],
+        "ordered": false
+      }
+    },
+    {
+      "step": 4,
+      "agent": "contoso_inventory",
+      "source": "postgres_data.json",
+      "sql": "SELECT warehouse_id,count(*) AS total FROM inventory WHERE quantity<reorder_level GROUP BY warehouse_id",
+      "reference_table": {
+        "columns": [
+          "warehouse_id",
+          "total"
+        ],
+        "rows": [
+          [
+            1,
+            3
+          ],
+          [
+            2,
+            2
+          ],
+          [
+            3,
+            6
+          ],
+          [
+            4,
+            4
+          ],
+          [
+            5,
+            1
+          ],
+          [
+            6,
+            2
+          ],
+          [
+            7,
+            2
+          ],
+          [
+            9,
+            2
+          ]
+        ],
+        "ordered": false
+      }
+    }
+  ],
+  "inventory_followup_4": [
+    {
+      "step": 2,
+      "agent": "contoso_inventory",
+      "source": "postgres_data.json",
+      "sql": "SELECT inventory_id,quantity FROM inventory ORDER BY quantity ASC,inventory_id ASC LIMIT 5",
+      "reference_table": {
+        "columns": [
+          "inventory_id",
+          "quantity"
+        ],
+        "rows": [
+          [
+            6,
+            0
+          ],
+          [
+            35,
+            0
+          ],
+          [
+            63,
+            0
+          ],
+          [
+            106,
+            1
+          ],
+          [
+            52,
+            2
+          ]
+        ],
+        "ordered": true
+      }
+    },
+    {
+      "step": 4,
+      "agent": "contoso_inventory",
+      "source": "postgres_data.json",
+      "sql": "SELECT inventory_id,quantity FROM inventory ORDER BY quantity DESC,inventory_id ASC LIMIT 5",
+      "reference_table": {
+        "columns": [
+          "inventory_id",
+          "quantity"
+        ],
+        "rows": [
+          [
+            4,
+            890
+          ],
+          [
+            22,
+            890
+          ],
+          [
+            41,
+            890
+          ],
+          [
+            87,
+            890
+          ],
+          [
+            107,
+            890
+          ]
+        ],
+        "ordered": true
+      }
+    }
+  ],
+  "inventory_followup_5": [
+    {
+      "step": 2,
+      "agent": "contoso_inventory",
+      "source": "postgres_data.json",
+      "sql": "SELECT w.location,sum(i.quantity) AS total FROM inventory i JOIN warehouses w ON i.warehouse_id=w.warehouse_id GROUP BY w.location",
+      "reference_table": {
+        "columns": [
+          "location",
+          "total"
+        ],
+        "rows": [
+          [
+            "Atlanta, GA",
+            1473
+          ],
+          [
+            "Boston, MA",
+            1647
+          ],
+          [
+            "Chicago, IL",
+            4462
+          ],
+          [
+            "Dallas, TX",
+            7144
+          ],
+          [
+            "Denver, CO",
+            2863
+          ],
+          [
+            "Los Angeles, CA",
+            4802
+          ],
+          [
+            "Miami, FL",
+            4164
+          ],
+          [
+            "Newark, NJ",
+            4844
+          ],
+          [
+            "Seattle, WA",
+            11703
+          ]
+        ],
+        "ordered": false
+      }
+    },
+    {
+      "step": 4,
+      "agent": "contoso_inventory",
+      "source": "postgres_data.json",
+      "sql": "SELECT sum(i.quantity) AS total FROM inventory i JOIN warehouses w ON i.warehouse_id=w.warehouse_id WHERE w.is_active=0",
+      "reference_table": {
+        "columns": [
+          "total"
+        ],
+        "rows": [
+          [
+            null
+          ]
+        ],
+        "ordered": false
+      }
+    }
+  ],
+  "hr_followup_1": [
+    {
+      "step": 2,
+      "agent": "contoso_hr",
+      "source": "azure_sql_data.json",
+      "sql": "SELECT count(*) AS total FROM employees",
+      "reference_table": {
+        "columns": [
+          "total"
+        ],
+        "rows": [
+          [
+            40
+          ]
+        ],
+        "ordered": false
+      }
+    },
+    {
+      "step": 4,
+      "agent": "contoso_hr",
+      "source": "azure_sql_data.json",
+      "sql": "SELECT count(*) AS total FROM departments",
+      "reference_table": {
+        "columns": [
+          "total"
+        ],
+        "rows": [
+          [
+            8
+          ]
+        ],
+        "ordered": false
+      }
+    }
+  ],
+  "hr_followup_2": [
+    {
+      "step": 2,
+      "agent": "contoso_hr",
+      "source": "azure_sql_data.json",
+      "sql": "SELECT count(*) AS total FROM employees WHERE IsActive=1",
+      "reference_table": {
+        "columns": [
+          "total"
+        ],
+        "rows": [
+          [
+            39
+          ]
+        ],
+        "ordered": false
+      }
+    },
+    {
+      "step": 4,
+      "agent": "contoso_hr",
+      "source": "azure_sql_data.json",
+      "sql": "SELECT count(*) AS total FROM employees WHERE Salary>=100000",
+      "reference_table": {
+        "columns": [
+          "total"
+        ],
+        "rows": [
+          [
+            18
+          ]
+        ],
+        "ordered": false
+      }
+    }
+  ],
+  "hr_followup_3": [
+    {
+      "step": 2,
+      "agent": "contoso_hr",
+      "source": "azure_sql_data.json",
+      "sql": "SELECT DepartmentID,count(*) AS total FROM employees GROUP BY DepartmentID",
+      "reference_table": {
+        "columns": [
+          "DepartmentID",
+          "total"
+        ],
+        "rows": [
+          [
+            1,
+            5
+          ],
+          [
+            2,
+            5
+          ],
+          [
+            3,
+            5
+          ],
+          [
+            4,
+            5
+          ],
+          [
+            5,
+            5
+          ],
+          [
+            6,
+            5
+          ],
+          [
+            7,
+            5
+          ],
+          [
+            8,
+            5
+          ]
+        ],
+        "ordered": false
+      }
+    },
+    {
+      "step": 4,
+      "agent": "contoso_hr",
+      "source": "azure_sql_data.json",
+      "sql": "SELECT DepartmentID,avg(Salary) AS total FROM employees GROUP BY DepartmentID",
+      "reference_table": {
+        "columns": [
+          "DepartmentID",
+          "total"
+        ],
+        "rows": [
+          [
+            1,
+            136000.0
+          ],
+          [
+            2,
+            108000.0
+          ],
+          [
+            3,
+            90000.0
+          ],
+          [
+            4,
+            86000.0
+          ],
+          [
+            5,
+            101800.0
+          ],
+          [
+            6,
+            95600.0
+          ],
+          [
+            7,
+            77000.0
+          ],
+          [
+            8,
+            127000.0
+          ]
+        ],
+        "ordered": false
+      }
+    }
+  ],
+  "hr_followup_4": [
+    {
+      "step": 2,
+      "agent": "contoso_hr",
+      "source": "azure_sql_data.json",
+      "sql": "SELECT EmployeeID,Salary FROM employees ORDER BY Salary DESC,EmployeeID ASC LIMIT 5",
+      "reference_table": {
+        "columns": [
+          "EmployeeID",
+          "Salary"
+        ],
+        "rows": [
+          [
+            20,
+            195000.0
+          ],
+          [
+            1,
+            185000.0
+          ],
+          [
+            35,
+            175000.0
+          ],
+          [
+            5,
+            165000.0
+          ],
+          [
+            25,
+            160000.0
+          ]
+        ],
+        "ordered": true
+      }
+    },
+    {
+      "step": 4,
+      "agent": "contoso_hr",
+      "source": "azure_sql_data.json",
+      "sql": "SELECT EmployeeID,Salary FROM employees ORDER BY Salary ASC,EmployeeID ASC LIMIT 5",
+      "reference_table": {
+        "columns": [
+          "EmployeeID",
+          "Salary"
+        ],
+        "rows": [
+          [
+            24,
+            52000.0
+          ],
+          [
+            34,
+            52000.0
+          ],
+          [
+            14,
+            55000.0
+          ],
+          [
+            18,
+            55000.0
+          ],
+          [
+            33,
+            55000.0
+          ]
+        ],
+        "ordered": true
+      }
+    }
+  ],
+  "hr_followup_5": [
+    {
+      "step": 2,
+      "agent": "contoso_hr",
+      "source": "azure_sql_data.json",
+      "sql": "SELECT d.Name,sum(e.Salary) AS total FROM employees e JOIN departments d ON e.DepartmentID=d.DepartmentID GROUP BY d.Name",
+      "reference_table": {
+        "columns": [
+          "Name",
+          "total"
+        ],
+        "rows": [
+          [
+            "Customer Support",
+            385000.0
+          ],
+          [
+            "Engineering",
+            680000.0
+          ],
+          [
+            "Finance",
+            509000.0
+          ],
+          [
+            "Human Resources",
+            430000.0
+          ],
+          [
+            "Marketing",
+            450000.0
+          ],
+          [
+            "Operations",
+            478000.0
+          ],
+          [
+            "Research & Development",
+            635000.0
+          ],
+          [
+            "Sales",
+            540000.0
+          ]
+        ],
+        "ordered": false
+      }
+    },
+    {
+      "step": 4,
+      "agent": "contoso_hr",
+      "source": "azure_sql_data.json",
+      "sql": "SELECT count(*) AS total FROM departments d WHERE NOT EXISTS (SELECT 1 FROM employees e WHERE e.DepartmentID=d.DepartmentID)",
+      "reference_table": {
+        "columns": [
+          "total"
+        ],
+        "rows": [
+          [
+            0
+          ]
+        ],
+        "ordered": false
+      }
+    }
+  ],
+  "finance_followup_1": [
+    {
+      "step": 2,
+      "agent": "financial_transactions",
+      "source": "bigquery_data.json",
+      "sql": "SELECT count(*) AS total FROM accounts",
+      "reference_table": {
+        "columns": [
+          "total"
+        ],
+        "rows": [
+          [
+            17
+          ]
+        ],
+        "ordered": false
+      }
+    },
+    {
+      "step": 4,
+      "agent": "financial_transactions",
+      "source": "bigquery_data.json",
+      "sql": "SELECT count(*) AS total FROM customers",
+      "reference_table": {
+        "columns": [
+          "total"
+        ],
+        "rows": [
+          [
+            10
+          ]
+        ],
+        "ordered": false
+      }
+    }
+  ],
+  "finance_followup_2": [
+    {
+      "step": 2,
+      "agent": "financial_transactions",
+      "source": "bigquery_data.json",
+      "sql": "SELECT count(*) AS total FROM accounts WHERE credit_limit IS NULL",
+      "reference_table": {
+        "columns": [
+          "total"
+        ],
+        "rows": [
+          [
+            15
+          ]
+        ],
+        "ordered": false
+      }
+    },
+    {
+      "step": 4,
+      "agent": "financial_transactions",
+      "source": "bigquery_data.json",
+      "sql": "SELECT count(*) AS total FROM accounts WHERE current_balance<0",
+      "reference_table": {
+        "columns": [
+          "total"
+        ],
+        "rows": [
+          [
+            2
+          ]
+        ],
+        "ordered": false
+      }
+    }
+  ],
+  "finance_followup_3": [
+    {
+      "step": 2,
+      "agent": "financial_transactions",
+      "source": "bigquery_data.json",
+      "sql": "SELECT account_type,count(*) AS total FROM accounts GROUP BY account_type",
+      "reference_table": {
+        "columns": [
+          "account_type",
+          "total"
+        ],
+        "rows": [
+          [
+            "Checking",
+            10
+          ],
+          [
+            "Credit",
+            2
+          ],
+          [
+            "Investment",
+            2
+          ],
+          [
+            "Savings",
+            3
+          ]
+        ],
+        "ordered": false
+      }
+    },
+    {
+      "step": 4,
+      "agent": "financial_transactions",
+      "source": "bigquery_data.json",
+      "sql": "SELECT channel,count(*) AS total FROM transactions GROUP BY channel",
+      "reference_table": {
+        "columns": [
+          "channel",
+          "total"
+        ],
+        "rows": [
+          [
+            "ATM",
+            1
+          ],
+          [
+            "Branch",
+            4
+          ],
+          [
+            "Mobile",
+            7
+          ],
+          [
+            "Online",
+            14
+          ],
+          [
+            "POS",
+            4
+          ]
+        ],
+        "ordered": false
+      }
+    }
+  ],
+  "finance_followup_4": [
+    {
+      "step": 2,
+      "agent": "financial_transactions",
+      "source": "bigquery_data.json",
+      "sql": "SELECT transaction_id,amount FROM transactions ORDER BY amount DESC,transaction_id ASC LIMIT 5",
+      "reference_table": {
+        "columns": [
+          "transaction_id",
+          "amount"
+        ],
+        "rows": [
+          [
+            "TXN-2024-000018",
+            25000.0
+          ],
+          [
+            "TXN-2024-000017",
+            15000.0
+          ],
+          [
+            "TXN-2024-000019",
+            12000.0
+          ],
+          [
+            "TXN-2024-000004",
+            10000.0
+          ],
+          [
+            "TXN-2024-000012",
+            6500.0
+          ]
+        ],
+        "ordered": true
+      }
+    },
+    {
+      "step": 4,
+      "agent": "financial_transactions",
+      "source": "bigquery_data.json",
+      "sql": "SELECT transaction_id,amount FROM transactions ORDER BY amount ASC,transaction_id ASC LIMIT 5",
+      "reference_table": {
+        "columns": [
+          "transaction_id",
+          "amount"
+        ],
+        "rows": [
+          [
+            "TXN-2024-000003",
+            -10000.0
+          ],
+          [
+            "TXN-2024-000025",
+            -8000.0
+          ],
+          [
+            "TXN-2024-000023",
+            -2500.0
+          ],
+          [
+            "TXN-2024-000024",
+            -1800.0
+          ],
+          [
+            "TXN-2024-000013",
+            -1500.0
+          ]
+        ],
+        "ordered": true
+      }
+    }
+  ],
+  "finance_followup_5": [
+    {
+      "step": 2,
+      "agent": "financial_transactions",
+      "source": "bigquery_data.json",
+      "sql": "SELECT c.customer_segment,sum(a.current_balance) AS total FROM accounts a JOIN customers c ON a.customer_id=c.customer_id GROUP BY c.customer_segment",
+      "reference_table": {
+        "columns": [
+          "customer_segment",
+          "total"
+        ],
+        "rows": [
+          [
+            "Premium",
+            32030.55
+          ],
+          [
+            "Standard",
+            25380.75
+          ],
+          [
+            "VIP",
+            1446730.5
+          ]
+        ],
+        "ordered": false
+      }
+    },
+    {
+      "step": 4,
+      "agent": "financial_transactions",
+      "source": "bigquery_data.json",
+      "sql": "SELECT count(*) AS total FROM customers c WHERE NOT EXISTS (SELECT 1 FROM accounts a WHERE a.customer_id=c.customer_id)",
+      "reference_table": {
+        "columns": [
+          "total"
+        ],
+        "rows": [
+          [
+            0
+          ]
+        ],
+        "ordered": false
+      }
+    }
+  ],
+  "hotel_followup_1": [
+    {
+      "step": 2,
+      "agent": "hotel_analytics",
+      "source": "synapse_data.json",
+      "sql": "SELECT count(*) AS total FROM dim_hotel",
+      "reference_table": {
+        "columns": [
+          "total"
+        ],
+        "rows": [
+          [
+            10
+          ]
+        ],
+        "ordered": false
+      }
+    },
+    {
+      "step": 4,
+      "agent": "hotel_analytics",
+      "source": "synapse_data.json",
+      "sql": "SELECT count(*) AS total FROM dim_guest",
+      "reference_table": {
+        "columns": [
+          "total"
+        ],
+        "rows": [
+          [
+            15
+          ]
+        ],
+        "ordered": false
+      }
+    }
+  ],
+  "hotel_followup_2": [
+    {
+      "step": 2,
+      "agent": "hotel_analytics",
+      "source": "synapse_data.json",
+      "sql": "SELECT count(*) AS total FROM fact_reservations WHERE IsCancelled=1",
+      "reference_table": {
+        "columns": [
+          "total"
+        ],
+        "rows": [
+          [
+            3
+          ]
+        ],
+        "ordered": false
+      }
+    },
+    {
+      "step": 4,
+      "agent": "hotel_analytics",
+      "source": "synapse_data.json",
+      "sql": "SELECT sum(TotalRevenue) AS total FROM fact_reservations WHERE IsCancelled=0",
+      "reference_table": {
+        "columns": [
+          "total"
+        ],
+        "rows": [
+          [
+            44256.0
+          ]
+        ],
+        "ordered": false
+      }
+    }
+  ],
+  "hotel_followup_3": [
+    {
+      "step": 2,
+      "agent": "hotel_analytics",
+      "source": "synapse_data.json",
+      "sql": "SELECT Region,count(*) AS total FROM dim_hotel GROUP BY Region",
+      "reference_table": {
+        "columns": [
+          "Region",
+          "total"
+        ],
+        "rows": [
+          [
+            "Central",
+            2
+          ],
+          [
+            "East",
+            3
+          ],
+          [
+            "Mountain",
+            2
+          ],
+          [
+            "South",
+            1
+          ],
+          [
+            "West",
+            2
+          ]
+        ],
+        "ordered": false
+      }
+    },
+    {
+      "step": 4,
+      "agent": "hotel_analytics",
+      "source": "synapse_data.json",
+      "sql": "SELECT HotelKey,sum(TotalRevenue) AS total FROM fact_reservations GROUP BY HotelKey",
+      "reference_table": {
+        "columns": [
+          "HotelKey",
+          "total"
+        ],
+        "rows": [
+          [
+            1,
+            8915.0
+          ],
+          [
+            2,
+            2805.0
+          ],
+          [
+            3,
+            2110.0
+          ],
+          [
+            4,
+            22650.0
+          ],
+          [
+            5,
+            1281.0
+          ],
+          [
+            6,
+            1805.0
+          ],
+          [
+            7,
+            2065.0
+          ],
+          [
+            8,
+            680.0
+          ],
+          [
+            9,
+            2150.0
+          ],
+          [
+            10,
+            2345.0
+          ]
+        ],
+        "ordered": false
+      }
+    }
+  ],
+  "hotel_followup_4": [
+    {
+      "step": 2,
+      "agent": "hotel_analytics",
+      "source": "synapse_data.json",
+      "sql": "SELECT ReservationKey,TotalRevenue FROM fact_reservations ORDER BY TotalRevenue DESC,ReservationKey ASC LIMIT 5",
+      "reference_table": {
+        "columns": [
+          "ReservationKey",
+          "TotalRevenue"
+        ],
+        "rows": [
+          [
+            12,
+            9605.0
+          ],
+          [
+            18,
+            5460.0
+          ],
+          [
+            17,
+            4645.0
+          ],
+          [
+            2,
+            2695.0
+          ],
+          [
+            10,
+            2545.0
+          ]
+        ],
+        "ordered": true
+      }
+    },
+    {
+      "step": 4,
+      "agent": "hotel_analytics",
+      "source": "synapse_data.json",
+      "sql": "SELECT ReservationKey,TotalRevenue FROM fact_reservations ORDER BY TotalRevenue ASC,ReservationKey ASC LIMIT 5",
+      "reference_table": {
+        "columns": [
+          "ReservationKey",
+          "TotalRevenue"
+        ],
+        "rows": [
+          [
+            6,
+            403.0
+          ],
+          [
+            13,
+            680.0
+          ],
+          [
+            20,
+            690.0
+          ],
+          [
+            22,
+            765.0
+          ],
+          [
+            3,
+            770.0
+          ]
+        ],
+        "ordered": true
+      }
+    }
+  ],
+  "hotel_followup_5": [
+    {
+      "step": 2,
+      "agent": "hotel_analytics",
+      "source": "synapse_data.json",
+      "sql": "SELECT h.Region,sum(r.TotalRevenue) AS total FROM fact_reservations r JOIN dim_hotel h ON r.HotelKey=h.HotelKey WHERE r.IsCancelled=0 GROUP BY h.Region",
+      "reference_table": {
+        "columns": [
+          "Region",
+          "total"
+        ],
+        "rows": [
+          [
+            "Central",
+            3495.0
+          ],
+          [
+            "East",
+            4306.0
+          ],
+          [
+            "Mountain",
+            3775.0
+          ],
+          [
+            "South",
+            22650.0
+          ],
+          [
+            "West",
+            10030.0
+          ]
+        ],
+        "ordered": false
+      }
+    },
+    {
+      "step": 4,
+      "agent": "hotel_analytics",
+      "source": "synapse_data.json",
+      "sql": "SELECT count(*) AS total FROM dim_hotel h WHERE NOT EXISTS (SELECT 1 FROM fact_reservations r WHERE r.HotelKey=h.HotelKey)",
+      "reference_table": {
+        "columns": [
+          "total"
+        ],
+        "rows": [
+          [
+            0
+          ]
+        ],
+        "ordered": false
+      }
+    }
+  ],
+  "collaboration_1_pause": [],
+  "collaboration_1_cancel": [],
+  "collaboration_1_approve": [
+    {
+      "step": 2,
+      "agent": "contoso_sales",
+      "source": "databricks_data.json",
+      "sql": "SELECT sum(total_amount) AS total FROM orders",
+      "reference_table": {
+        "columns": [
+          "total"
+        ],
+        "rows": [
+          [
+            47915.950000000004
+          ]
+        ],
+        "ordered": false
+      }
+    },
+    {
+      "step": 2,
+      "agent": "contoso_products",
+      "source": "cosmos_data.json",
+      "sql": "SELECT avg(price) AS total FROM products",
+      "reference_table": {
+        "columns": [
+          "total"
+        ],
+        "rows": [
+          [
+            147.76777777777778
+          ]
+        ],
+        "ordered": false
+      }
+    }
+  ],
+  "collaboration_1_revise": [
+    {
+      "step": 3,
+      "agent": "contoso_sales",
+      "source": "databricks_data.json",
+      "sql": "SELECT sum(total_amount) AS total FROM orders",
+      "reference_table": {
+        "columns": [
+          "total"
+        ],
+        "rows": [
+          [
+            47915.950000000004
+          ]
+        ],
+        "ordered": false
+      }
+    }
+  ],
+  "collaboration_2_pause": [],
+  "collaboration_2_cancel": [],
+  "collaboration_2_approve": [
+    {
+      "step": 2,
+      "agent": "contoso_inventory",
+      "source": "postgres_data.json",
+      "sql": "SELECT sum(capacity) AS total FROM warehouses",
+      "reference_table": {
+        "columns": [
+          "total"
+        ],
+        "rows": [
+          [
+            615000
+          ]
+        ],
+        "ordered": false
+      }
+    },
+    {
+      "step": 2,
+      "agent": "contoso_hr",
+      "source": "azure_sql_data.json",
+      "sql": "SELECT sum(Salary) AS total FROM employees",
+      "reference_table": {
+        "columns": [
+          "total"
+        ],
+        "rows": [
+          [
+            4107000.0
+          ]
+        ],
+        "ordered": false
+      }
+    }
+  ],
+  "collaboration_2_revise": [
+    {
+      "step": 3,
+      "agent": "contoso_inventory",
+      "source": "postgres_data.json",
+      "sql": "SELECT sum(capacity) AS total FROM warehouses",
+      "reference_table": {
+        "columns": [
+          "total"
+        ],
+        "rows": [
+          [
+            615000
+          ]
+        ],
+        "ordered": false
+      }
+    }
+  ],
+  "collaboration_3_pause": [],
+  "collaboration_3_cancel": [],
+  "collaboration_3_approve": [
+    {
+      "step": 2,
+      "agent": "financial_transactions",
+      "source": "bigquery_data.json",
+      "sql": "SELECT count(*) AS total FROM transactions",
+      "reference_table": {
+        "columns": [
+          "total"
+        ],
+        "rows": [
+          [
+            30
+          ]
+        ],
+        "ordered": false
+      }
+    },
+    {
+      "step": 2,
+      "agent": "hotel_analytics",
+      "source": "synapse_data.json",
+      "sql": "SELECT count(*) AS total FROM fact_reservations",
+      "reference_table": {
+        "columns": [
+          "total"
+        ],
+        "rows": [
+          [
+            22
+          ]
+        ],
+        "ordered": false
+      }
+    }
+  ],
+  "collaboration_3_revise": [
+    {
+      "step": 3,
+      "agent": "financial_transactions",
+      "source": "bigquery_data.json",
+      "sql": "SELECT count(*) AS total FROM transactions",
+      "reference_table": {
+        "columns": [
+          "total"
+        ],
+        "rows": [
+          [
+            30
+          ]
+        ],
+        "ordered": false
+      }
+    }
+  ],
+  "collaboration_4_pause": [],
+  "collaboration_4_cancel": [],
+  "collaboration_4_approve": [
+    {
+      "step": 2,
+      "agent": "contoso_sales",
+      "source": "databricks_data.json",
+      "sql": "SELECT count(*) AS total FROM orders WHERE order_date>='2025-01-01' AND order_date<'2025-02-01'",
+      "reference_table": {
+        "columns": [
+          "total"
+        ],
+        "rows": [
+          [
+            57
+          ]
+        ],
+        "ordered": false
+      }
+    },
+    {
+      "step": 2,
+      "agent": "financial_transactions",
+      "source": "bigquery_data.json",
+      "sql": "SELECT count(*) AS total FROM transactions WHERE transaction_date>='2024-12-01' AND transaction_date<'2025-01-01'",
+      "reference_table": {
+        "columns": [
+          "total"
+        ],
+        "rows": [
+          [
+            29
+          ]
+        ],
+        "ordered": false
+      }
+    }
+  ],
+  "collaboration_4_revise": [
+    {
+      "step": 3,
+      "agent": "contoso_sales",
+      "source": "databricks_data.json",
+      "sql": "SELECT count(*) AS total FROM orders WHERE order_date>='2025-01-01' AND order_date<'2025-02-01'",
+      "reference_table": {
+        "columns": [
+          "total"
+        ],
+        "rows": [
+          [
+            57
+          ]
+        ],
+        "ordered": false
+      }
+    }
+  ],
+  "collaboration_5_pause": [],
+  "collaboration_5_cancel": [],
+  "collaboration_5_approve": [
+    {
+      "step": 2,
+      "agent": "contoso_hr",
+      "source": "azure_sql_data.json",
+      "sql": "SELECT count(*) AS total FROM employees WHERE Salary>(SELECT avg(Salary) FROM employees)",
+      "reference_table": {
+        "columns": [
+          "total"
+        ],
+        "rows": [
+          [
+            18
+          ]
+        ],
+        "ordered": false
+      }
+    },
+    {
+      "step": 2,
+      "agent": "contoso_products",
+      "source": "cosmos_data.json",
+      "sql": "SELECT count(*) AS total FROM products WHERE price>(SELECT avg(price) FROM products)",
+      "reference_table": {
+        "columns": [
+          "total"
+        ],
+        "rows": [
+          [
+            14
+          ]
+        ],
+        "ordered": false
+      }
+    }
+  ],
+  "collaboration_5_revise": [
+    {
+      "step": 3,
+      "agent": "contoso_hr",
+      "source": "azure_sql_data.json",
+      "sql": "SELECT count(*) AS total FROM employees WHERE Salary>(SELECT avg(Salary) FROM employees)",
+      "reference_table": {
+        "columns": [
+          "total"
+        ],
+        "rows": [
+          [
+            18
+          ]
+        ],
+        "ordered": false
+      }
+    }
+  ]
+}

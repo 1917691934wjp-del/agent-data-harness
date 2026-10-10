@@ -25,6 +25,12 @@ wheels/
 
 # Virtual environment
 .venv/
+.uv-cache/
+.pytest_cache/
+.ruff_cache/
+.coverage
+coverage.xml
+htmlcov/
 venv/
 env/
 ENV/
@@ -45,8 +51,13 @@ ENV/
 .streamlit/
 
 # Chainlit
-.chainlit/
+.chainlit/*
+!.chainlit/config.toml
+!.chainlit/translations/
+.chainlit/translations/*
+!.chainlit/translations/zh-CN.json
 .files/
+local_history/
 
 # Jupyter Notebook
 .ipynb_checkpoints
@@ -65,3 +76,16 @@ logs/
 
 # Big query
 credentials.json
+
+# Local evaluation reports may contain SQL and business result data.
+/outputs/
+.env.*
+!.env.example
+*.sqlite
+*.sqlite3
+*.db
+*.sqlite-wal
+*.sqlite-shm
+/outputs/evaluations/
+/outputs/auth-tests-*/
+/outputs/auth-all-tests-*/

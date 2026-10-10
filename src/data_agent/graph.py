@@ -5,7 +5,7 @@ for natural language to SQL query conversion.
 """
 
 import logging
-from typing import TYPE_CHECKING, Union
+from typing import TYPE_CHECKING, Literal, Union
 
 from langchain_core.language_models import BaseChatModel
 from langgraph.checkpoint.base import BaseCheckpointSaver
@@ -14,6 +14,7 @@ from langgraph.graph import END, StateGraph
 from langgraph.graph.state import CompiledStateGraph
 
 from data_agent.config import DataAgentConfig
+from data_agent.context import SchemaSnapshot
 from data_agent.executors import create_executor
 from data_agent.models.state import AgentState, InputState, OutputState
 from data_agent.nodes.data_nodes import DataAgentNodes
@@ -47,6 +48,8 @@ class DataAgentGraph:
         datasource: Union["SQLDatabase", "CosmosAdapter"],
         config: DataAgentConfig,
         max_retries: int = 3,
+        *,
+        schema_snapshot: SchemaSnapshot | None = None,
     ) -> None:
         """Initialize the data agent graph.
 
@@ -61,7 +64,9 @@ class DataAgentGraph:
         self.config = config
         self.max_retries = max_retries
 
-        self._nodes = DataAgentNodes(llm, datasource, config, max_retries)
+        self._nodes = DataAgentNodes(
+            llm, datasource, config, max_retries, schema_snapshot=schema_snapshot
+        )
         self._response_node = ResponseNode(llm, config)
 
         # Initialize visualization node
@@ -93,10 +98,13 @@ class DataAgentGraph:
             state: Current agent state.
 
         Returns:
-            'error' if execution failed, 'visualize' if visualization requested, 'respond' otherwise.
+            'error' on failure, 'complete' for evidence-only workers,
+            'visualize' for charts, or 'respond' for a single-agent answer.
         """
         if state.get("error"):
             return "error"
+        if state.get("skip_response"):
+            return "complete"
         if state.get("visualization_requested", False):
             return "visualize"
         return "respond"
@@ -132,6 +140,7 @@ class DataAgentGraph:
             self._route_after_execute,
             {
                 "error": END,
+                "complete": END,
                 "visualize": "visualize_data",
                 "respond": "generate_response",
             },
@@ -143,20 +152,24 @@ class DataAgentGraph:
 
     def compile(
         self,
-        checkpointer: BaseCheckpointSaver | None = None,
+        checkpointer: BaseCheckpointSaver | Literal[False] | None = None,
         name: str = "data_agent_graph",
     ) -> CompiledStateGraph:
         """Build and compile the state graph.
 
         Args:
             checkpointer: Optional checkpointer for conversation persistence.
+                False disables worker checkpointing for isolated collaboration.
             name: Name for the compiled graph.
 
         Returns:
             Compiled StateGraph instance ready for invocation.
         """
         graph = self.build()
-        return graph.compile(name=name, checkpointer=checkpointer or InMemorySaver())
+        return graph.compile(
+            name=name,
+            checkpointer=InMemorySaver() if checkpointer is None else checkpointer,
+        )
 
 
 def create_data_agent(
@@ -164,7 +177,9 @@ def create_data_agent(
     datasource: Union["SQLDatabase", "CosmosAdapter"],
     config: DataAgentConfig,
     max_retries: int = 3,
-    checkpointer: BaseCheckpointSaver | None = None,
+    checkpointer: BaseCheckpointSaver | Literal[False] | None = None,
+    *,
+    schema_snapshot: SchemaSnapshot | None = None,
 ) -> CompiledStateGraph:
     """Create a data agent graph for any supported datasource.
 
@@ -180,6 +195,6 @@ def create_data_agent(
     Returns:
         Compiled StateGraph instance ready for invocation.
     """
-    return DataAgentGraph(llm, datasource, config, max_retries).compile(
-        checkpointer=checkpointer
-    )
+    return DataAgentGraph(
+        llm, datasource, config, max_retries, schema_snapshot=schema_snapshot
+    ).compile(checkpointer=checkpointer)

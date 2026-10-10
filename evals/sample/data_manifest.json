@@ -1,0 +1,8 @@
+{
+  "azure_sql_data.json": "3bf9731aaa6d263077a80929d3e892bddee9d88c8f1a15861a1cd30c4e8bb073",
+  "bigquery_data.json": "37ff2857a38e7a51f652a92e0071196bf111c96eecbcfc2b268b3b13295c1edf",
+  "cosmos_data.json": "0b94302a808864f48ff3f9fcfcb7c45e35190e76fe9311ed9be6a9013dd1cbb5",
+  "databricks_data.json": "ffff83bc36a7b8c6cba103e090e8ead6e6e78de93c9144d71480cc5774336663",
+  "postgres_data.json": "d464ac771aac7f8de46e69a3f841793e9d638accb690d54a60a71427e890d63c",
+  "synapse_data.json": "fb1694970ac4fd7b984e244246384c74cf1ff46d573825e1cbd06b70f5cc0bfb"
+}

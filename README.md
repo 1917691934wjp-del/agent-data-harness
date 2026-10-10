@@ -18,18 +18,23 @@
 
 ---
 
-A natural language to SQL (NL2SQL) platform built on LangGraph and Azure OpenAI. This multi-agent system automatically routes user questions to the appropriate database backend and generates optimized SQL queries and results.
+A natural language to SQL (NL2SQL) platform built on LangGraph with DeepSeek as the default model provider and optional Azure OpenAI support. This multi-agent system automatically routes user questions to the appropriate database backend and generates SQL queries and results.
 
 Built on top of LangChain's [`SQLDatabase`](https://docs.langchain.com/oss/python/langchain/sql-agent) with extended support for Azure AD authentication, Cosmos DB, and built-in dialect validation.
 
 ## Features
 
+This project extends [eosho/langchain_data_agent](https://github.com/eosho/langchain_data_agent) under the original MIT license. The current workspace adds collaboration, runtime/evaluation harness, business metric context, and multi-user capabilities. See the documentation for implementation and validation boundaries.
+
 - **Multi-Database Support**: PostgreSQL, Azure SQL, Azure Synapse, Azure Cosmos DB, Databricks SQL, and Google BigQuery
 - **Intent Detection**: Automatically routes queries to the correct data agent based on question context
+- **Multi-Agent Collaboration**: Plans parallel and dependent queries, exchanges structured evidence, and summarizes results across data sources with optional validated keyed joins
 - **Multi-Turn Conversations**: Follow-up questions with context awareness (e.g., "What's the average?" after a query)
 - **SQL Validation**: Safe query execution with sqlglot-based validation across all dialects
 - **Data Visualization**: Generate charts and graphs from query results using natural language (e.g., "show me a bar chart")
 - **Configurable Agents**: YAML-based configuration for adding new data sources
+- **Agent Harness**: Shared runtime budgets, request/model/task timeouts, parent-child tracing, field policies, optional answer judging, and regression quality gates across CLI, UI, A2A, and live evaluation
+- **Multi-user Web UI**: Hashed credentials, registration, one-time recovery codes, revocable sessions, datasource grants, and private conversation/attachment/checkpoint storage
 - **A2A Protocol**: Agent-to-Agent interoperability for integration with other A2A-compliant systems
 
 ## Architecture
@@ -52,6 +57,11 @@ Generates, validates, and executes SQL queries with retry logic.
 - [Configuration](docs/CONFIGURATION.md)
 - [Data Visualization](docs/VISUALIZATION.md)
 - [A2A Protocol](docs/A2A.md)
+- [Multi-Agent Collaboration](docs/MULTI_AGENT.md)
+- [Human-in-the-loop confirmation](docs/HUMAN_IN_THE_LOOP.md)
+- [Agent Harness: runtime, tracing and implementation roadmap](docs/HARNESS.md)
+- [Multi-user accounts, recovery and datasource access](docs/MULTI_USER.md)
+- [Business semantics and metric definitions](docs/BUSINESS_SEMANTICS.md)
 
 ## Quick Start
 
@@ -59,7 +69,7 @@ Generates, validates, and executes SQL queries with retry logic.
 
 - Python 3.12+
 - [uv](https://docs.astral.sh/uv/) package manager
-- Azure OpenAI deployment
+- DeepSeek API key (`DEEPSEEK_API_KEY`), or an Azure OpenAI deployment when using `provider: azure_openai`
 
 ### Installation
 
@@ -205,9 +215,9 @@ chainlit run src/data_agent/ui/app.py
 Ensure these are set in your `.env` file:
 
 ```bash
-AZURE_OPENAI_ENDPOINT=https://your-resource.openai.azure.com/
-AZURE_OPENAI_API_KEY=your-api-key
-AZURE_OPENAI_DEPLOYMENT=gpt-4o
+DEEPSEEK_API_KEY=your-deepseek-api-key
+DEEPSEEK_BASE_URL=https://api.deepseek.com
+DEEPSEEK_MODEL=deepseek-flash
 ```
 
 ### Programmatic Usage
@@ -245,6 +255,18 @@ The platform includes built-in configuration for these databases:
 | SQLite | `sqlite` | sqlite |
 
 > **Note:** Any SQLAlchemy-compatible database can be used via `shared_db` parameter or `connection_string` in config. The built-in types provide convenience configuration and AAD authentication support.
+
+## Evaluation Center
+
+The default collaboration flow also shares schema snapshots between its planner and workers, supplies versioned inventory metric definitions, and checkpoints user conditions with explicit provenance and approval status. See [上下文与指标口径说明](docs/CONTEXT.md).
+
+Run fixed datasets through the agent or replay recorded observations, then inspect a searchable local HTML report. Includes 30 sample cases for result correctness, follow-up questions, clarification, and human review. The synthetic demo intentionally passes 25/30 cases; it is not a model accuracy benchmark.
+
+```powershell
+.venv\Scripts\data-agent.exe eval run evals/sample/suite.json --observations evals/sample/demo_observations.json --output outputs/evaluations/demo
+```
+
+See [评测中心使用说明](docs/EVALUATION.md) for live execution, scoring rules, dataset authoring, and regression comparisons.
 
 ## Development
 

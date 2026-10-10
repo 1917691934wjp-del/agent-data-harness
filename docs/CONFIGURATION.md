@@ -2,13 +2,39 @@
 
 Data agents are configured via YAML files. See `src/data_agent/config/contoso.yaml` for a complete example.
 
+## DeepSeek（当前默认）
+
+三个内置 YAML 的规划与数据助手均使用 provider: deepseek、model: deepseek-flash。项目使用已有 langchain-openai 的 OpenAI 兼容客户端，不需要新增依赖。Azure provider 保留，可在 YAML 中切回 azure_openai。
+
+在项目 .env 中填写：
+
+```dotenv
+DEEPSEEK_API_KEY=你的实际密钥
+DEEPSEEK_BASE_URL=https://api.deepseek.com
+DEEPSEEK_MODEL=deepseek-flash
+```
+
+DEEPSEEK_MODEL 仅在 YAML 未指定模型时作为回退。修改内置模型请修改对应 YAML 的 llm.model。API Key 不写进 YAML。CLI、UI、A2A 和 live evaluation 共用 provider；不再要求为 DeepSeek 配置 Azure 模型密钥。数据库及 Azure Sessions 配置仍由各自服务决定。
+
+```yaml
+llm:
+  provider: deepseek
+  model: deepseek-flash
+  temperature: 0.0
+  max_tokens: 4096
+```
+
+DeepSeek 的结构化规划/SQL/回答使用 function_calling 和本地 Pydantic 校验，默认关闭思考模式，以兼容指定工具选择；不会使用 OpenAI 专属的 JSON Schema 响应格式。模型名与思考模式限制参考 [官方 API 文档](https://api-docs.deepseek.com/api/create-chat-completion/)。
+
+可选 Judge：`data-agent eval run ... --judge-provider deepseek --judge-deployment deepseek-flash`；Azure Judge 使用 `--judge-provider azure_openai`。只有显式启用才会调用评分模型。
+
 ## Intent Detection
 
 ```yaml
 intent_detection_agent:
   llm:
-    model: gpt-4o
-    provider: azure_openai
+    model: deepseek-flash
+    provider: deepseek
     temperature: 0.0
   system_prompt: |
     You are an intent detection assistant...
@@ -28,7 +54,7 @@ data_agents:
       database: "mydb"
       username: "user"
     llm:
-      model: gpt-4o
+      model: deepseek-flash
       temperature: 0.0
     validation:
       max_rows: 5000

@@ -33,7 +33,7 @@ Be conversational but precise. Include relevant numbers and insights from the da
 VISUALIZATION_SYSTEM_PROMPT = """You are a data visualization expert. Generate Python code using matplotlib to create a chart.
 
 ## Rules
-1. Use matplotlib to create visualizations
+1. Use matplotlib to create visualizations. Use Simplified Chinese chart titles, axis labels and legends. Configure an installed Chinese font (Microsoft YaHei, SimHei or Noto Sans CJK SC) using matplotlib.font_manager; set axes.unicode_minus=False. Preserve original data values.
 2. DO NOT use plt.style.use() with seaborn styles - they are deprecated
 3. End your code with plt.show() - the image will be captured automatically
 4. Use this pattern:

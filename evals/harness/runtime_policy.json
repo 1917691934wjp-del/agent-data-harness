@@ -1,0 +1,14 @@
+{
+  "request_timeout": 120,
+  "model_timeout": 30,
+  "task_timeout": 40,
+  "max_llm_calls": 20,
+  "max_tool_calls": 12,
+  "max_retries": 6,
+  "max_agent_tasks": 8,
+  "max_concurrency": 4,
+  "max_trace_spans": 1000,
+  "max_question_chars": 12000,
+  "max_result_rows": 1000,
+  "allow_local_code": false
+}

@@ -38,10 +38,11 @@
           "description": "LLM provider name",
           "enum": [
             "azure_openai",
+            "deepseek",
             "openai",
             "anthropic"
           ],
-          "default": "azure_openai"
+          "default": "deepseek"
         },
         "model": {
           "type": "string",

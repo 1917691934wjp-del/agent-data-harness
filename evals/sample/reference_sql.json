@@ -1,0 +1,98 @@
+{
+  "sales_count": {
+    "source": "databricks_data.json",
+    "sql": "SELECT count(*) AS total FROM orders"
+  },
+  "sales_customers": {
+    "source": "databricks_data.json",
+    "sql": "SELECT count(*) AS total FROM customers"
+  },
+  "sales_amount": {
+    "source": "databricks_data.json",
+    "sql": "SELECT sum(total_amount) AS total FROM orders"
+  },
+  "sales_status": {
+    "source": "databricks_data.json",
+    "sql": "SELECT status, count(*) AS total FROM orders GROUP BY status"
+  },
+  "sales_region": {
+    "source": "databricks_data.json",
+    "sql": "SELECT region, count(*) AS total FROM customers GROUP BY region"
+  },
+  "sales_empty": {
+    "source": "databricks_data.json",
+    "sql": "SELECT order_id FROM orders WHERE order_id='NOT-EXIST'"
+  },
+  "product_count": {
+    "source": "cosmos_data.json",
+    "sql": "SELECT count(*) AS total FROM products"
+  },
+  "product_active": {
+    "source": "cosmos_data.json",
+    "sql": "SELECT count(*) AS total FROM products WHERE is_active=1"
+  },
+  "product_price": {
+    "source": "cosmos_data.json",
+    "sql": "SELECT max(price) AS total FROM products"
+  },
+  "product_category": {
+    "source": "cosmos_data.json",
+    "sql": "SELECT category, count(*) AS total FROM products GROUP BY category"
+  },
+  "inventory_count": {
+    "source": "postgres_data.json",
+    "sql": "SELECT count(*) AS total FROM inventory"
+  },
+  "inventory_quantity": {
+    "source": "postgres_data.json",
+    "sql": "SELECT sum(quantity) AS total FROM inventory"
+  },
+  "inventory_warehouses": {
+    "source": "postgres_data.json",
+    "sql": "SELECT count(*) AS total FROM warehouses"
+  },
+  "inventory_low": {
+    "source": "postgres_data.json",
+    "sql": "SELECT count(*) AS total FROM inventory WHERE quantity < reorder_level"
+  },
+  "hr_count": {
+    "source": "azure_sql_data.json",
+    "sql": "SELECT count(*) AS total FROM employees"
+  },
+  "hr_active": {
+    "source": "azure_sql_data.json",
+    "sql": "SELECT count(*) AS total FROM employees WHERE IsActive=1"
+  },
+  "hr_salary": {
+    "source": "azure_sql_data.json",
+    "sql": "SELECT avg(Salary) AS total FROM employees"
+  },
+  "hr_departments": {
+    "source": "azure_sql_data.json",
+    "sql": "SELECT count(*) AS total FROM departments"
+  },
+  "finance_accounts": {
+    "source": "bigquery_data.json",
+    "sql": "SELECT count(*) AS total FROM accounts"
+  },
+  "finance_transactions": {
+    "source": "bigquery_data.json",
+    "sql": "SELECT count(*) AS total FROM transactions"
+  },
+  "finance_alerts": {
+    "source": "bigquery_data.json",
+    "sql": "SELECT count(*) AS total FROM fraud_alerts"
+  },
+  "finance_null": {
+    "source": "bigquery_data.json",
+    "sql": "SELECT count(*) AS total FROM accounts WHERE credit_limit IS NULL"
+  },
+  "hotel_count": {
+    "source": "synapse_data.json",
+    "sql": "SELECT count(*) AS total FROM dim_hotel"
+  },
+  "hotel_cancelled": {
+    "source": "synapse_data.json",
+    "sql": "SELECT count(*) AS total FROM fact_reservations WHERE IsCancelled=1"
+  }
+}

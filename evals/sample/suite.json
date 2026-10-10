@@ -1,0 +1,807 @@
+{
+  "schema_version": 1,
+  "name": "本地业务数据与 HITL 基准",
+  "description": "24 个参考 SQL 结果案例及 6 个对话行为案例。固定样例数据；列名属于输出契约。",
+  "data_version": "sample-7bac333c58e8",
+  "data_files_sha256": {
+    "azure_sql_data.json": "3bf9731aaa6d263077a80929d3e892bddee9d88c8f1a15861a1cd30c4e8bb073",
+    "bigquery_data.json": "37ff2857a38e7a51f652a92e0071196bf111c96eecbcfc2b268b3b13295c1edf",
+    "cosmos_data.json": "0b94302a808864f48ff3f9fcfcb7c45e35190e76fe9311ed9be6a9013dd1cbb5",
+    "databricks_data.json": "ffff83bc36a7b8c6cba103e090e8ead6e6e78de93c9144d71480cc5774336663",
+    "postgres_data.json": "d464ac771aac7f8de46e69a3f841793e9d638accb690d54a60a71427e890d63c",
+    "synapse_data.json": "fb1694970ac4fd7b984e244246384c74cf1ff46d573825e1cbd06b70f5cc0bfb"
+  },
+  "cases": [
+    {
+      "id": "sales_count",
+      "category": "结果正确性",
+      "steps": [
+        {
+          "question": "统计订单总数。结果列名使用 total。",
+          "expect": {
+            "status": "success",
+            "agents": [
+              "contoso_sales"
+            ],
+            "table": {
+              "columns": [
+                "total"
+              ],
+              "rows": [
+                [
+                  208
+                ]
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "sales_customers",
+      "category": "结果正确性",
+      "steps": [
+        {
+          "question": "统计销售客户总数。结果列名使用 total。",
+          "expect": {
+            "status": "success",
+            "agents": [
+              "contoso_sales"
+            ],
+            "table": {
+              "columns": [
+                "total"
+              ],
+              "rows": [
+                [
+                  50
+                ]
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "sales_amount",
+      "category": "结果正确性",
+      "steps": [
+        {
+          "question": "统计所有订单 total_amount 总和，不过滤订单状态。结果列名使用 total。",
+          "expect": {
+            "status": "success",
+            "agents": [
+              "contoso_sales"
+            ],
+            "table": {
+              "columns": [
+                "total"
+              ],
+              "rows": [
+                [
+                  47915.950000000004
+                ]
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "sales_status",
+      "category": "结果正确性",
+      "steps": [
+        {
+          "question": "按订单状态统计订单数。结果列名使用 status, total。",
+          "expect": {
+            "status": "success",
+            "agents": [
+              "contoso_sales"
+            ],
+            "table": {
+              "columns": [
+                "status",
+                "total"
+              ],
+              "rows": [
+                [
+                  "cancelled",
+                  8
+                ],
+                [
+                  "delivered",
+                  131
+                ],
+                [
+                  "pending",
+                  18
+                ],
+                [
+                  "processing",
+                  24
+                ],
+                [
+                  "shipped",
+                  27
+                ]
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "sales_region",
+      "category": "结果正确性",
+      "steps": [
+        {
+          "question": "按客户所在区域统计客户数。结果列名使用 region, total。",
+          "expect": {
+            "status": "success",
+            "agents": [
+              "contoso_sales"
+            ],
+            "table": {
+              "columns": [
+                "region",
+                "total"
+              ],
+              "rows": [
+                [
+                  "Central",
+                  16
+                ],
+                [
+                  "East",
+                  17
+                ],
+                [
+                  "West",
+                  17
+                ]
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "sales_empty",
+      "category": "结果正确性",
+      "steps": [
+        {
+          "question": "查询编号为 NOT-EXIST 的订单，返回 order_id。结果列名使用 order_id。",
+          "expect": {
+            "status": "success",
+            "agents": [
+              "contoso_sales"
+            ],
+            "table": {
+              "columns": [
+                "order_id"
+              ],
+              "rows": []
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "product_count",
+      "category": "结果正确性",
+      "steps": [
+        {
+          "question": "统计产品目录中的产品总数。结果列名使用 total。",
+          "expect": {
+            "status": "success",
+            "agents": [
+              "contoso_products"
+            ],
+            "table": {
+              "columns": [
+                "total"
+              ],
+              "rows": [
+                [
+                  45
+                ]
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "product_active",
+      "category": "结果正确性",
+      "steps": [
+        {
+          "question": "统计产品目录中 is_active 为真的产品数量。结果列名使用 total。",
+          "expect": {
+            "status": "success",
+            "agents": [
+              "contoso_products"
+            ],
+            "table": {
+              "columns": [
+                "total"
+              ],
+              "rows": [
+                [
+                  44
+                ]
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "product_price",
+      "category": "结果正确性",
+      "steps": [
+        {
+          "question": "计算产品目录中的最高产品价格。结果列名使用 total。",
+          "expect": {
+            "status": "success",
+            "agents": [
+              "contoso_products"
+            ],
+            "table": {
+              "columns": [
+                "total"
+              ],
+              "rows": [
+                [
+                  899.99
+                ]
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "product_category",
+      "category": "结果正确性",
+      "steps": [
+        {
+          "question": "按产品目录的 category 统计产品数。结果列名使用 category, total。",
+          "expect": {
+            "status": "success",
+            "agents": [
+              "contoso_products"
+            ],
+            "table": {
+              "columns": [
+                "category",
+                "total"
+              ],
+              "rows": [
+                [
+                  "clothing",
+                  11
+                ],
+                [
+                  "electronics",
+                  12
+                ],
+                [
+                  "home",
+                  11
+                ],
+                [
+                  "sports",
+                  11
+                ]
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "inventory_count",
+      "category": "结果正确性",
+      "steps": [
+        {
+          "question": "统计库存记录总数，不是产品去重数。结果列名使用 total。",
+          "expect": {
+            "status": "success",
+            "agents": [
+              "contoso_inventory"
+            ],
+            "table": {
+              "columns": [
+                "total"
+              ],
+              "rows": [
+                [
+                  125
+                ]
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "inventory_quantity",
+      "category": "结果正确性",
+      "steps": [
+        {
+          "question": "统计所有仓库当前库存 quantity 的总和。结果列名使用 total。",
+          "expect": {
+            "status": "success",
+            "agents": [
+              "contoso_inventory"
+            ],
+            "table": {
+              "columns": [
+                "total"
+              ],
+              "rows": [
+                [
+                  43102
+                ]
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "inventory_warehouses",
+      "category": "结果正确性",
+      "steps": [
+        {
+          "question": "统计仓库总数。结果列名使用 total。",
+          "expect": {
+            "status": "success",
+            "agents": [
+              "contoso_inventory"
+            ],
+            "table": {
+              "columns": [
+                "total"
+              ],
+              "rows": [
+                [
+                  10
+                ]
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "inventory_low",
+      "category": "结果正确性",
+      "steps": [
+        {
+          "question": "统计 quantity 小于 reorder_level 的库存记录数。结果列名使用 total。",
+          "expect": {
+            "status": "success",
+            "agents": [
+              "contoso_inventory"
+            ],
+            "table": {
+              "columns": [
+                "total"
+              ],
+              "rows": [
+                [
+                  22
+                ]
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "hr_count",
+      "category": "结果正确性",
+      "steps": [
+        {
+          "question": "统计员工总数。结果列名使用 total。",
+          "expect": {
+            "status": "success",
+            "agents": [
+              "contoso_hr"
+            ],
+            "table": {
+              "columns": [
+                "total"
+              ],
+              "rows": [
+                [
+                  40
+                ]
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "hr_active",
+      "category": "结果正确性",
+      "steps": [
+        {
+          "question": "统计 IsActive 为真的员工数量。结果列名使用 total。",
+          "expect": {
+            "status": "success",
+            "agents": [
+              "contoso_hr"
+            ],
+            "table": {
+              "columns": [
+                "total"
+              ],
+              "rows": [
+                [
+                  39
+                ]
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "hr_salary",
+      "category": "结果正确性",
+      "steps": [
+        {
+          "question": "计算所有员工 Salary 的平均值。结果列名使用 total。",
+          "expect": {
+            "status": "success",
+            "agents": [
+              "contoso_hr"
+            ],
+            "table": {
+              "columns": [
+                "total"
+              ],
+              "rows": [
+                [
+                  102675.0
+                ]
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "hr_departments",
+      "category": "结果正确性",
+      "steps": [
+        {
+          "question": "统计部门总数。结果列名使用 total。",
+          "expect": {
+            "status": "success",
+            "agents": [
+              "contoso_hr"
+            ],
+            "table": {
+              "columns": [
+                "total"
+              ],
+              "rows": [
+                [
+                  8
+                ]
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "finance_accounts",
+      "category": "结果正确性",
+      "steps": [
+        {
+          "question": "统计金融账户总数。结果列名使用 total。",
+          "expect": {
+            "status": "success",
+            "agents": [
+              "financial_transactions"
+            ],
+            "table": {
+              "columns": [
+                "total"
+              ],
+              "rows": [
+                [
+                  17
+                ]
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "finance_transactions",
+      "category": "结果正确性",
+      "steps": [
+        {
+          "question": "统计金融交易记录总数。结果列名使用 total。",
+          "expect": {
+            "status": "success",
+            "agents": [
+              "financial_transactions"
+            ],
+            "table": {
+              "columns": [
+                "total"
+              ],
+              "rows": [
+                [
+                  30
+                ]
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "finance_alerts",
+      "category": "结果正确性",
+      "steps": [
+        {
+          "question": "统计欺诈告警记录总数。结果列名使用 total。",
+          "expect": {
+            "status": "success",
+            "agents": [
+              "financial_transactions"
+            ],
+            "table": {
+              "columns": [
+                "total"
+              ],
+              "rows": [
+                [
+                  5
+                ]
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "finance_null",
+      "category": "结果正确性",
+      "steps": [
+        {
+          "question": "统计 credit_limit 为空的金融账户数量。结果列名使用 total。",
+          "expect": {
+            "status": "success",
+            "agents": [
+              "financial_transactions"
+            ],
+            "table": {
+              "columns": [
+                "total"
+              ],
+              "rows": [
+                [
+                  15
+                ]
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "hotel_count",
+      "category": "结果正确性",
+      "steps": [
+        {
+          "question": "统计酒店总数。结果列名使用 total。",
+          "expect": {
+            "status": "success",
+            "agents": [
+              "hotel_analytics"
+            ],
+            "table": {
+              "columns": [
+                "total"
+              ],
+              "rows": [
+                [
+                  10
+                ]
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "hotel_cancelled",
+      "category": "结果正确性",
+      "steps": [
+        {
+          "question": "统计 IsCancelled 为真的酒店预订记录数。结果列名使用 total。",
+          "expect": {
+            "status": "success",
+            "agents": [
+              "hotel_analytics"
+            ],
+            "table": {
+              "columns": [
+                "total"
+              ],
+              "rows": [
+                [
+                  3
+                ]
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "followup",
+      "category": "多轮对话",
+      "steps": [
+        {
+          "question": "统计员工总数，列名 total",
+          "expect": {
+            "status": "success",
+            "agents": [
+              "contoso_hr"
+            ],
+            "table": {
+              "columns": [
+                "total"
+              ],
+              "rows": [
+                [
+                  40
+                ]
+              ]
+            }
+          }
+        },
+        {
+          "question": "其中在职的有多少，按 IsActive 为真统计，列名 total",
+          "expect": {
+            "status": "success",
+            "agents": [
+              "contoso_hr"
+            ],
+            "table": {
+              "columns": [
+                "total"
+              ],
+              "rows": [
+                [
+                  39
+                ]
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "review_pause",
+      "category": "人工确认",
+      "steps": [
+        {
+          "question": "分别统计销售订单数和库存记录数，分开报告两个数据源的结果，不做关联。",
+          "expect": {
+            "status": "plan_review",
+            "agents": [
+              "contoso_sales",
+              "contoso_inventory"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "review_cancel",
+      "category": "人工确认",
+      "steps": [
+        {
+          "question": "分别统计销售订单数和库存记录数，分开报告两个数据源的结果，不做关联。",
+          "expect": {
+            "status": "plan_review",
+            "agents": [
+              "contoso_sales",
+              "contoso_inventory"
+            ]
+          }
+        },
+        {
+          "resume": {
+            "action": "cancel"
+          },
+          "expect": {
+            "status": "cancelled",
+            "error_contains": "cancelled"
+          }
+        }
+      ]
+    },
+    {
+      "id": "review_approve",
+      "category": "人工确认",
+      "steps": [
+        {
+          "question": "分别统计销售订单数和库存记录数，分开报告两个数据源的结果，不做关联。",
+          "expect": {
+            "status": "plan_review",
+            "agents": [
+              "contoso_sales",
+              "contoso_inventory"
+            ]
+          }
+        },
+        {
+          "resume": {
+            "action": "approve"
+          },
+          "expect": {
+            "status": "success",
+            "agents": [
+              "contoso_sales",
+              "contoso_inventory"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "review_revise",
+      "category": "人工确认",
+      "steps": [
+        {
+          "question": "分别统计销售订单数和库存记录数，分开报告两个数据源的结果，不做关联。",
+          "expect": {
+            "status": "plan_review",
+            "agents": [
+              "contoso_sales",
+              "contoso_inventory"
+            ]
+          }
+        },
+        {
+          "resume": {
+            "action": "revise",
+            "feedback": "只查询库存记录数"
+          },
+          "expect": {
+            "status": "plan_review",
+            "agents": [
+              "contoso_inventory"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "clarification",
+      "category": "澄清",
+      "steps": [
+        {
+          "question": "帮我查一下那个指标，需要先向我确认指标名称和业务范围。",
+          "expect": {
+            "status": "clarification_needed"
+          }
+        }
+      ]
+    }
+  ]
+}

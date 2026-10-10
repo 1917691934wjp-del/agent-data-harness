@@ -267,6 +267,21 @@ class BigQueryDatasource(BaseSettings):
     credentials_json: str = ""
 
 
+class SampleDatasource(BaseSettings):
+    """Local JSON dataset loaded into SQLite; no remote credentials required."""
+
+    type: Literal["sample"] = "sample"
+    source: str
+
+
+class SampleDataSettings(BaseSettings):
+    """Opt-in local sample mode shared by CLI and UI configuration loading."""
+
+    model_config = SettingsConfigDict(env_file=".env", extra="ignore")
+    data_agent_sample_mode: bool = False
+    data_agent_sample_dir: str = str(CONFIG_DIR.parents[2] / "scripts" / "data")
+
+
 Datasource = (
     DatabricksDatasource
     | CosmosDatasource
@@ -274,6 +289,7 @@ Datasource = (
     | AzureSQLDatasource
     | SynapseDatasource
     | BigQueryDatasource
+    | SampleDatasource
 )
 
 
@@ -315,8 +331,8 @@ DATASOURCE_TYPES: dict[str, type[Datasource]] = {
 class LLMConfig:
     """LLM configuration settings."""
 
-    provider: str = "azure_openai"
-    model: str = "gpt-5-mini"
+    provider: str = "deepseek"
+    model: str = "deepseek-flash"
     api_version: str = "2024-12-01-preview"
     temperature: float = 0.0
     max_tokens: int | None = None
@@ -324,7 +340,7 @@ class LLMConfig:
     @classmethod
     def from_dict(cls, data: dict[str, Any]) -> "LLMConfig":
         return cls(
-            provider=data.get("provider", "azure_openai"),
+            provider=data.get("provider", "deepseek"),
             model=data.get("model", ""),
             api_version=data.get("api_version", "2024-12-01-preview"),
             temperature=data.get("temperature", 0.0),

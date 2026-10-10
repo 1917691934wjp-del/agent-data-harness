@@ -1,10 +1,9 @@
 intent_detection_agent:
   llm:
-    model: gpt-5-mini
-    provider: azure_openai
-    api_version: 2024-12-01-preview
-    temperature: 1.0
-    max_tokens: 500
+    model: deepseek-flash
+    provider: deepseek
+    temperature: 0.0
+    max_tokens: 4096
   system_prompt: |
     You are an intent detection assistant responsible for routing user questions to the appropriate data agent.
 
@@ -32,11 +31,10 @@ data_agents:
       dataset: financial_data
       location: US
     llm:
-      model: gpt-5-mini
-      provider: azure_openai
-      api_version: 2024-12-01-preview
-      temperature: 1.0
-      max_tokens: 2000
+      model: deepseek-flash
+      provider: deepseek
+      temperature: 0.0
+      max_tokens: 4096
     validation:
       max_rows: 5000
       blocked_functions:

@@ -1,0 +1,194 @@
+[
+  {
+    "id": "inventory_quantity",
+    "name": "库存数量合计",
+    "version": "1",
+    "table": "inventory",
+    "columns": [
+      "quantity"
+    ],
+    "grain": [
+      "product_id",
+      "warehouse_id"
+    ],
+    "expression": "SUM(quantity)",
+    "definition": "对选定范围的实物库存 quantity 求和；不是可用库存，不扣除占用量。NULL 不补零。",
+    "aliases": [
+      "库存总量",
+      "库存数量",
+      "库存 quantity 的总和"
+    ],
+    "source": "project_definition",
+    "unit": "未指定",
+    "time_column": null,
+    "null_policy": "NULL 不自动补零；遵循指标定义。"
+  },
+  {
+    "id": "inventory_records",
+    "name": "库存记录数",
+    "version": "1",
+    "table": "inventory",
+    "columns": [
+      "product_id",
+      "warehouse_id"
+    ],
+    "grain": [
+      "product_id",
+      "warehouse_id"
+    ],
+    "expression": "COUNT(*)",
+    "definition": "统计库存表记录条数，不是去重产品数；不假设产品与仓库组合天然唯一。",
+    "aliases": [
+      "库存记录数",
+      "库存记录总数"
+    ],
+    "source": "project_definition",
+    "unit": "未指定",
+    "time_column": null,
+    "null_policy": "NULL 不自动补零；遵循指标定义。"
+  },
+  {
+    "id": "low_stock_records",
+    "name": "库存不足记录数",
+    "version": "1",
+    "table": "inventory",
+    "columns": [
+      "quantity",
+      "reorder_level",
+      "product_id",
+      "warehouse_id"
+    ],
+    "grain": [
+      "product_id",
+      "warehouse_id"
+    ],
+    "expression": "COUNT(*) WHERE quantity < reorder_level",
+    "definition": "逐条判断 quantity < reorder_level，再统计记录数；NULL 不满足比较条件，不能视为库存为零。",
+    "aliases": [
+      "库存不足记录数",
+      "quantity 小于 reorder_level 的库存记录数"
+    ],
+    "source": "project_definition",
+    "unit": "未指定",
+    "time_column": null,
+    "null_policy": "NULL 不自动补零；遵循指标定义。"
+  },
+  {
+    "id": "low_stock_products",
+    "name": "库存不足产品数",
+    "version": "1",
+    "table": "inventory",
+    "columns": [
+      "quantity",
+      "reorder_level",
+      "product_id",
+      "warehouse_id"
+    ],
+    "grain": [
+      "product_id",
+      "warehouse_id"
+    ],
+    "expression": "COUNT(DISTINCT product_id) WHERE quantity < reorder_level",
+    "definition": "选定仓库范围内任一记录库存不足的去重产品数；不代表全仓汇总后仍库存不足。",
+    "aliases": [
+      "库存不足产品数",
+      "库存不足的产品数"
+    ],
+    "source": "project_definition",
+    "unit": "未指定",
+    "time_column": null,
+    "null_policy": "NULL 不自动补零；遵循指标定义。"
+  },
+  {
+    "id": "order_records",
+    "name": "订单记录数",
+    "version": "1",
+    "table": "orders",
+    "columns": [
+      "order_id"
+    ],
+    "grain": [
+      "order_id"
+    ],
+    "expression": "COUNT(*)",
+    "definition": "统计订单表记录条数，包含所有状态；不是商品销量。",
+    "aliases": [
+      "订单数",
+      "订单总数",
+      "订单记录数"
+    ],
+    "source": "project_definition",
+    "unit": "条",
+    "time_column": "order_date",
+    "null_policy": "NULL 不自动补零；遵循指标定义。"
+  },
+  {
+    "id": "order_amount",
+    "name": "订单金额合计",
+    "version": "1",
+    "table": "orders",
+    "columns": [
+      "total_amount"
+    ],
+    "grain": [
+      "order_id"
+    ],
+    "expression": "SUM(total_amount)",
+    "definition": "所有状态订单的 total_amount 合计；不等同于实收收入或净销售额。币种未确认时不能跨币种合计。",
+    "aliases": [
+      "订单金额合计",
+      "订单总金额"
+    ],
+    "source": "project_definition",
+    "unit": "源数据金额单位（币种需确认）",
+    "time_column": "order_date",
+    "null_policy": "NULL 不自动补零；遵循指标定义。"
+  },
+  {
+    "id": "active_employees",
+    "name": "在职员工数",
+    "version": "1",
+    "table": "employees",
+    "columns": [
+      "EmployeeID",
+      "IsActive"
+    ],
+    "grain": [
+      "EmployeeID"
+    ],
+    "expression": "COUNT(DISTINCT EmployeeID) WHERE IsActive = true",
+    "definition": "按当前 IsActive 为 true 统计去重员工数；没有任职历史，不能推算历史日期的在职人数。",
+    "aliases": [
+      "在职员工数",
+      "在职人数"
+    ],
+    "source": "project_definition",
+    "unit": "人",
+    "time_column": null,
+    "null_policy": "NULL 不自动补零；遵循指标定义。"
+  },
+  {
+    "id": "available_inventory",
+    "name": "可用库存量",
+    "version": "1",
+    "table": "inventory",
+    "columns": [
+      "quantity",
+      "reserved_quantity"
+    ],
+    "grain": [
+      "product_id",
+      "warehouse_id"
+    ],
+    "expression": "SUM(quantity - reserved_quantity)",
+    "definition": "项目示例口径：实物库存减占用库存；缺占用字段时不可计算，不能用实物库存代替。",
+    "aliases": [
+      "可用库存",
+      "可用库存量"
+    ],
+    "source": "project_definition",
+    "unit": "源数据数量单位",
+    "time_column": null,
+    "null_policy": "NULL 不自动补零；遵循指标定义。"
+  }
+]

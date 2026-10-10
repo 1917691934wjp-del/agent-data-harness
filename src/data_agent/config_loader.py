@@ -21,6 +21,8 @@ from .config import (
     FewShotExample,
     IntentDetectionConfig,
     LLMConfig,
+    SampleDataSettings,
+    SampleDatasource,
     TableSchema,
     ValidationConfig,
 )
@@ -160,7 +162,7 @@ class ConfigLoader:
     @classmethod
     def _parse_data_agent(cls, data: dict[str, Any]) -> DataAgentConfig:
         """Parse a single data agent config."""
-        return DataAgentConfig(
+        config = DataAgentConfig(
             name=data.get("name", ""),
             description=data.get("description", ""),
             datasource=cls._parse_datasource(data.get("datasource")),
@@ -175,6 +177,28 @@ class ConfigLoader:
                 FewShotExample.from_dict(e) for e in data.get("few_shot_examples", [])
             ],
         )
+
+        settings = SampleDataSettings()
+        if settings.data_agent_sample_mode and config.datasource is not None:
+            source_type = config.datasource.type
+            source = (
+                Path(settings.data_agent_sample_dir).resolve()
+                / f"{source_type}_data.json"
+            )
+            if not source.is_file():
+                raise FileNotFoundError(f"Sample dataset not found: {source}")
+            config.datasource = SampleDatasource(source=str(source))
+            # Reflect the actual JSON fields instead of the remote database schema.
+            config.table_schemas = []
+            config.few_shot_examples = []
+            config.system_prompt = (
+                "You are a SQLite SQL assistant querying local sample data. "
+                "Use only the tables and columns below, without remote schema prefixes. "
+                "Nested arrays and objects are JSON TEXT; use SQLite JSON functions. "
+                "Dates are ISO text. Generate read-only SELECT queries.\n"
+                "{schema_context}\n{few_shot_examples}"
+            )
+        return config
 
     @classmethod
     def _parse_datasource(cls, data: dict[str, Any] | None) -> Datasource | None:

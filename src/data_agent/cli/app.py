@@ -7,9 +7,9 @@ from pathlib import Path
 from typing import Annotated, Any
 from uuid import uuid4
 
-import typer
 from dotenv import load_dotenv
 from rich.prompt import Prompt
+import typer
 
 from data_agent import DataAgentFlow
 from data_agent.cli.console import console, print_error
@@ -22,7 +22,11 @@ from data_agent.cli.output import (
 from data_agent.config import CONFIG_DIR, AgentConfig
 from data_agent.config_loader import ConfigLoader
 from data_agent.core.logging import setup_logging
+from data_agent.evaluation.cli import app as evaluation_app
+from data_agent.harness import AgentHarness
+from data_agent.models.collaboration import AgentTaskResult
 from data_agent.models.state import OutputState
+from data_agent.utils.review import human_reply
 
 load_dotenv()
 
@@ -42,6 +46,7 @@ app = typer.Typer(
     no_args_is_help=True,
     rich_markup_mode="rich",
 )
+app.add_typer(evaluation_app, name="eval")
 
 
 def get_config_choices() -> list[str]:
@@ -131,7 +136,7 @@ async def handle_clarification_request(
             "[cyan]Your clarified question[/cyan]",
         )
         return clarification.strip() if clarification.strip() else None
-    except KeyboardInterrupt:
+    except (KeyboardInterrupt, EOFError):
         return None
 
 
@@ -154,34 +159,35 @@ async def execute_query(
         Tuple of (query result, final question used).
     """
     with console.status("[cyan]Thinking...[/cyan]", spinner="dots"):
-        result = await flow.run(question, thread_id=thread_id)
+        result = await AgentHarness(flow).run_output(question, thread_id=thread_id)
 
     if not isinstance(result, dict):
         result = dict(result)
 
-    if isinstance(result, dict) and "__interrupt__" in result:
-        interrupt_data = result["__interrupt__"]
-        if interrupt_data and len(interrupt_data) > 0:
-            interrupt_obj = interrupt_data[0]
-            payload = (
-                interrupt_obj.value
-                if hasattr(interrupt_obj, "value")
-                else interrupt_obj
+    while isinstance(result, dict) and result.get("__interrupt__"):
+        interrupt_obj = result["__interrupt__"][0]
+        payload = (
+            interrupt_obj.value if hasattr(interrupt_obj, "value") else interrupt_obj
+        )
+        if payload.get("type") == "plan_review":
+            console.print(payload["message"], markup=False)
+            console.print(payload["hint"], markup=False)
+            try:
+                answer = Prompt.ask("approve / 确认, cancel / 取消, or changes")
+            except (KeyboardInterrupt, EOFError):
+                answer = "cancel"
+            reply = human_reply(payload, answer)
+        elif payload.get("type") == "clarification_needed":
+            clarified = await handle_clarification_request(payload)
+            reply = human_reply(payload, clarified or "cancel")
+            if clarified:
+                question = clarified
+        else:
+            return result, question
+        with console.status("[cyan]Thinking...[/cyan]", spinner="dots"):
+            result = await AgentHarness(flow).run_output(
+                resume_value=reply, thread_id=thread_id
             )
-
-            if payload.get("type") == "clarification_needed":
-                clarified = await handle_clarification_request(payload)
-                if clarified is None:
-                    return {"error": "User cancelled"}, question
-
-                with console.status("[cyan]Thinking...[/cyan]", spinner="dots"):
-                    resume_result = await flow.run(
-                        resume_value={"question": clarified},
-                        thread_id=thread_id,
-                    )
-                if not isinstance(resume_result, dict):
-                    resume_result = dict(resume_result)
-                return resume_result, clarified
 
     return result, question
 
@@ -232,9 +238,25 @@ def display_result(
     if result_dict.get("final_response"):
         print_response(result_dict["final_response"])
 
+    print_task_results(result_dict.get("agent_results", []))
+
     error = result_dict.get("error")
     if error and error != "out_of_scope" and not str(error).startswith("Interrupt"):
         print_error_panel(str(error))
+
+
+def print_task_results(task_results: list) -> None:
+    """Show source and dependency status for a collaborative response."""
+    if len(task_results) > 1:
+        for value in task_results:
+            task = AgentTaskResult.model_validate(value)
+            dependencies = ", ".join(task.depends_on) or "none"
+            rows = task.result.row_count if task.result is not None else 0
+            console.print(
+                f"[{task.task_id}] {task.agent_name}: {task.status}; "
+                f"rows={rows}; receives evidence from={dependencies}",
+                markup=False,
+            )
 
 
 @app.command()
